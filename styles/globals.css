@@ -1,0 +1,16 @@
+:root {
+  --rust: #c0392b;
+  --pitch: #0e1a1f;
+  --pitch2: #162028;
+  --pitch3: #1e2d36;
+  --steel-dark: #3a4a54;
+  --grass: #2a7a3b;
+  --text: #e8eef2;
+  --text-muted: #7a9aaa;
+  --border: #2a3d48;
+  --gold: #e6a817;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--pitch); color: var(--text); }
+a { color: inherit; text-decoration: none; }
