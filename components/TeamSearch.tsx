@@ -27,7 +27,7 @@ export default function TeamSearch({ allLeagues, onGoToLeague }: Props) {
     async function buildIndex() {
       setIndexLoading(true)
       const teams: IndexedTeam[] = []
-      const seen = new Set<number>()
+      const seen = new Set<string>()
       const batchSize = 10
       for (let i = 0; i < allLeagues.length && !cancelled; i += batchSize) {
         const batch = allLeagues.slice(i, i + batchSize)
@@ -42,8 +42,10 @@ export default function TeamSearch({ allLeagues, onGoToLeague }: Props) {
           for (const group of (data.groups || [])) {
             for (const entry of (group.standings || [])) {
               const t = entry.team
-              if (t && !seen.has(t.id)) {
-                seen.add(t.id)
+              if (!t) continue
+              const key = `${t.id}-${league.id}`
+              if (!seen.has(key)) {
+                seen.add(key)
                 teams.push({ ...t, leagueId: league.id, leagueName: league.name })
               }
             }
@@ -61,7 +63,7 @@ export default function TeamSearch({ allLeagues, onGoToLeague }: Props) {
 
   // Filter teams locally from the index
   const results = query.length >= 2
-    ? teamIndex.filter(t => t.name.toLowerCase().includes(query.toLowerCase())).slice(0, 15)
+    ? teamIndex.filter(t => t.name.toLowerCase().includes(query.toLowerCase())).slice(0, 30)
     : []
 
   const selectTeam = useCallback(async (team: IndexedTeam) => {

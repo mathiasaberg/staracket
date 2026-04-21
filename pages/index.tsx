@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { API } from '../lib/api'
 import { fmt, fmtTime } from '../lib/format'
-import { groupLeagues, isSwedish } from '../lib/regions'
+import { groupLeagues, isSwedish, getRegion, REGION_ORDER } from '../lib/regions'
 import { parseStandings } from '../lib/standings'
 import { getFavLeagues, toggleFavLeague, getFavTeams, toggleFavTeam } from '../lib/favorites'
 import type { League, Event, ParsedStanding, MatchModalData } from '../lib/types'
@@ -16,7 +16,18 @@ import RaceChart from '../components/RaceChart'
 const CURRENT_YEAR = 2026
 const YEARS = [2026, 2025, 2024, 2023, 2022]
 
-type View = 'resultat' | 'karta' | 'dashboard' | 'sok'
+type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter'
+
+type NewsItem = {
+  id: string
+  title: string
+  body: string
+  date: string
+  image?: string
+}
+
+const NEWS_STORAGE_KEY = 'staracket_news'
+const AUTH_TOKEN_KEY = 'staracket_auth_token'
 
 export default function Home() {
   const [view, setView] = useState<View>('resultat')
@@ -36,11 +47,35 @@ export default function Home() {
   const [favLeagueIds, setFavLeagueIds] = useState<number[]>([])
   const [favTeamIds, setFavTeamIds] = useState<number[]>([])
   const [mapLeagueIds, setMapLeagueIds] = useState<number[]>([])
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([])
+  const [editingNews, setEditingNews] = useState<NewsItem | null>(null)
+  const [authUser, setAuthUser] = useState<string | null>(null)
+  const [showLogin, setShowLogin] = useState(false)
+  const [loginError, setLoginError] = useState('')
+  const [sidebarSearch, setSidebarSearch] = useState('')
+  const [regionFilter, setRegionFilter] = useState('')
+  const [mapInitDone, setMapInitDone] = useState(false)
   const leagueRef = useRef<League | null>(null)
 
   useEffect(() => {
     setFavLeagueIds(getFavLeagues())
     setFavTeamIds(getFavTeams())
+    try {
+      const stored = localStorage.getItem(NEWS_STORAGE_KEY)
+      if (stored) setNewsItems(JSON.parse(stored))
+    } catch {}
+    // Verify stored auth token
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    if (token) {
+      fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'verify', token })
+      }).then(r => r.json()).then(d => {
+        if (d.username) setAuthUser(d.username)
+        else localStorage.removeItem(AUTH_TOKEN_KEY)
+      }).catch(() => localStorage.removeItem(AUTH_TOKEN_KEY))
+    }
   }, [])
 
   const loadLeagues = useCallback(async (selectedYear: number) => {
@@ -51,15 +86,8 @@ export default function Home() {
     setStandings([])
 
     try {
-      const data = await API('leagues', { sport: 10, limit: 500 })
-      const all: League[] = data.leagues || []
-      let football = all.filter(l =>
-        Number(l.season?.startYear) === selectedYear || Number(l.season?.endYear) === selectedYear
-      )
-      // Fallback: if very few Swedish leagues found, try without strict year filter
-      if (football.filter(l => /allsvenskan|superettan|division|ettan/i.test(l.name)).length === 0) {
-        football = all
-      }
+      const data = await API('leagues', { sport: 10, limit: 500, season: selectedYear })
+      let football: League[] = data.leagues || []
       const dam = football.filter(l =>
         l.teamClassId === 2 ||
         /\bdam(allsvenskan|ettan|)?\b/i.test(l.name) ||
@@ -150,16 +178,11 @@ export default function Home() {
   const openMatch = useCallback(async (baseEvent: Event) => {
     setMatchModal({ baseEvent, event: null, facts: [], loading: true })
     try {
-      const [evRes, factsRes] = await Promise.allSettled([
-        API(`events/${baseEvent.id}`),
-        API(`events/${baseEvent.id}/facts`)
-      ])
-      const evData = evRes.status === 'fulfilled' ? evRes.value : {}
-      const factsData = factsRes.status === 'fulfilled' ? factsRes.value : {}
+      const evData = await API(`events/${baseEvent.id}`)
       setMatchModal({
         baseEvent,
         event: evData?.event || null,
-        facts: factsData?.facts || [],
+        facts: [],
         loading: false
       })
     } catch {
@@ -190,6 +213,67 @@ export default function Home() {
   const currentLeagues = leagues[gender]
   const groupedLeagues = groupLeagues(currentLeagues || [], favLeagueIds)
 
+  // Filter sidebar leagues by search and region
+  const filteredGroupedLeagues = groupedLeagues.map(g => {
+    let filtered = g.leagues
+    if (sidebarSearch) {
+      const q = sidebarSearch.toLowerCase()
+      filtered = filtered.filter(l => l.name.toLowerCase().includes(q))
+    }
+    if (regionFilter) {
+      filtered = filtered.filter(l => {
+        const r = getRegion(l.name)
+        return r === regionFilter || (regionFilter === 'Favoriter' && favLeagueIds.includes(l.id))
+      })
+    }
+    return { ...g, leagues: filtered }
+  }).filter(g => g.leagues.length > 0)
+
+  // Compute form (last 5 match results) per team for standings
+  const teamForm = (() => {
+    const form: Record<number, ('W'|'D'|'L')[]> = {}
+    if (!rounds.length || currentRound < 0) return form
+    // Collect all finished events up to the current round
+    const allEvents: Event[] = []
+    for (let i = 0; i <= currentRound; i++) {
+      const r = rounds[i]
+      const evts = roundMap[r] || []
+      allEvents.push(...evts.filter(e => e.status === 'FINISHED'))
+    }
+    // Build results per team
+    const teamResults: Record<number, ('W'|'D'|'L')[]> = {}
+    for (const e of allEvents) {
+      const hs = e.homeTeamScore ?? 0
+      const as = e.visitingTeamScore ?? 0
+      const hid = e.homeTeam?.id
+      const aid = e.visitingTeam?.id
+      if (hid) {
+        if (!teamResults[hid]) teamResults[hid] = []
+        teamResults[hid].push(hs > as ? 'W' : hs === as ? 'D' : 'L')
+      }
+      if (aid) {
+        if (!teamResults[aid]) teamResults[aid] = []
+        teamResults[aid].push(hs < as ? 'W' : hs === as ? 'D' : 'L')
+      }
+    }
+    // Take last 5
+    for (const [id, results] of Object.entries(teamResults)) {
+      form[Number(id)] = results.slice(-5)
+    }
+    return form
+  })()
+
+  // Auto-filter map on Superettan on first visit
+  useEffect(() => {
+    if (view === 'karta' && !mapInitDone && currentLeagues?.length) {
+      const superettan = currentLeagues.find(l => /superettan/i.test(l.name))
+      if (superettan) {
+        setMapLeagueIds([superettan.id])
+      }
+      setMapInitDone(true)
+    }
+  }, [view, mapInitDone, currentLeagues])
+
   return (
     <>
       <Head>
@@ -200,14 +284,18 @@ export default function Home() {
       </Head>
 
       <header className={styles.header}>
-        <div className={styles.logo} onClick={() => setView('resultat')} style={{cursor:'pointer'}}>
-          stå<span>räcket</span>
+        <div className={styles.logoWrap} onClick={() => setView('resultat')} style={{cursor:'pointer'}}>
+          <div className={styles.logo}>
+            stå<span>räcket</span>
+          </div>
+          <div className={styles.logoSub}>Ditt stöd i fotbollssverige</div>
         </div>
         <nav className={styles.topNav}>
           <button className={`${styles.topNavBtn} ${view==='resultat' ? styles.topNavActive : ''}`} onClick={() => setView('resultat')}>Serier</button>
           <button className={`${styles.topNavBtn} ${view==='dashboard' ? styles.topNavActive : ''}`} onClick={() => setView('dashboard')}>Dashboard</button>
           <button className={`${styles.topNavBtn} ${view==='karta' ? styles.topNavActive : ''}`} onClick={() => setView('karta')}>Karta</button>
           <button className={`${styles.topNavBtn} ${view==='sok' ? styles.topNavActive : ''}`} onClick={() => setView('sok')}>Sök</button>
+          <button className={`${styles.topNavBtn} ${view==='nyheter' ? styles.topNavActive : ''}`} onClick={() => setView('nyheter')}>Nyheter</button>
         </nav>
         <div className={styles.headerRight}>
           <select className={styles.yearSelect} value={year} onChange={e => setYear(Number(e.target.value))}>
@@ -226,33 +314,55 @@ export default function Home() {
           <nav className={styles.sidebar}>
             {loading ? (
               <div className={styles.loading}>Laddar...</div>
-            ) : groupedLeagues.length === 0 ? (
-              <div className={styles.emptyMsg}>Inga divisioner hittades</div>
             ) : (
-              groupedLeagues.map((group, gi) => (
-                <div key={group.region} className={styles.sidebarGroup}>
-                  <div className={`${styles.sidebarGroupLabel} ${gi === 0 ? styles.sidebarGroupFirst : ''} ${group.region === 'Internationellt' ? styles.sidebarGroupForeign : ''} ${group.region === 'Favoriter' ? styles.sidebarGroupFav : ''}`}>
-                    {group.region}
-                  </div>
-                  {group.leagues.map(l => (
-                    <div
-                      key={l.id}
-                      className={`${styles.leagueItem} ${selectedLeague?.id === l.id ? styles.active : ''} ${!isSwedish(l.name) ? styles.leagueItemForeign : ''}`}
-                      onClick={() => selectLeague(l)}
-                      title={l.name}
-                    >
-                      <span className={styles.leagueItemName}>{l.name}</span>
-                      <button
-                        className={`${styles.favStar} ${favLeagueIds.includes(l.id) ? styles.favStarActive : ''}`}
-                        onClick={e => { e.stopPropagation(); handleToggleFavLeague(l.id) }}
-                        title="Favorit"
-                      >
-                        {favLeagueIds.includes(l.id) ? '★' : '☆'}
-                      </button>
-                    </div>
-                  ))}
+              <>
+                <div className={styles.sidebarSearch}>
+                  <input
+                    className={styles.sidebarSearchInput}
+                    placeholder="Sök serie..."
+                    value={sidebarSearch}
+                    onChange={e => setSidebarSearch(e.target.value)}
+                  />
                 </div>
-              ))
+                <div className={styles.sidebarFilter}>
+                  <select
+                    className={styles.sidebarFilterSelect}
+                    value={regionFilter}
+                    onChange={e => setRegionFilter(e.target.value)}
+                  >
+                    <option value="">Alla regioner</option>
+                    {REGION_ORDER.map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                </div>
+                {filteredGroupedLeagues.length === 0 ? (
+                  <div className={styles.emptyMsg}>Inga serier matchar</div>
+                ) : (
+                  filteredGroupedLeagues.map((group, gi) => (
+                    <div key={group.region} className={styles.sidebarGroup}>
+                      <div className={`${styles.sidebarGroupLabel} ${gi === 0 && !sidebarSearch && !regionFilter ? styles.sidebarGroupFirst : ''} ${group.region === 'Internationellt' ? styles.sidebarGroupForeign : ''} ${group.region === 'Favoriter' ? styles.sidebarGroupFav : ''}`}>
+                        {group.region}
+                      </div>
+                      {group.leagues.map(l => (
+                        <div
+                          key={l.id}
+                          className={`${styles.leagueItem} ${selectedLeague?.id === l.id ? styles.active : ''} ${!isSwedish(l.name) ? styles.leagueItemForeign : ''}`}
+                          onClick={() => selectLeague(l)}
+                          title={l.name}
+                        >
+                          <span className={styles.leagueItemName}>{l.name}</span>
+                          <button
+                            className={`${styles.favStar} ${favLeagueIds.includes(l.id) ? styles.favStarActive : ''}`}
+                            onClick={e => { e.stopPropagation(); handleToggleFavLeague(l.id) }}
+                            title="Favorit"
+                          >
+                            {favLeagueIds.includes(l.id) ? '★' : '☆'}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ))
+                )}
+              </>
             )}
           </nav>
 
@@ -291,6 +401,7 @@ export default function Home() {
                           <th className={styles.r}>O</th><th className={styles.r}>F</th>
                           <th className={styles.r}>GM</th><th className={styles.r}>IM</th>
                           <th className={styles.r}>+/-</th><th className={styles.r}>P</th>
+                          <th className={styles.r}>Form</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -310,6 +421,15 @@ export default function Home() {
                             <td className={styles.r}>{t.ga}</td>
                             <td className={styles.r}>{t.gd > 0 ? '+' + t.gd : t.gd}</td>
                             <td className={`${styles.r} ${styles.pts}`}>{t.pts}</td>
+                            <td>
+                              <div className={styles.formCell}>
+                                {(teamForm[t.team.id] || []).map((r, ri) => (
+                                  <span key={ri} className={`${styles.formDot} ${r === 'W' ? styles.formWin : r === 'D' ? styles.formDraw : styles.formLoss}`}>
+                                    {r === 'W' ? 'V' : r === 'D' ? 'O' : 'F'}
+                                  </span>
+                                ))}
+                              </div>
+                            </td>
                             <td>
                               <button
                                 className={`${styles.favStar} ${styles.favStarSmall} ${favTeamIds.includes(t.team.id) ? styles.favStarActive : ''}`}
@@ -422,6 +542,150 @@ export default function Home() {
       {view === 'sok' && (
         <div className={styles.pageContent}>
           <TeamSearch allLeagues={allLeagues} onGoToLeague={selectLeague} />
+        </div>
+      )}
+
+      {/* ── News/CMS view ── */}
+      {view === 'nyheter' && (
+        <div className={styles.pageContent}>
+          <div className={styles.newsContainer}>
+            <div className={styles.newsHeader}>
+              <h2 className={styles.dashboardTitle}>Nyheter</h2>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                {authUser ? (
+                  <>
+                    <button className={styles.racePlayBtn} onClick={() => setEditingNews({ id: '', title: '', body: '', date: new Date().toISOString().slice(0, 10) })}>
+                      + Ny artikel
+                    </button>
+                    <button className={styles.teamInfoLink} onClick={() => {
+                      setAuthUser(null)
+                      localStorage.removeItem(AUTH_TOKEN_KEY)
+                    }}>Logga ut ({authUser})</button>
+                  </>
+                ) : (
+                  <button className={styles.teamInfoLink} onClick={() => { setShowLogin(true); setLoginError('') }}>Logga in</button>
+                )}
+              </div>
+            </div>
+
+            {showLogin && !authUser && (
+              <div className={styles.newsEditor}>
+                <form onSubmit={async (e) => {
+                  e.preventDefault()
+                  const form = e.currentTarget
+                  const fd = new FormData(form)
+                  const username = fd.get('username') as string
+                  const password = fd.get('password') as string
+                  try {
+                    const r = await fetch('/api/auth', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ action: 'login', username, password })
+                    })
+                    const data = await r.json()
+                    if (r.ok && data.token) {
+                      localStorage.setItem(AUTH_TOKEN_KEY, data.token)
+                      setAuthUser(data.username)
+                      setShowLogin(false)
+                      setLoginError('')
+                    } else {
+                      setLoginError(data.error || 'Inloggning misslyckades')
+                    }
+                  } catch {
+                    setLoginError('Kunde inte ansluta till servern')
+                  }
+                }}>
+                  <input className={styles.searchInput} name="username" placeholder="Användarnamn" autoComplete="username" required />
+                  <input className={styles.searchInput} name="password" type="password" placeholder="Lösenord" autoComplete="current-password" required style={{ marginTop: 8 }} />
+                  {loginError && <div style={{ color: 'var(--rust)', fontSize: 13, marginTop: 4 }}>{loginError}</div>}
+                  <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                    <button type="submit" className={styles.racePlayBtn}>Logga in</button>
+                    <button type="button" className={styles.racePlayBtn} style={{ background: 'var(--steel-dark)' }} onClick={() => setShowLogin(false)}>Avbryt</button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {editingNews && authUser && (
+              <div className={styles.newsEditor}>
+                <input
+                  className={styles.searchInput}
+                  placeholder="Rubrik"
+                  value={editingNews.title}
+                  onChange={e => setEditingNews({ ...editingNews, title: e.target.value })}
+                />
+                <textarea
+                  className={styles.newsTextarea}
+                  placeholder="Brödtext..."
+                  rows={6}
+                  value={editingNews.body}
+                  onChange={e => setEditingNews({ ...editingNews, body: e.target.value })}
+                />
+                {editingNews.image && (
+                  <div style={{ position: 'relative', marginBottom: 8 }}>
+                    <img src={editingNews.image} alt="Förhandsvisning" style={{ maxWidth: '100%', maxHeight: 200, borderRadius: 6, border: '1px solid var(--border)' }} />
+                    <button
+                      className={styles.modalClose}
+                      style={{ position: 'absolute', top: 4, right: 4 }}
+                      onClick={() => setEditingNews({ ...editingNews, image: undefined })}
+                    >Ta bort bild</button>
+                  </div>
+                )}
+                <label className={styles.teamInfoLink} style={{ display: 'inline-block', cursor: 'pointer', textAlign: 'center' }}>
+                  Lägg till bild
+                  <input type="file" accept="image/*" style={{ display: 'none' }} onChange={e => {
+                    const file = e.target.files?.[0]
+                    if (!file) return
+                    if (file.size > 2 * 1024 * 1024) { alert('Max 2 MB'); return }
+                    const reader = new FileReader()
+                    reader.onload = () => setEditingNews(prev => prev ? { ...prev, image: reader.result as string } : prev)
+                    reader.readAsDataURL(file)
+                  }} />
+                </label>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button className={styles.racePlayBtn} onClick={() => {
+                    const item: NewsItem = {
+                      ...editingNews,
+                      id: editingNews.id || Date.now().toString(),
+                      date: editingNews.date || new Date().toISOString().slice(0, 10)
+                    }
+                    const updated = editingNews.id
+                      ? newsItems.map(n => n.id === item.id ? item : n)
+                      : [item, ...newsItems]
+                    setNewsItems(updated)
+                    localStorage.setItem(NEWS_STORAGE_KEY, JSON.stringify(updated))
+                    setEditingNews(null)
+                  }}>Publicera</button>
+                  <button className={styles.racePlayBtn} style={{ background: 'var(--steel-dark)' }} onClick={() => setEditingNews(null)}>Avbryt</button>
+                </div>
+              </div>
+            )}
+
+            {newsItems.length === 0 && !editingNews && !showLogin && (
+              <div className={styles.modalEmpty}>Inga nyheter publicerade ännu</div>
+            )}
+
+            {newsItems.map(n => (
+              <div key={n.id} className={styles.newsCard}>
+                <div className={styles.newsDate}>{n.date}</div>
+                <h3 className={styles.newsTitle}>{n.title}</h3>
+                {n.image && (
+                  <img src={n.image} alt="" style={{ width: '100%', maxHeight: 300, objectFit: 'cover', borderRadius: 6, marginBottom: '0.75rem' }} />
+                )}
+                <p className={styles.newsBody}>{n.body}</p>
+                {authUser && (
+                  <div className={styles.newsActions}>
+                    <button className={styles.teamInfoLink} onClick={() => setEditingNews(n)}>Redigera</button>
+                    <button className={styles.teamInfoLink} style={{ color: 'var(--rust)' }} onClick={() => {
+                      const updated = newsItems.filter(x => x.id !== n.id)
+                      setNewsItems(updated)
+                      localStorage.setItem(NEWS_STORAGE_KEY, JSON.stringify(updated))
+                    }}>Ta bort</button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

@@ -1,17 +1,18 @@
 import type { League } from './types'
 
-const REGION_ORDER = [
+export const REGION_ORDER = [
   'Favoriter', 'Nationellt', 'Division 1', 'Norrland',
   'Svealand & Stockholm', 'Götaland', 'Övrigt', 'Internationellt'
 ]
 
 export function getRegion(name: string): string {
   if (/premier league|la liga|bundesliga|serie a|ligue 1|champions|europa league|eredivisie/i.test(name)) return 'Internationellt'
+  if (/division 1,\s*herrar/i.test(name)) return 'Övrigt'
   if (/allsvenskan|superettan|svenska cupen|ettan/i.test(name)) return 'Nationellt'
   if (/division 1\b/i.test(name)) return 'Division 1'
-  if (/norrland|norrbotten|västerbotten|jämtland|ångermanland|medelpad|hälsingland|gästrikland|lappland/i.test(name)) return 'Norrland'
-  if (/dalarna|västmanland|uppland|södermanland|örebro|värmland|stockholm|svealand|bergslagen|närke/i.test(name)) return 'Svealand & Stockholm'
-  if (/göteborg|västra götaland|östergötland|småland|halland|blekinge|skåne|gotland|bohuslän|götaland|jönköping|kalmar|kronoberg|dalsland/i.test(name)) return 'Götaland'
+  if (/norrland|norrbotten|västerbotten|jämtland|ångermanland|medelpad|hälsingland|gästrikland|lappland|härjedalen/i.test(name)) return 'Norrland'
+  if (/dalarna|västmanland|uppland|södermanland|örebro|värmland|stockholm|svealand|bergslagen|närke|roslagen/i.test(name)) return 'Svealand & Stockholm'
+  if (/göteborg|västra götaland|västergötland|östergötland|småland|halland|blekinge|skåne|gotland|bohuslän|götaland|jönköping|kalmar|kronoberg|dalsland|sjuhärad/i.test(name)) return 'Götaland'
   if (/division\s+\d/i.test(name)) return 'Övrigt'
   return 'Övrigt'
 }

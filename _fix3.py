@@ -1,4 +1,21 @@
-import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
+#!/usr/bin/env python3
+"""Rewrite RaceChart with proper position animation, fix SwedenMap with arena info."""
+import os, re
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+def fix_unicode(text):
+    def surrogate_pair(m):
+        hi = int(m.group(1), 16)
+        lo = int(m.group(2), 16)
+        cp = 0x10000 + (hi - 0xD800) * 0x400 + (lo - 0xDC00)
+        return chr(cp)
+    text = re.sub(r'\\u([dD][89aAbB][0-9a-fA-F]{2})\\u([dD][cCdDeEfF][0-9a-fA-F]{2})', surrogate_pair, text)
+    text = re.sub(r'\\u([0-9a-fA-F]{4})', lambda m: chr(int(m.group(1), 16)), text)
+    return text
+
+# ── 1. Rewrite RaceChart with position animation ──
+race_chart = r'''import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { API } from '../lib/api'
 import { parseStandings } from '../lib/standings'
 import type { League, ParsedStanding } from '../lib/types'
@@ -107,27 +124,27 @@ export default function RaceChart({ league, rounds, onClose }: Props) {
     <div className={styles.modalOverlay} onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div className={styles.raceChartCard}>
         <div className={styles.raceChartHeader}>
-          <span className={styles.raceChartTitle}>{league.name} – Serierace</span>
-          <button className={styles.modalClose} onClick={onClose}>{'✕'} Stäng</button>
+          <span className={styles.raceChartTitle}>{league.name} \u2013 Serierace</span>
+          <button className={styles.modalClose} onClick={onClose}>{'\u2715'} St\u00e4ng</button>
         </div>
         <div className={styles.raceChartBody}>
           {loading ? (
-            <div className={styles.modalEmpty}>Laddar alla omgångars ställningar…</div>
+            <div className={styles.modalEmpty}>Laddar alla omg\u00e5ngars st\u00e4llningar\u2026</div>
           ) : (
             <>
               <div className={styles.raceControls}>
                 {!playing ? (
                   <button className={styles.racePlayBtn} onClick={currentIdx >= displayRounds.length - 1 ? play : (currentIdx === 0 ? play : resume)}>
-                    {currentIdx >= displayRounds.length - 1 ? '▶ Spela om' : (currentIdx === 0 ? '▶ Starta' : '▶ Fortsätt')}
+                    {currentIdx >= displayRounds.length - 1 ? '\u25b6 Spela om' : (currentIdx === 0 ? '\u25b6 Starta' : '\u25b6 Forts\u00e4tt')}
                   </button>
                 ) : (
-                  <button className={styles.racePlayBtn} onClick={pause}>{'⏸'} Pausa</button>
+                  <button className={styles.racePlayBtn} onClick={pause}>{'\u23f8'} Pausa</button>
                 )}
                 {currentIdx > 0 && !playing && (
-                  <button className={styles.racePlayBtn} style={{background:'var(--steel-dark)'}} onClick={() => setCurrentIdx(0)}>{'⏮'} Omgång 1</button>
+                  <button className={styles.racePlayBtn} style={{background:'var(--steel-dark)'}} onClick={() => setCurrentIdx(0)}>{'\u23ee'} Omg\u00e5ng 1</button>
                 )}
                 <span className={styles.raceRoundLabel}>
-                  {displayRounds[currentIdx] === 0 ? 'Start' : `Omgång ${displayRounds[currentIdx]}`} / {rounds[rounds.length - 1]}
+                  {displayRounds[currentIdx] === 0 ? 'Start' : `Omg\u00e5ng ${displayRounds[currentIdx]}`} / {rounds[rounds.length - 1]}
                 </span>
               </div>
               <div className={styles.raceBars} style={{ position: 'relative', height: totalHeight }}>
@@ -171,3 +188,37 @@ export default function RaceChart({ league, rounds, onClose }: Props) {
     </div>
   )
 }
+'''
+
+with open('components/RaceChart.tsx', 'w', encoding='utf-8', newline='\n') as f:
+    f.write(fix_unicode(race_chart))
+print('Written RaceChart.tsx')
+
+# ── 2. Rewrite SwedenMap with arena info from teams API ──
+with open('components/SwedenMap.tsx', 'r', encoding='utf-8') as f:
+    smap = f.read()
+
+# The PlottedTeam type needs arena and municipality fields
+old_plotted = "type PlottedTeam = Team & { lat: number; lng: number; city: string; leagueName: string; leagueId: number }"
+new_plotted = "type PlottedTeam = Team & { lat: number; lng: number; city: string; leagueName: string; leagueId: number; arenaName?: string; municipality?: string }"
+smap = smap.replace(old_plotted, new_plotted)
+
+# Update the team creation to include arena data
+old_push = "found.push({ ...t, ...loc, leagueName: league.name, leagueId: league.id })"
+new_push = "found.push({ ...t, ...loc, leagueName: league.name, leagueId: league.id, arenaName: t.arena?.name || undefined, municipality: t.municipality?.name || undefined })"
+smap = smap.replace(old_push, new_push)
+
+# Update the detail view to show arena
+# Find the city display and add arena info after it
+old_city = "                <div className={styles.teamInfoMeta}>{'\uD83D\uDCCD'} {selectedTeam.city}</div>"
+new_city = """                <div className={styles.teamInfoMeta}>{'\uD83D\uDCCD'} {selectedTeam.city}{selectedTeam.municipality && selectedTeam.municipality !== selectedTeam.city ? ` (${selectedTeam.municipality})` : ''}</div>
+                {selectedTeam.arenaName && (
+                  <div className={styles.teamInfoMeta}>{'\uD83C\uDFDF\uFE0F'} {selectedTeam.arenaName}</div>
+                )}"""
+smap = smap.replace(old_city, new_city)
+
+with open('components/SwedenMap.tsx', 'w', encoding='utf-8', newline='\n') as f:
+    f.write(smap)
+print('Written SwedenMap.tsx')
+
+print('Done!')

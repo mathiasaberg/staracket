@@ -120,6 +120,42 @@
   padding: 0.75rem 0;
 }
 
+.sidebarSearch {
+  padding: 0.5rem 1rem;
+}
+.sidebarSearchInput {
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  background: var(--pitch3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.sidebarSearchInput:focus { border-color: var(--steel-dark); }
+.sidebarSearchInput::placeholder { color: var(--text-muted); }
+.sidebarFilter {
+  padding: 0 1rem 0.5rem;
+}
+.sidebarFilterSelect {
+  width: 100%;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--pitch3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.sidebarFilterSelect option { background: var(--pitch2); }
+
 .sidebarGroup { }
 .sidebarGroupLabel {
   font-family: 'Barlow Condensed', sans-serif;
@@ -311,6 +347,30 @@
 .muted { color: var(--text-muted); }
 .pts { text-align: right; font-weight: 600; color: var(--text); }
 .teamName { font-weight: 500; }
+
+/* ── Form column ── */
+.formCell {
+  display: flex;
+  gap: 3px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.formDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  line-height: 1;
+}
+.formWin { background: var(--grass); }
+.formDraw { background: var(--steel-dark); }
+.formLoss { background: var(--rust); }
 
 /* ── Matches ── */
 .matchesGrid {
@@ -568,8 +628,14 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.raceBars { display: flex; flex-direction: column; gap: 4px; }
-.raceBarRow { display: flex; align-items: center; gap: 8px; height: 26px; }
+.raceBars { position: relative; overflow: hidden; }
+.raceBarRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  will-change: transform;
+}
 .raceBarLabel {
   width: 160px;
   font-size: 12px;
@@ -591,6 +657,7 @@
   height: 100%;
   border-radius: 3px;
   min-width: 2px;
+  transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .raceBarPts {
   font-family: 'Barlow Condensed', sans-serif;
@@ -848,4 +915,90 @@
   color: var(--text-muted);
   width: 90px;
   flex-shrink: 0;
+}
+
+/* ── Logo wrap & subtitle ── */
+.logoWrap {
+  flex-shrink: 0;
+  line-height: 1;
+}
+.logoSub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-top: 1px;
+  text-align: center;
+}
+
+/* ── News/CMS ── */
+.newsContainer {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.newsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.newsEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--pitch2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.newsTextarea {
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  background: var(--pitch3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+.newsTextarea:focus { border-color: var(--steel-dark); }
+.newsCard {
+  background: var(--pitch2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.newsDate {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+.newsTitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.newsBody {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  white-space: pre-wrap;
+}
+.newsActions {
+  display: flex;
+  gap: 8px;
 }
