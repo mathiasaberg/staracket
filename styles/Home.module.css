@@ -109,6 +109,10 @@
   font-family: 'Barlow', sans-serif;
   padding: 1.5rem;
 }
+.centeredContent {
+  max-width: 700px;
+  margin: 0 auto;
+}
 
 /* ── Sidebar ── */
 .sidebar {
@@ -159,12 +163,11 @@
 .sidebarGroup { }
 .sidebarGroupLabel {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--text-muted);
-  opacity: 0.65;
   padding: 0.8rem 1.25rem 0.3rem;
   border-top: 1px solid var(--border);
   margin-top: 0.25rem;
@@ -228,6 +231,13 @@
   font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+.emptyState {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
 }
 
 .emptyMsg {
@@ -347,6 +357,8 @@
 .muted { color: var(--text-muted); }
 .pts { text-align: right; font-weight: 600; color: var(--text); }
 .teamName { font-weight: 500; }
+.teamNameClickable { cursor: pointer; }
+.teamNameClickable:hover { color: var(--gold); }
 
 /* ── Form column ── */
 .formCell {
@@ -413,6 +425,13 @@
   font-size: 12px;
   font-family: 'Barlow', sans-serif;
   font-weight: 400;
+}
+.matchMeta {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: -2px;
 }
 
 .legend {
@@ -1001,4 +1020,149 @@
 .newsActions {
   display: flex;
   gap: 8px;
+}
+
+
+/* ── Modal tabs ── */
+.modalTabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--pitch3);
+  padding: 0 1.5rem;
+}
+.modalTab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.modalTab:hover { color: var(--text); }
+.modalTabActive {
+  color: var(--grass);
+  border-bottom-color: var(--grass);
+}
+
+/* ── Events timeline ── */
+.eventTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.eventRow {
+  display: grid;
+  grid-template-columns: 44px 24px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid #1a2a33;
+  font-size: 14px;
+}
+.eventRow:last-child { border-bottom: none; }
+.eventMinute {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: right;
+}
+.eventIcon { text-align: center; font-size: 15px; }
+.eventDetail { display: flex; flex-direction: column; gap: 1px; }
+.eventPlayer { font-weight: 600; font-size: 14px; }
+.eventAssist { font-size: 12px; color: var(--text-muted); }
+.eventSubOut {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.eventTeamName {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* ── Lineup display ── */
+.lineupColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.lineupTeam { }
+.lineupTeamHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+}
+.lineupTeamName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+.lineupFormation {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--grass);
+  background: var(--pitch3);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+.lineupCoach {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.lineupLabel {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0.75rem 0 0.25rem;
+}
+.lineupPlayer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #1a2a33;
+}
+.lineupPlayer:last-child { border-bottom: none; }
+.lineupNumber {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.lineupPos {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 24px;
+  flex-shrink: 0;
+}
+.lineupPlayerName { flex: 1; }
+.lineupSubbed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.lineupSubMinute {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
 }

@@ -8,6 +8,7 @@ type Props = {
   league: League
   rounds: number[]
   onClose: () => void
+  favTeamIds?: number[]
 }
 
 const BAR_COLORS = [
@@ -19,7 +20,7 @@ const BAR_COLORS = [
 
 const ROW_HEIGHT = 30 // px per row
 
-export default function RaceChart({ league, rounds, onClose }: Props) {
+export default function RaceChart({ league, rounds, onClose, favTeamIds = [] }: Props) {
   const [allStandings, setAllStandings] = useState<Map<number, ParsedStanding[]>>(new Map())
   const [currentIdx, setCurrentIdx] = useState(-1)
   const [playing, setPlaying] = useState(false)
@@ -135,6 +136,7 @@ export default function RaceChart({ league, rounds, onClose }: Props) {
                   const s = standingsMap.get(teamId)
                   if (!s) return null
                   const pos = posMap.get(teamId) ?? 0
+                  const isFav = favTeamIds.includes(teamId)
                   return (
                     <div
                       key={teamId}
@@ -149,13 +151,16 @@ export default function RaceChart({ league, rounds, onClose }: Props) {
                         height: ROW_HEIGHT,
                       }}
                     >
-                      <div className={styles.raceBarLabel}>{s.team.name}</div>
+                      <div className={styles.raceBarLabel} style={isFav ? { color: 'var(--gold)', fontWeight: 700 } : undefined}>
+                        {isFav ? '★ ' : ''}{s.team.name}
+                      </div>
                       <div className={styles.raceBarTrack}>
                         <div
                           className={styles.raceBar}
                           style={{
                             width: `${(s.pts / maxPts) * 100}%`,
-                            backgroundColor: teamColors.get(teamId) || '#888'
+                            backgroundColor: isFav ? 'var(--gold)' : (teamColors.get(teamId) || '#888'),
+                            boxShadow: isFav ? '0 0 8px var(--gold)' : undefined,
                           }}
                         />
                         <span className={styles.raceBarPts}>{s.pts}p</span>

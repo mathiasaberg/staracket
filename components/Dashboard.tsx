@@ -23,6 +23,10 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
   const favTeamIds = getFavTeams()
 
   useEffect(() => {
+    if (favLeagueIds.length === 0 && favTeamIds.length === 0) {
+      setLoading(false)
+      return
+    }
     let cancelled = false
     async function load() {
       setLoading(true)

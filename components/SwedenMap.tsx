@@ -67,9 +67,12 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
   const [selectedTeam, setSelectedTeam] = useState<PlottedTeam | null>(null)
   const [expandedCluster, setExpandedCluster] = useState<number>(-1)
   const [recentEvents, setRecentEvents] = useState<Event[]>([])
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
+  const [teamPosition, setTeamPosition] = useState<{ pos: number; total: number; pts: number; form: ('W'|'D'|'L')[] } | null>(null)
   const [loading, setLoading] = useState(true)
   const [loadingTeam, setLoadingTeam] = useState(false)
   const [missingCount, setMissingCount] = useState(0)
+  const [missingTeams, setMissingTeams] = useState<{ name: string; leagueName: string }[]>([])
 
   useEffect(() => {
     let cancelled = false
@@ -78,6 +81,7 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
       const seen = new Set<number>()
       let totalTeams = 0
       let mappedTeams = 0
+      const missing: { name: string; leagueName: string }[] = []
       const batchSize = 10
       for (let i = 0; i < allLeagues.length && !cancelled; i += batchSize) {
         const batch = allLeagues.slice(i, i + batchSize)
@@ -100,6 +104,8 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
               if (loc) {
                 found.push({ ...t, ...loc, leagueName: league.name, leagueId: league.id, arenaName: t.arena?.name || undefined, municipality: t.municipality?.name || undefined })
                 mappedTeams++
+              } else {
+                missing.push({ name: t.name, leagueName: league.name })
               }
             }
           }
@@ -108,6 +114,7 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
       if (!cancelled) {
         setTeams(found)
         setMissingCount(seen.size - mappedTeams)
+        setMissingTeams(missing)
         setLoading(false)
       }
     }
@@ -124,16 +131,41 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
   const selectTeam = useCallback(async (team: PlottedTeam) => {
     setSelectedTeam(team)
     setLoadingTeam(true)
+    setTeamPosition(null)
     try {
-      const data = await API('events', { league: team.leagueId, limit: 200 })
-      const events: Event[] = data.events || []
+      const [evData, stData] = await Promise.all([
+        API('events', { league: team.leagueId, limit: 200 }),
+        API(`leagues/${team.leagueId}/standings`)
+      ])
+      const events: Event[] = evData.events || []
       const teamEvents = events.filter(
         e => e.homeTeam?.id === team.id || e.visitingTeam?.id === team.id
       )
       const finished = teamEvents.filter(e => e.status === 'FINISHED')
+      const upcoming = teamEvents.filter(e => e.status !== 'FINISHED')
       setRecentEvents(finished.slice(-5).reverse())
+      setUpcomingEvents(upcoming.slice(0, 3))
+
+      // Parse standings position and form
+      const standings = (stData.groups || []).flatMap((g: any) => g.standings || [])
+      const myStanding = standings.find((s: any) => s.team?.id === team.id)
+      if (myStanding) {
+        const total = standings.length
+        const pos = standings.indexOf(myStanding) + 1
+        // Compute form from last 5 finished
+        const form: ('W'|'D'|'L')[] = []
+        for (const e of finished) {
+          const hs = e.homeTeamScore ?? 0
+          const as = e.visitingTeamScore ?? 0
+          const isHome = e.homeTeam?.id === team.id
+          if (isHome) form.push(hs > as ? 'W' : hs === as ? 'D' : 'L')
+          else form.push(as > hs ? 'W' : hs === as ? 'D' : 'L')
+        }
+        setTeamPosition({ pos, total, pts: myStanding.stats?.pts ?? 0, form: form.slice(-5) })
+      }
     } catch {
       setRecentEvents([])
+      setUpcomingEvents([])
     }
     setLoadingTeam(false)
   }, [])
@@ -226,6 +258,11 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
                 )}
                 <div className={styles.teamInfoMeta}>
                   {'🏆'} {selectedTeam.leagueName}
+                  {teamPosition && (
+                    <span style={{ marginLeft: 8, color: 'var(--text-muted)', fontSize: 12 }}>
+                      #{teamPosition.pos}/{teamPosition.total} · {teamPosition.pts}p
+                    </span>
+                  )}
                   <button
                     className={styles.teamInfoLink}
                     onClick={() => {
@@ -236,6 +273,15 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
                     Gå till serien {'→'}
                   </button>
                 </div>
+                {teamPosition && teamPosition.form.length > 0 && (
+                  <div style={{ display: 'flex', gap: 3, margin: '6px 0' }}>
+                    {teamPosition.form.map((r, i) => (
+                      <span key={i} className={`${styles.formDot} ${r === 'W' ? styles.formWin : r === 'D' ? styles.formDraw : styles.formLoss}`}>
+                        {r === 'W' ? 'V' : r === 'D' ? 'O' : 'F'}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {recentEvents.length > 0 && (
                   <>
                     <div className={styles.teamInfoLabel}>Senaste matcher</div>
@@ -248,6 +294,34 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
                     ))}
                   </>
                 )}
+                {upcomingEvents.length > 0 && (
+                  <>
+                    <div className={styles.teamInfoLabel}>Kommande matcher</div>
+                    {upcomingEvents.map(e => (
+                      <div key={e.id} className={styles.teamInfoMatch}>
+                        <span>{e.homeTeam.name}</span>
+                        <span className={styles.teamInfoScore} style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+                          {e.startDate ? new Date(e.startDate).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' }) : '–'}
+                        </span>
+                        <span>{e.visitingTeam.name}</span>
+                      </div>
+                    ))}
+                  </>
+                )}
+                {(() => {
+                  const leagueMissing = missingTeams.filter(m => m.leagueName === selectedTeam.leagueName)
+                  if (!leagueMissing.length) return null
+                  return (
+                    <>
+                      <div className={styles.teamInfoLabel} style={{ color: 'var(--rust)' }}>
+                        Saknar position ({leagueMissing.length})
+                      </div>
+                      <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                        {leagueMissing.map(m => m.name).join(', ')}
+                      </div>
+                    </>
+                  )
+                })()}
               </>
             )}
           </div>

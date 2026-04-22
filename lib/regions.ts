@@ -8,11 +8,11 @@ export const REGION_ORDER = [
 export function getRegion(name: string): string {
   if (/premier league|la liga|bundesliga|serie a|ligue 1|champions|europa league|eredivisie/i.test(name)) return 'Internationellt'
   if (/division 1,\s*herrar/i.test(name)) return 'Övrigt'
-  if (/allsvenskan|superettan|svenska cupen|ettan/i.test(name)) return 'Nationellt'
+  if (/allsvenskan|superettan|damallsvenskan|elitettan|svenska cupen|ettan/i.test(name)) return 'Nationellt'
   if (/division 1\b/i.test(name)) return 'Division 1'
-  if (/norrland|norrbotten|västerbotten|jämtland|ångermanland|medelpad|hälsingland|gästrikland|lappland|härjedalen/i.test(name)) return 'Norrland'
-  if (/dalarna|västmanland|uppland|södermanland|örebro|värmland|stockholm|svealand|bergslagen|närke|roslagen/i.test(name)) return 'Svealand & Stockholm'
-  if (/göteborg|västra götaland|västergötland|östergötland|småland|halland|blekinge|skåne|gotland|bohuslän|götaland|jönköping|kalmar|kronoberg|dalsland|sjuhärad/i.test(name)) return 'Götaland'
+  if (/norrland|norrbotten|västerbotten|jämtland|ångermanland|medelpad|hälsingland|gästrikland|gestrikland|lappland|härjedalen|gävle|sandviken|sundsvall|timrå|umeå|skellefteå|luleå|boden|piteå|kiruna|gällivare|östersund|örnsköldsvik|härnösand|kramfors|hudiksvall|bollnäs|söderhamn/i.test(name)) return 'Norrland'
+  if (/dalarna|västmanland|uppland|södermanland|örebro|värmland|stockholm|svealand|bergslagen|närke|roslagen|solna|södertälje|täby|nacka|sollentuna|huddinge|haninge|norrtälje|västerås|eskilstuna|nyköping|katrineholm|strängnäs|karlstad|karlskoga|falun|borlänge|mora|enköping/i.test(name)) return 'Svealand & Stockholm'
+  if (/göteborg|västra götaland|västergötland|östergötland|småland|halland|blekinge|skåne|gotland|bohuslän|götaland|jönköping|kalmar|kronoberg|dalsland|sjuhärad|malmö|lund|helsingborg|landskrona|trelleborg|kristianstad|hässleholm|ängelholm|ystad|eslöv|borås|trollhättan|skövde|lidköping|mariestad|uddevalla|halmstad|varberg|falkenberg|kungsbacka|norrköping|linköping|motala|värnamo|nässjö|oskarshamn|västervik|växjö|karlskrona|visby/i.test(name)) return 'Götaland'
   if (/division\s+\d/i.test(name)) return 'Övrigt'
   return 'Övrigt'
 }

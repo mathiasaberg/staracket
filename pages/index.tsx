@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { API } from '../lib/api'
@@ -8,15 +8,17 @@ import { parseStandings } from '../lib/standings'
 import { getFavLeagues, toggleFavLeague, getFavTeams, toggleFavTeam } from '../lib/favorites'
 import type { League, Event, ParsedStanding, MatchModalData } from '../lib/types'
 import MatchModal from '../components/MatchModal'
+import { fetchMatchDetails } from '../lib/apifootball'
 import Dashboard from '../components/Dashboard'
 import SwedenMap from '../components/SwedenMap'
 import TeamSearch from '../components/TeamSearch'
 import RaceChart from '../components/RaceChart'
+import TodayMatches from '../components/TodayMatches'
 
 const CURRENT_YEAR = 2026
 const YEARS = [2026, 2025, 2024, 2023, 2022]
 
-type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter'
+type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter' | 'idag'
 
 type NewsItem = {
   id: string
@@ -55,6 +57,7 @@ export default function Home() {
   const [sidebarSearch, setSidebarSearch] = useState('')
   const [regionFilter, setRegionFilter] = useState('')
   const [mapInitDone, setMapInitDone] = useState(false)
+  const [teamSchedule, setTeamSchedule] = useState<{ team: { id: number; name: string }; events: Event[] } | null>(null)
   const leagueRef = useRef<League | null>(null)
 
   useEffect(() => {
@@ -179,16 +182,33 @@ export default function Home() {
     setMatchModal({ baseEvent, event: null, facts: [], loading: true })
     try {
       const evData = await API(`events/${baseEvent.id}`)
+      const ev = evData?.event || null
       setMatchModal({
-        baseEvent,
-        event: evData?.event || null,
-        facts: [],
-        loading: false
+        baseEvent, event: ev, facts: [], loading: false, apiLoading: true
       })
+      // Fetch API-Football data for 2022-2024 seasons
+      const matchYear = baseEvent.startDate ? new Date(baseEvent.startDate).getFullYear() : 0
+      if (matchYear >= 2022 && matchYear <= 2024) {
+        const leagueName = ev?.league?.name || selectedLeague?.name || ''
+        const details = await fetchMatchDetails(
+          leagueName,
+          baseEvent.homeTeam.name,
+          baseEvent.visitingTeam.name,
+          baseEvent.startDate
+        )
+        setMatchModal(prev => prev ? {
+          ...prev,
+          apiEvents: details?.events || [],
+          apiLineups: details?.lineups || [],
+          apiLoading: false
+        } : null)
+      } else {
+        setMatchModal(prev => prev ? { ...prev, apiLoading: false } : null)
+      }
     } catch {
       setMatchModal({ baseEvent, event: null, facts: [], loading: false })
     }
-  }, [])
+  }, [selectedLeague])
 
   const handleToggleFavLeague = (id: number) => {
     const next = toggleFavLeague(id)
@@ -230,18 +250,17 @@ export default function Home() {
   }).filter(g => g.leagues.length > 0)
 
   // Compute form (last 5 match results) per team for standings
+  type FormEntry = { result: 'W'|'D'|'L'; event: Event }
   const teamForm = (() => {
-    const form: Record<number, ('W'|'D'|'L')[]> = {}
+    const form: Record<number, FormEntry[]> = {}
     if (!rounds.length || currentRound < 0) return form
-    // Collect all finished events up to the current round
     const allEvents: Event[] = []
     for (let i = 0; i <= currentRound; i++) {
       const r = rounds[i]
       const evts = roundMap[r] || []
       allEvents.push(...evts.filter(e => e.status === 'FINISHED'))
     }
-    // Build results per team
-    const teamResults: Record<number, ('W'|'D'|'L')[]> = {}
+    const teamResults: Record<number, FormEntry[]> = {}
     for (const e of allEvents) {
       const hs = e.homeTeamScore ?? 0
       const as = e.visitingTeamScore ?? 0
@@ -249,14 +268,13 @@ export default function Home() {
       const aid = e.visitingTeam?.id
       if (hid) {
         if (!teamResults[hid]) teamResults[hid] = []
-        teamResults[hid].push(hs > as ? 'W' : hs === as ? 'D' : 'L')
+        teamResults[hid].push({ result: hs > as ? 'W' : hs === as ? 'D' : 'L', event: e })
       }
       if (aid) {
         if (!teamResults[aid]) teamResults[aid] = []
-        teamResults[aid].push(hs < as ? 'W' : hs === as ? 'D' : 'L')
+        teamResults[aid].push({ result: hs < as ? 'W' : hs === as ? 'D' : 'L', event: e })
       }
     }
-    // Take last 5
     for (const [id, results] of Object.entries(teamResults)) {
       form[Number(id)] = results.slice(-5)
     }
@@ -264,6 +282,11 @@ export default function Home() {
   })()
 
   // Auto-filter map on Superettan on first visit
+  const nationalLeagues = useMemo(() =>
+    (currentLeagues || []).filter(l => /allsvenskan|superettan|damallsvenskan|elitettan|ettan|svenska cupen/i.test(l.name)),
+    [currentLeagues]
+  )
+
   useEffect(() => {
     if (view === 'karta' && !mapInitDone && currentLeagues?.length) {
       const superettan = currentLeagues.find(l => /superettan/i.test(l.name))
@@ -296,6 +319,7 @@ export default function Home() {
           <button className={`${styles.topNavBtn} ${view==='karta' ? styles.topNavActive : ''}`} onClick={() => setView('karta')}>Karta</button>
           <button className={`${styles.topNavBtn} ${view==='sok' ? styles.topNavActive : ''}`} onClick={() => setView('sok')}>Sök</button>
           <button className={`${styles.topNavBtn} ${view==='nyheter' ? styles.topNavActive : ''}`} onClick={() => setView('nyheter')}>Nyheter</button>
+          <button className={`${styles.topNavBtn} ${view==='idag' ? styles.topNavActive : ''}`} onClick={() => setView('idag')}>Idag</button>
         </nav>
         <div className={styles.headerRight}>
           <select className={styles.yearSelect} value={year} onChange={e => setYear(Number(e.target.value))}>
@@ -409,7 +433,13 @@ export default function Home() {
                         {standings.map((t, i) => (
                           <tr key={t.team?.id || i} data-zone={t.zone}>
                             <td className={`${styles.r} ${styles.muted}`}>{t.position}</td>
-                            <td className={styles.teamName}>
+                            <td className={`${styles.teamName} ${styles.teamNameClickable}`} onClick={() => {
+                              const allEvts: Event[] = []
+                              for (const evts of Object.values(roundMap)) allEvts.push(...evts)
+                              const teamEvts = allEvts.filter(e => e.homeTeam?.id === t.team.id || e.visitingTeam?.id === t.team.id)
+                                .sort((a, b) => (a.round ?? 0) - (b.round ?? 0))
+                              setTeamSchedule({ team: t.team, events: teamEvts })
+                            }}>
                               {t.team?.logo && <img src={t.team.logo} alt="" className={styles.teamLogo} />}
                               {t.team?.name || '—'}
                             </td>
@@ -423,9 +453,11 @@ export default function Home() {
                             <td className={`${styles.r} ${styles.pts}`}>{t.pts}</td>
                             <td>
                               <div className={styles.formCell}>
-                                {(teamForm[t.team.id] || []).map((r, ri) => (
-                                  <span key={ri} className={`${styles.formDot} ${r === 'W' ? styles.formWin : r === 'D' ? styles.formDraw : styles.formLoss}`}>
-                                    {r === 'W' ? 'V' : r === 'D' ? 'O' : 'F'}
+                                {(teamForm[t.team.id] || []).map((f, ri) => (
+                                  <span key={ri} className={`${styles.formDot} ${f.result === 'W' ? styles.formWin : f.result === 'D' ? styles.formDraw : styles.formLoss}`}
+                                    title={`${f.event.homeTeam?.name} ${f.event.homeTeamScore}–${f.event.visitingTeamScore} ${f.event.visitingTeam?.name}`}
+                                  >
+                                    {f.result === 'W' ? 'V' : f.result === 'D' ? 'O' : 'F'}
                                   </span>
                                 ))}
                               </div>
@@ -473,6 +505,9 @@ export default function Home() {
                             {e.visitingTeam?.logo && <img src={e.visitingTeam.logo} alt="" className={styles.teamLogo} />}
                             {e.visitingTeam?.name || '—'}
                           </div>
+                          {(e.homeTeam as any)?.arena?.name && (
+                            <div className={styles.matchMeta}>{(e.homeTeam as any).arena.name}</div>
+                          )}
                         </div>
                       )
                     })}
@@ -513,27 +548,20 @@ export default function Home() {
                     <span className={styles.leagueItemName} style={{color:'var(--rust)'}}>✕ Rensa filter ({mapLeagueIds.length})</span>
                   </div>
                 )}
-                {groupedLeagues.filter(g => g.region !== 'Favoriter').map((group) => (
-                  <div key={'map-' + group.region} className={styles.sidebarGroup}>
-                    <div className={`${styles.sidebarGroupLabel} ${group.region === 'Internationellt' ? styles.sidebarGroupForeign : ''}`}>
-                      {group.region}
-                    </div>
-                    {group.leagues.map(l => (
-                      <div
-                        key={l.id}
-                        className={`${styles.leagueItem} ${mapLeagueIds.includes(l.id) ? styles.active : ''}`}
-                        onClick={() => toggleMapLeague(l.id)}
-                      >
-                        <span className={styles.leagueItemName}>{l.name}</span>
-                      </div>
-                    ))}
+                {nationalLeagues.map(l => (
+                  <div
+                    key={l.id}
+                    className={`${styles.leagueItem} ${mapLeagueIds.includes(l.id) ? styles.active : ''}`}
+                    onClick={() => toggleMapLeague(l.id)}
+                  >
+                    <span className={styles.leagueItemName}>{l.name}</span>
                   </div>
                 ))}
               </>
             )}
           </nav>
           <main className={styles.main}>
-            <SwedenMap allLeagues={currentLeagues} selectedLeagueIds={mapLeagueIds} onGoToLeague={selectLeague} />
+            <SwedenMap allLeagues={nationalLeagues} selectedLeagueIds={mapLeagueIds} onGoToLeague={selectLeague} />
           </main>
         </div>
       )}
@@ -689,9 +717,50 @@ export default function Home() {
         </div>
       )}
 
+      {view === 'idag' && (
+        <div className={styles.pageContent}>
+          <div className={styles.centeredContent}>
+            <h2 className={styles.dashboardTitle}>Matcher idag</h2>
+            <TodayMatches allLeagues={allLeagues} nationalLeagues={nationalLeagues} favLeagueIds={favLeagueIds} favTeamIds={favTeamIds} onOpenMatch={openMatch} />
+          </div>
+        </div>
+      )}
+
       {matchModal && <MatchModal modal={matchModal} onClose={() => setMatchModal(null)} />}
+      {teamSchedule && (
+        <div className={styles.modalOverlay} onClick={e => { if (e.target === e.currentTarget) setTeamSchedule(null) }}>
+          <div className={styles.modalCard}>
+            <div className={styles.modalHeader}>
+              <button className={styles.modalClose} onClick={() => setTeamSchedule(null)}>{'\u2715 St\u00e4ng'}</button>
+              <div className={styles.modalLeagueName}>{selectedLeague?.name}</div>
+              <div style={{fontFamily:'Barlow Condensed, sans-serif', fontSize: 22, fontWeight: 700}}>
+                {teamSchedule.team.name}
+              </div>
+            </div>
+            <div className={styles.modalBody}>
+              <div className={styles.factsTitle}>Spelschema</div>
+              {teamSchedule.events.map(e => {
+                const done = e.status === 'FINISHED'
+                const isHome = e.homeTeam?.id === teamSchedule.team.id
+                return (
+                  <div key={e.id} className={styles.matchInfoRow} style={{cursor: 'pointer'}} onClick={() => { setTeamSchedule(null); openMatch(e) }}>
+                    <span className={styles.matchInfoLabel}>Omg {e.round}</span>
+                    <span style={{flex:1}}>
+                      {isHome ? e.visitingTeam?.name : e.homeTeam?.name}
+                      {isHome ? ' (H)' : ' (B)'}
+                    </span>
+                    <span style={{fontWeight: 600, fontFamily:'Barlow Condensed, sans-serif'}}>
+                      {done ? `${e.homeTeamScore}\u2013${e.visitingTeamScore}` : e.startDate ? `${fmt(e.startDate)} ${fmtTime(e.startDate)}` : '\u2013'}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
       {showRace && selectedLeague && rounds.length > 1 && (
-        <RaceChart league={selectedLeague} rounds={rounds} onClose={() => setShowRace(false)} />
+        <RaceChart league={selectedLeague} rounds={rounds} onClose={() => setShowRace(false)} favTeamIds={favTeamIds} />
       )}
     </>
   )
