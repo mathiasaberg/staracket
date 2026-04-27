@@ -58,6 +58,7 @@ export default function Home() {
   const [regionFilter, setRegionFilter] = useState('')
   const [mapInitDone, setMapInitDone] = useState(false)
   const [teamSchedule, setTeamSchedule] = useState<{ team: { id: number; name: string }; events: Event[] } | null>(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const leagueRef = useRef<League | null>(null)
 
   useEffect(() => {
@@ -307,6 +308,7 @@ export default function Home() {
       </Head>
 
       <header className={styles.header}>
+        <button className={styles.hamburger} onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
         <div className={styles.logoWrap} onClick={() => setView('resultat')} style={{cursor:'pointer'}}>
           <div className={styles.logo}>
             stå<span>räcket</span>
@@ -335,7 +337,8 @@ export default function Home() {
       {/* ── "Serier" view ── */}
       {view === 'resultat' && (
         <div className={styles.app}>
-          <nav className={styles.sidebar}>
+          <nav className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
+            <button className={styles.sidebarClose} onClick={() => setSidebarOpen(false)}>{"\u2715"}</button>
             {loading ? (
               <div className={styles.loading}>Laddar...</div>
             ) : (
@@ -370,7 +373,7 @@ export default function Home() {
                         <div
                           key={l.id}
                           className={`${styles.leagueItem} ${selectedLeague?.id === l.id ? styles.active : ''} ${!isSwedish(l.name) ? styles.leagueItemForeign : ''}`}
-                          onClick={() => selectLeague(l)}
+                          onClick={() => { selectLeague(l); setSidebarOpen(false) }}
                           title={l.name}
                         >
                           <span className={styles.leagueItemName}>{l.name}</span>
@@ -417,14 +420,15 @@ export default function Home() {
                 {standings.length > 0 && (
                   <>
                     <div className={styles.sectionTitle}>Tabell efter omgång {round}</div>
+                    <div className={styles.tableWrap}>
                     <table className={styles.table}>
                       <thead>
                         <tr>
                           <th>#</th><th>Lag</th>
                           <th className={styles.r}>M</th><th className={styles.r}>V</th>
                           <th className={styles.r}>O</th><th className={styles.r}>F</th>
-                          <th className={styles.r}>GM</th><th className={styles.r}>IM</th>
-                          <th className={styles.r}>+/-</th><th className={styles.r}>P</th>
+                          <th className={`${styles.r} ${styles.hideMobile}`}>GM</th><th className={`${styles.r} ${styles.hideMobile}`}>IM</th>
+                          <th className={`${styles.r} ${styles.hideMobile}`}>+/-</th><th className={styles.r}>P</th>
                           <th className={styles.r}>Form</th>
                           <th></th>
                         </tr>
@@ -447,9 +451,9 @@ export default function Home() {
                             <td className={styles.r}>{t.w}</td>
                             <td className={styles.r}>{t.d}</td>
                             <td className={styles.r}>{t.l}</td>
-                            <td className={styles.r}>{t.gf}</td>
-                            <td className={styles.r}>{t.ga}</td>
-                            <td className={styles.r}>{t.gd > 0 ? '+' + t.gd : t.gd}</td>
+                            <td className={`${styles.r} ${styles.hideMobile}`}>{t.gf}</td>
+                            <td className={`${styles.r} ${styles.hideMobile}`}>{t.ga}</td>
+                            <td className={`${styles.r} ${styles.hideMobile}`}>{t.gd > 0 ? '+' + t.gd : t.gd}</td>
                             <td className={`${styles.r} ${styles.pts}`}>{t.pts}</td>
                             <td>
                               <div className={styles.formCell}>
@@ -475,6 +479,7 @@ export default function Home() {
                         ))}
                       </tbody>
                     </table>
+                    </div>
                   </>
                 )}
 
@@ -536,7 +541,8 @@ export default function Home() {
       {/* ── Map view ── */}
       {view === 'karta' && (
         <div className={styles.app}>
-          <nav className={styles.sidebar}>
+          <nav className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
+            <button className={styles.sidebarClose} onClick={() => setSidebarOpen(false)}>{"\u2715"}</button>
             {loading ? (
               <div className={styles.loading}>Laddar...</div>
             ) : (

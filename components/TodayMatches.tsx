@@ -76,11 +76,11 @@ export default function TodayMatches({ allLeagues, nationalLeagues, favLeagueIds
                 const live = e.status === 'ONGOING'
                 return (
                   <div key={e.id} className={styles.matchInfoRow} style={{ cursor: 'pointer' }} onClick={() => onOpenMatch(e)}>
-                    <span style={{ width: 80, flexShrink: 0, color: 'var(--text-muted)', fontSize: 12 }}>
+                    <span style={{ minWidth: 60, maxWidth: 80, flexShrink: 0, color: 'var(--text-muted)', fontSize: 12 }}>
                       {done ? 'Slut' : live ? 'Live' : `${fmt(e.startDate)} ${fmtTime(e.startDate)}`}
                     </span>
                     <span style={{ flex: 1 }}>{e.homeTeam?.name}</span>
-                    <span style={{ fontWeight: 600, fontFamily: 'Barlow Condensed, sans-serif', width: 50, textAlign: 'center' }}>
+                    <span style={{ fontWeight: 600, fontFamily: 'Barlow Condensed, sans-serif', minWidth: 36, textAlign: 'center' }}>
                       {done || live ? `${e.homeTeamScore}\u2013${e.visitingTeamScore}` : '\u2013'}
                     </span>
                     <span style={{ flex: 1, textAlign: 'right' }}>{e.visitingTeam?.name}</span>
