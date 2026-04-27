@@ -762,6 +762,7 @@ export default function Home() {
       {showRace && selectedLeague && rounds.length > 1 && (
         <RaceChart league={selectedLeague} rounds={rounds} onClose={() => setShowRace(false)} favTeamIds={favTeamIds} />
       )}
+      <div className={styles.poweredBy}>Powered by <a href="https://www.everysport.com" target="_blank" rel="noopener noreferrer">EverySport</a></div>
     </>
   )
 }

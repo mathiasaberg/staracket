@@ -1166,3 +1166,19 @@
   font-size: 11px;
   color: var(--text-muted);
 }
+
+.poweredBy {
+  text-align: center;
+  padding: 18px 0 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  color: var(--steel-dark);
+  letter-spacing: 0.5px;
+}
+.poweredBy a {
+  color: var(--steel-dark);
+  text-decoration: none;
+}
+.poweredBy a:hover {
+  color: var(--text-muted);
+}
