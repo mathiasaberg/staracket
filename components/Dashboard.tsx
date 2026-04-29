@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { API } from '../lib/api'
+import { parseStandings } from '../lib/standings'
 import { fmt, fmtTime } from '../lib/format'
 import { getFavLeagues, getFavTeams } from '../lib/favorites'
-import type { League, Event } from '../lib/types'
+import type { League, Event, ParsedStanding } from '../lib/types'
 import styles from '../styles/Home.module.css'
 
 type Props = {
@@ -16,17 +17,22 @@ type FavData = {
   events: Event[]
 }
 
-type TeamNextMatch = {
+type TeamDetail = {
   teamId: number
   teamName: string
   leagueName: string
   league: League
-  event: Event
+  nextEvent: Event | null
+  recentEvents: Event[]
+  upcomingEvents: Event[]
+  position: { pos: number; total: number; pts: number } | null
+  form: ('W' | 'D' | 'L')[]
+  loading: boolean
 }
 
 export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Props) {
   const [favData, setFavData] = useState<FavData[]>([])
-  const [teamMatches, setTeamMatches] = useState<TeamNextMatch[]>([])
+  const [teamDetails, setTeamDetails] = useState<TeamDetail[]>([])
   const [loading, setLoading] = useState(true)
   const favLeagueIds = getFavLeagues()
   const favTeamIds = getFavTeams()
@@ -40,10 +46,10 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
     async function load() {
       setLoading(true)
       const leagueResults: FavData[] = []
-      const teamResults: TeamNextMatch[] = []
+      const teamMap = new Map<number, TeamDetail>()
       const favTeamSet = new Set(favTeamIds)
 
-      // Load favorite leagues
+      // Load favorite leagues + collect team data from them
       const leaguesToLoad = allLeagues.filter(l => favLeagueIds.includes(l.id))
       for (const league of leaguesToLoad) {
         try {
@@ -53,49 +59,87 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
           const upcoming = events.filter(e => e.status !== 'FINISHED').slice(0, 3)
           leagueResults.push({ league, events: [...finished.reverse(), ...upcoming] })
 
-          // Also check for fav teams in these leagues
+          // Build team details for fav teams found in these leagues
           if (favTeamSet.size > 0) {
-            for (const e of events) {
-              const homeMatch = favTeamSet.has(e.homeTeam?.id)
-              const awayMatch = favTeamSet.has(e.visitingTeam?.id)
-              if (homeMatch && e.status !== 'FINISHED') {
-                const existing = teamResults.find(t => t.teamId === e.homeTeam.id)
-                if (!existing) {
-                  teamResults.push({ teamId: e.homeTeam.id, teamName: e.homeTeam.name, leagueName: league.name, league, event: e })
+            for (const tid of favTeamSet) {
+              if (teamMap.has(tid)) continue
+              const teamEvents = events.filter(
+                e => e.homeTeam?.id === tid || e.visitingTeam?.id === tid
+              )
+              if (teamEvents.length > 0) {
+                const teamName = teamEvents[0].homeTeam?.id === tid
+                  ? teamEvents[0].homeTeam.name
+                  : teamEvents[0].visitingTeam.name
+                const finishedTeam = teamEvents.filter(e => e.status === 'FINISHED')
+                const upcomingTeam = teamEvents.filter(e => e.status !== 'FINISHED')
+                const form: ('W' | 'D' | 'L')[] = []
+                for (const e of finishedTeam.slice(-5)) {
+                  const hs = e.homeTeamScore ?? 0
+                  const as = e.visitingTeamScore ?? 0
+                  const isHome = e.homeTeam?.id === tid
+                  if (isHome) form.push(hs > as ? 'W' : hs === as ? 'D' : 'L')
+                  else form.push(as > hs ? 'W' : hs === as ? 'D' : 'L')
                 }
-              }
-              if (awayMatch && e.status !== 'FINISHED') {
-                const existing = teamResults.find(t => t.teamId === e.visitingTeam.id)
-                if (!existing) {
-                  teamResults.push({ teamId: e.visitingTeam.id, teamName: e.visitingTeam.name, leagueName: league.name, league, event: e })
-                }
+                teamMap.set(tid, {
+                  teamId: tid,
+                  teamName,
+                  leagueName: league.name,
+                  league,
+                  nextEvent: upcomingTeam[0] || null,
+                  recentEvents: finishedTeam.slice(-3).reverse(),
+                  upcomingEvents: upcomingTeam.slice(0, 3),
+                  position: null,
+                  form,
+                  loading: true,
+                })
               }
             }
           }
         } catch { /* skip */ }
       }
 
-      // Search for fav team matches in other leagues if not found yet
+      // Search for fav teams in other leagues if not found yet
       if (favTeamSet.size > 0) {
-        const foundTeamIds = new Set(teamResults.map(t => t.teamId))
-        const missingTeamIds = favTeamIds.filter(id => !foundTeamIds.has(id))
-        if (missingTeamIds.length > 0) {
-          const missingSet = new Set(missingTeamIds)
+        const missingIds = favTeamIds.filter(id => !teamMap.has(id))
+        if (missingIds.length > 0) {
+          const missingSet = new Set(missingIds)
           for (const league of allLeagues.slice(0, 30)) {
             if (missingSet.size === 0) break
-            if (favLeagueIds.includes(league.id)) continue // already loaded
+            if (favLeagueIds.includes(league.id)) continue
             try {
               const data = await API('events', { league: league.id, limit: 100 })
               const events: Event[] = data.events || []
-              for (const e of events) {
-                if (e.status === 'FINISHED') continue
-                if (missingSet.has(e.homeTeam?.id)) {
-                  teamResults.push({ teamId: e.homeTeam.id, teamName: e.homeTeam.name, leagueName: league.name, league, event: e })
-                  missingSet.delete(e.homeTeam.id)
-                }
-                if (missingSet.has(e.visitingTeam?.id)) {
-                  teamResults.push({ teamId: e.visitingTeam.id, teamName: e.visitingTeam.name, leagueName: league.name, league, event: e })
-                  missingSet.delete(e.visitingTeam.id)
+              for (const tid of [...missingSet]) {
+                const teamEvents = events.filter(
+                  e => e.homeTeam?.id === tid || e.visitingTeam?.id === tid
+                )
+                if (teamEvents.length > 0) {
+                  const teamName = teamEvents[0].homeTeam?.id === tid
+                    ? teamEvents[0].homeTeam.name
+                    : teamEvents[0].visitingTeam.name
+                  const finishedTeam = teamEvents.filter(e => e.status === 'FINISHED')
+                  const upcomingTeam = teamEvents.filter(e => e.status !== 'FINISHED')
+                  const form: ('W' | 'D' | 'L')[] = []
+                  for (const e of finishedTeam.slice(-5)) {
+                    const hs = e.homeTeamScore ?? 0
+                    const as = e.visitingTeamScore ?? 0
+                    const isHome = e.homeTeam?.id === tid
+                    if (isHome) form.push(hs > as ? 'W' : hs === as ? 'D' : 'L')
+                    else form.push(as > hs ? 'W' : hs === as ? 'D' : 'L')
+                  }
+                  teamMap.set(tid, {
+                    teamId: tid,
+                    teamName,
+                    leagueName: league.name,
+                    league,
+                    nextEvent: upcomingTeam[0] || null,
+                    recentEvents: finishedTeam.slice(-3).reverse(),
+                    upcomingEvents: upcomingTeam.slice(0, 3),
+                    position: null,
+                    form,
+                    loading: true,
+                  })
+                  missingSet.delete(tid)
                 }
               }
             } catch { /* skip */ }
@@ -103,9 +147,32 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
         }
       }
 
+      if (cancelled) return
+
+      // Fetch standings for each team's league
+      const leagueIdsToFetch = new Set([...teamMap.values()].map(t => t.league.id))
+      for (const lid of leagueIdsToFetch) {
+        try {
+          const stData = await API(`leagues/${lid}/standings`)
+          const standings = parseStandings(stData)
+          for (const [, td] of teamMap) {
+            if (td.league.id !== lid) continue
+            const myStanding = standings.find(s => s.team?.id === td.teamId)
+            if (myStanding) {
+              td.position = { pos: myStanding.position, total: standings.length, pts: myStanding.pts }
+            }
+            td.loading = false
+          }
+        } catch {
+          for (const [, td] of teamMap) {
+            if (td.league.id === lid) td.loading = false
+          }
+        }
+      }
+
       if (!cancelled) {
         setFavData(leagueResults)
-        setTeamMatches(teamResults)
+        setTeamDetails([...teamMap.values()])
         setLoading(false)
       }
     }
@@ -130,33 +197,65 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
         <div className={styles.modalEmpty}>Laddar favoriter…</div>
       ) : (
         <div className={styles.dashboardGrid}>
-          {/* Left column: Favorite teams next match */}
+          {/* Left column: Favorite teams with details */}
           <div className={styles.dashboardCol}>
             <div className={styles.dashboardColTitle}>Favoritlag</div>
-            {teamMatches.length === 0 ? (
+            {teamDetails.length === 0 ? (
               <div className={styles.dashboardColEmpty}>
                 {favTeamIds.length === 0
                   ? 'Markera lag med ★ i tabellen för att se deras nästa match här.'
-                  : 'Inga kommande matcher hittades.'}
+                  : 'Inga matcher hittades för dina favoritlag.'}
               </div>
             ) : (
-              teamMatches.map(tm => (
-                <div key={tm.teamId} className={styles.dashboardTeamCard}>
-                  <div className={styles.dashboardTeamName}>{tm.teamName}</div>
-                  <div className={styles.dashboardTeamLeague} onClick={() => onGoToLeague(tm.league)}>
-                    {tm.leagueName} {'→'}
+              teamDetails.map(td => (
+                <div key={td.teamId} className={styles.teamInfoCard}>
+                  <h3 className={styles.teamInfoName}>{td.teamName}</h3>
+                  <div className={styles.teamInfoMeta}>
+                    {'🏆'} {td.leagueName}
+                    {td.position && (
+                      <span style={{ marginLeft: 8, color: 'var(--text-muted)', fontSize: 12 }}>
+                        #{td.position.pos}/{td.position.total} · {td.position.pts}p
+                      </span>
+                    )}
+                    <button className={styles.teamInfoLink} onClick={() => onGoToLeague(td.league)}>
+                      Gå till serien {'→'}
+                    </button>
                   </div>
-                  <div
-                    className={`${styles.matchCard} ${styles.matchCardFav}`}
-                    onClick={() => onOpenMatch?.(tm.event)}
-                    style={{ cursor: onOpenMatch ? 'pointer' : 'default' }}
-                  >
-                    <div className={styles.matchHome}>{tm.event.homeTeam?.name || '—'}</div>
-                    <div className={`${styles.matchScore} ${styles.upcoming}`}>
-                      {tm.event.startDate ? `${fmt(tm.event.startDate)} ${fmtTime(tm.event.startDate)}` : '—'}
+                  {td.form.length > 0 && (
+                    <div style={{ display: 'flex', gap: 3, margin: '6px 0' }}>
+                      {td.form.map((r, i) => (
+                        <span key={i} className={`${styles.formDot} ${r === 'W' ? styles.formWin : r === 'D' ? styles.formDraw : styles.formLoss}`}>
+                          {r === 'W' ? 'V' : r === 'D' ? 'O' : 'F'}
+                        </span>
+                      ))}
                     </div>
-                    <div className={styles.matchAway}>{tm.event.visitingTeam?.name || '—'}</div>
-                  </div>
+                  )}
+                  {td.recentEvents.length > 0 && (
+                    <>
+                      <div className={styles.teamInfoLabel}>Senaste matcher</div>
+                      {td.recentEvents.map(e => (
+                        <div key={e.id} className={styles.teamInfoMatch} style={{ cursor: 'pointer' }} onClick={() => onOpenMatch?.(e)}>
+                          <span>{e.homeTeam?.name}</span>
+                          <span className={styles.teamInfoScore}>{e.homeTeamScore}{'–'}{e.visitingTeamScore}</span>
+                          <span>{e.visitingTeam?.name}</span>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                  {td.upcomingEvents.length > 0 && (
+                    <>
+                      <div className={styles.teamInfoLabel}>Kommande matcher</div>
+                      {td.upcomingEvents.map(e => (
+                        <div key={e.id} className={styles.teamInfoMatch} style={{ cursor: 'pointer' }} onClick={() => onOpenMatch?.(e)}>
+                          <span>{e.homeTeam?.name}</span>
+                          <span className={styles.teamInfoScore} style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+                            {e.startDate ? `${fmt(e.startDate)} ${fmtTime(e.startDate)}` : '–'}
+                          </span>
+                          <span>{e.visitingTeam?.name}</span>
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
               ))
             )}

@@ -20,8 +20,18 @@ function getDivisionNumber(name: string): number {
   return m ? parseInt(m[1], 10) : 0
 }
 
-export function getRegion(name: string): string {
+function isForeignLeague(league: League): boolean {
+  const sn = league.season?.name?.toLowerCase() || ''
+  if (/finland|norge|norway|danmark|denmark|island|iceland/i.test(sn)) return true
+  return false
+}
+
+export function getRegion(name: string, league?: League): string {
   if (/premier league|la liga|bundesliga|serie a|ligue 1|champions|europa league|eredivisie/i.test(name)) return 'Internationellt'
+
+  // Finnish and other non-Swedish leagues → Internationellt
+  if (/finsk|finska|finland|suomi|veikkausliiga|ykkönen/i.test(name)) return 'Internationellt'
+  if (league && isForeignLeague(league)) return 'Internationellt'
 
   // National youth leagues → Nationellt
   if (isNationalYouth(name)) return 'Nationellt'
@@ -32,7 +42,7 @@ export function getRegion(name: string): string {
   // Non-national youth leagues → Ungdomslag
   if (isYouth(name)) return 'Ungdomslag'
 
-  // Division N (senior)
+  // Division N (senior) — only Swedish divisions at this point
   const div = getDivisionNumber(name)
   if (div > 0 && div <= 7) return `Division ${div}`
 
@@ -40,8 +50,8 @@ export function getRegion(name: string): string {
   return 'Övrigt'
 }
 
-export function isSwedish(name: string): boolean {
-  return getRegion(name) !== 'Internationellt'
+export function isSwedish(name: string, league?: League): boolean {
+  return getRegion(name, league) !== 'Internationellt'
 }
 
 export function groupLeagues(leagueList: League[], favIds?: number[]): { region: string; leagues: League[] }[] {
@@ -51,7 +61,7 @@ export function groupLeagues(leagueList: League[], favIds?: number[]): { region:
     if (favIds?.length && favIds.includes(l.id)) {
       map.get('Favoriter')!.push(l)
     }
-    const r = getRegion(l.name)
+    const r = getRegion(l.name, l)
     if (!map.has(r)) map.set(r, [])
     map.get(r)!.push(l)
   }

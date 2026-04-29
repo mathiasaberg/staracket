@@ -16,7 +16,7 @@ import RaceChart from '../components/RaceChart'
 import TodayMatches from '../components/TodayMatches'
 
 const CURRENT_YEAR = 2026
-const YEARS = [2026, 2025, 2024, 2023, 2022]
+const YEARS = Array.from({ length: CURRENT_YEAR - 1999 }, (_, i) => CURRENT_YEAR - i)
 
 type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter' | 'idag'
 

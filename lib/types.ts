@@ -1,6 +1,6 @@
 export type League = {
   id: number; name: string; teamClass?: string; teamClassId?: number
-  season?: { startYear: number; endYear: number }
+  season?: { name?: string; startYear: number; endYear: number }
   sport?: { id: number; name: string }
 }
 export type Team = { id: number; name: string; shortName?: string; logo?: string; arena?: { id?: number; name?: string; city?: string } }
