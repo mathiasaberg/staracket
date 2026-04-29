@@ -61,7 +61,7 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
 
           // Build team details for fav teams found in these leagues
           if (favTeamSet.size > 0) {
-            for (const tid of favTeamSet) {
+            for (const tid of Array.from(favTeamSet)) {
               if (teamMap.has(tid)) continue
               const teamEvents = events.filter(
                 e => e.homeTeam?.id === tid || e.visitingTeam?.id === tid
@@ -109,7 +109,7 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
             try {
               const data = await API('events', { league: league.id, limit: 100 })
               const events: Event[] = data.events || []
-              for (const tid of [...missingSet]) {
+              for (const tid of Array.from(missingSet)) {
                 const teamEvents = events.filter(
                   e => e.homeTeam?.id === tid || e.visitingTeam?.id === tid
                 )
@@ -150,29 +150,29 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
       if (cancelled) return
 
       // Fetch standings for each team's league
-      const leagueIdsToFetch = new Set([...teamMap.values()].map(t => t.league.id))
+      const leagueIdsToFetch = Array.from(new Set(Array.from(teamMap.values()).map(t => t.league.id)))
       for (const lid of leagueIdsToFetch) {
         try {
           const stData = await API(`leagues/${lid}/standings`)
           const standings = parseStandings(stData)
-          for (const [, td] of teamMap) {
-            if (td.league.id !== lid) continue
+          Array.from(teamMap.values()).forEach(td => {
+            if (td.league.id !== lid) return
             const myStanding = standings.find(s => s.team?.id === td.teamId)
             if (myStanding) {
               td.position = { pos: myStanding.position, total: standings.length, pts: myStanding.pts }
             }
             td.loading = false
-          }
+          })
         } catch {
-          for (const [, td] of teamMap) {
+          Array.from(teamMap.values()).forEach(td => {
             if (td.league.id === lid) td.loading = false
-          }
+          })
         }
       }
 
       if (!cancelled) {
         setFavData(leagueResults)
-        setTeamDetails([...teamMap.values()])
+        setTeamDetails(Array.from(teamMap.values()))
         setLoading(false)
       }
     }
