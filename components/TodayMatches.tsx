@@ -42,12 +42,21 @@ export default function TodayMatches({ allLeagues, nationalLeagues, favLeagueIds
       const favTeamSet = new Set(favTeamIds)
       const favItems: LeagueEvents[] = []
       const nationalItems: LeagueEvents[] = []
+      const favLeagueIdsInResults = new Set<number>()
 
       for (const le of results) {
         const isFav = favSet.has(le.league.id) ||
           le.events.some(e => favTeamSet.has(e.homeTeam?.id) || favTeamSet.has(e.visitingTeam?.id))
-        if (isFav) favItems.push(le)
-        if (nationalIds.has(le.league.id)) nationalItems.push(le)
+        if (isFav) {
+          favItems.push(le)
+          favLeagueIdsInResults.add(le.league.id)
+        }
+      }
+
+      for (const le of results) {
+        if (nationalIds.has(le.league.id) && !favLeagueIdsInResults.has(le.league.id)) {
+          nationalItems.push(le)
+        }
       }
 
       const grouped: { label: string; items: LeagueEvents[] }[] = []

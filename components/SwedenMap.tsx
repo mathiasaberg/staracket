@@ -161,7 +161,10 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
           if (isHome) form.push(hs > as ? 'W' : hs === as ? 'D' : 'L')
           else form.push(as > hs ? 'W' : hs === as ? 'D' : 'L')
         }
-        setTeamPosition({ pos, total, pts: myStanding.stats?.pts ?? 0, form: form.slice(-5) })
+        const statsArr: { name: string; value: string }[] = myStanding.stats || []
+        const ptsEntry = statsArr.find((s: any) => s.name === 'pts')
+        const pts = ptsEntry ? parseInt(ptsEntry.value, 10) || 0 : 0
+        setTeamPosition({ pos, total, pts, form: form.slice(-5) })
       }
     } catch {
       setRecentEvents([])

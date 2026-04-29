@@ -837,7 +837,7 @@
 }
 
 /* ── Dashboard ── */
-.dashboard { max-width: 900px; margin: 0 auto; }
+.dashboard { max-width: 1100px; margin: 0 auto; }
 .dashboardTitle {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 22px;
@@ -846,6 +846,53 @@
   letter-spacing: 0.04em;
   margin-bottom: 1.5rem;
 }
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.dashboardCol {}
+.dashboardColTitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 6px;
+  margin-bottom: 1rem;
+}
+.dashboardColEmpty {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 1rem 0;
+}
+.dashboardTeamCard {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.dashboardTeamCard:last-child { border-bottom: none; }
+.dashboardTeamName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.dashboardTeamLeague {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grass);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.12s;
+}
+.dashboardTeamLeague:hover { color: var(--text); }
 .dashboardEmpty {
   text-align: center;
   padding: 3rem;
@@ -1381,6 +1428,7 @@
     min-height: calc(100vh - 48px);
   }
   .dashboard { padding: 0; }
+  .dashboardGrid { grid-template-columns: 1fr; gap: 1.5rem; }
   .searchContainer { padding: 0; }
   .newsContainer { padding: 0; }
 

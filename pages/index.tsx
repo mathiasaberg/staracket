@@ -357,7 +357,7 @@ export default function Home() {
                     value={regionFilter}
                     onChange={e => setRegionFilter(e.target.value)}
                   >
-                    <option value="">Alla regioner</option>
+                    <option value="">Alla kategorier</option>
                     {REGION_ORDER.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>

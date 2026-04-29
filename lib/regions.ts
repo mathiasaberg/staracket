@@ -1,18 +1,41 @@
 import type { League } from './types'
 
 export const REGION_ORDER = [
-  'Favoriter', 'Nationellt', 'Division 1', 'Norrland',
-  'Svealand & Stockholm', 'Götaland', 'Övrigt', 'Internationellt'
+  'Favoriter', 'Nationellt',
+  'Division 1', 'Division 2', 'Division 3', 'Division 4', 'Division 5', 'Division 6', 'Division 7',
+  'Ungdomslag', 'Övrigt', 'Internationellt'
 ]
+
+function isYouth(name: string): boolean {
+  return /\b[PF]\d{2}\b/i.test(name) || /\bU\d+\b/i.test(name)
+}
+
+function isNationalYouth(name: string): boolean {
+  if (!isYouth(name)) return false
+  return /allsvenskan|superettan|elitettan|riksserie|nationell/i.test(name)
+}
+
+function getDivisionNumber(name: string): number {
+  const m = name.match(/\bdivision\s+(\d+)\b/i)
+  return m ? parseInt(m[1], 10) : 0
+}
 
 export function getRegion(name: string): string {
   if (/premier league|la liga|bundesliga|serie a|ligue 1|champions|europa league|eredivisie/i.test(name)) return 'Internationellt'
-  if (/division 1,\s*herrar/i.test(name)) return 'Övrigt'
-  if (/allsvenskan|superettan|damallsvenskan|elitettan|svenska cupen|ettan/i.test(name)) return 'Nationellt'
-  if (/division 1\b/i.test(name)) return 'Division 1'
-  if (/norrland|norrbotten|västerbotten|jämtland|ångermanland|medelpad|hälsingland|gästrikland|gestrikland|lappland|härjedalen|gävle|sandviken|sundsvall|timrå|umeå|skellefteå|luleå|boden|piteå|kiruna|gällivare|östersund|örnsköldsvik|härnösand|kramfors|hudiksvall|bollnäs|söderhamn/i.test(name)) return 'Norrland'
-  if (/dalarna|västmanland|uppland|södermanland|örebro|värmland|stockholm|svealand|bergslagen|närke|roslagen|solna|södertälje|täby|nacka|sollentuna|huddinge|haninge|norrtälje|västerås|eskilstuna|nyköping|katrineholm|strängnäs|karlstad|karlskoga|falun|borlänge|mora|enköping/i.test(name)) return 'Svealand & Stockholm'
-  if (/göteborg|västra götaland|västergötland|östergötland|småland|halland|blekinge|skåne|gotland|bohuslän|götaland|jönköping|kalmar|kronoberg|dalsland|sjuhärad|malmö|lund|helsingborg|landskrona|trelleborg|kristianstad|hässleholm|ängelholm|ystad|eslöv|borås|trollhättan|skövde|lidköping|mariestad|uddevalla|halmstad|varberg|falkenberg|kungsbacka|norrköping|linköping|motala|värnamo|nässjö|oskarshamn|västervik|växjö|karlskrona|visby/i.test(name)) return 'Götaland'
+
+  // National youth leagues → Nationellt
+  if (isNationalYouth(name)) return 'Nationellt'
+
+  // National senior leagues
+  if (/allsvenskan|superettan|damallsvenskan|elitettan|svenska cupen|\bettan\b/i.test(name) && !isYouth(name)) return 'Nationellt'
+
+  // Non-national youth leagues → Ungdomslag
+  if (isYouth(name)) return 'Ungdomslag'
+
+  // Division N (senior)
+  const div = getDivisionNumber(name)
+  if (div > 0 && div <= 7) return `Division ${div}`
+
   if (/division\s+\d/i.test(name)) return 'Övrigt'
   return 'Övrigt'
 }
@@ -29,7 +52,18 @@ export function groupLeagues(leagueList: League[], favIds?: number[]): { region:
       map.get('Favoriter')!.push(l)
     }
     const r = getRegion(l.name)
+    if (!map.has(r)) map.set(r, [])
     map.get(r)!.push(l)
+  }
+  // Sort Ungdomslag by division number, then alphabetically
+  const youth = map.get('Ungdomslag')
+  if (youth) {
+    youth.sort((a, b) => {
+      const da = getDivisionNumber(a.name)
+      const db = getDivisionNumber(b.name)
+      if (da !== db) return da - db
+      return a.name.localeCompare(b.name, 'sv')
+    })
   }
   return REGION_ORDER.map(r => ({ region: r, leagues: map.get(r)! })).filter(g => g.leagues.length > 0)
 }
