@@ -70,6 +70,14 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
     const nearby: NearbyMatch[] = []
     const batchSize = 10
 
+    console.log(`[NearbyMatches] Användarens position: lat=${pos.lat}, lng=${pos.lng}`)
+    console.log(`[NearbyMatches] Söker matcher inom ${maxKm} km, datum: ${today}`)
+    console.log(`[NearbyMatches] Antal ligor att söka igenom: ${allLeagues.length}`)
+
+    let totalEvents = 0
+    let matchedTeams = 0
+    let unmatchedTeams: string[] = []
+
     for (let i = 0; i < allLeagues.length; i += batchSize) {
       const batch = allLeagues.slice(i, i + batchSize)
       const results = await Promise.allSettled(
@@ -83,17 +91,28 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
         const { league, data } = r.value
         const events: Event[] = (data?.events || [])
           .filter((e: Event) => e.startDate && e.startDate.startsWith(today))
+        totalEvents += events.length
         for (const event of events) {
           const homeName = event.homeTeam?.name
           if (!homeName) continue
           const loc = findTeamLocation(homeName)
-          if (!loc) continue
+          if (!loc) {
+            unmatchedTeams.push(homeName)
+            continue
+          }
+          matchedTeams++
           const dist = haversineKm(pos.lat, pos.lng, loc.lat, loc.lng)
+          console.log(`[NearbyMatches] ${homeName} → ${loc.city} (lat=${loc.lat}, lng=${loc.lng}) avstånd: ${dist.toFixed(1)} km ${dist <= maxKm ? '✅ INOM RADIE' : ''}`)
           if (dist <= maxKm) {
             nearby.push({ event, league, distance: dist, venueCity: loc.city })
           }
         }
       }
+    }
+
+    console.log(`[NearbyMatches] Sammanfattning: ${totalEvents} matcher idag, ${matchedTeams} hemmalag med position, ${unmatchedTeams.length} utan position, ${nearby.length} inom ${maxKm} km`)
+    if (unmatchedTeams.length > 0) {
+      console.log(`[NearbyMatches] Hemmalag utan matchad position:`, unmatchedTeams)
     }
 
     nearby.sort((a, b) => a.distance - b.distance)
@@ -132,6 +151,12 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
           ))}
         </div>
       </div>
+
+      {userPos && (
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8, fontFamily: 'monospace' }}>
+          📍 Din position: {userPos.lat.toFixed(5)}, {userPos.lng.toFixed(5)}
+        </div>
+      )}
 
       {loadingMatches ? (
         <LoadingSpinner message="Söker matcher i närheten…" />

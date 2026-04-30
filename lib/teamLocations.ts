@@ -227,13 +227,23 @@ export const TEAM_LOCATIONS: Record<string, { lat: number; lng: number; city: st
   'danderyd': { lat: 59.396, lng: 18.020, city: 'Danderyd' },
 }
 
+function stripDiacritics(s: string): string {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+}
+
 export function findTeamLocation(teamName: string): { lat: number; lng: number; city: string } | null {
   const lower = teamName.toLowerCase()
   // Direct match
   if (TEAM_LOCATIONS[lower]) return TEAM_LOCATIONS[lower]
-  // Substring match
+  // Substring match (exact characters)
   for (const [key, val] of Object.entries(TEAM_LOCATIONS)) {
     if (lower.includes(key) || key.includes(lower)) return val
+  }
+  // Fallback: match without diacritics (ö→o, å→a, ä→a)
+  const norm = stripDiacritics(teamName)
+  for (const [key, val] of Object.entries(TEAM_LOCATIONS)) {
+    const normKey = stripDiacritics(key)
+    if (norm.includes(normKey) || normKey.includes(norm)) return val
   }
   return null
 }
