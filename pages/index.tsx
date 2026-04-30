@@ -16,11 +16,12 @@ import LoadingSpinner from '../components/LoadingSpinner'
 const SwedenMap = lazy(() => import('../components/SwedenMap'))
 const TeamSearch = lazy(() => import('../components/TeamSearch'))
 const RaceChart = lazy(() => import('../components/RaceChart'))
+const NearbyMatches = lazy(() => import('../components/NearbyMatches'))
 
 const CURRENT_YEAR = 2026
 const YEARS = Array.from({ length: CURRENT_YEAR - 1999 }, (_, i) => CURRENT_YEAR - i)
 
-type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter' | 'idag'
+type View = 'resultat' | 'karta' | 'dashboard' | 'sok' | 'nyheter' | 'idag' | 'nara'
 
 type NewsItem = {
   id: string
@@ -324,6 +325,7 @@ export default function Home() {
           <button className={`${styles.topNavBtn} ${view==='sok' ? styles.topNavActive : ''}`} onClick={() => setView('sok')}>Sök</button>
           <button className={`${styles.topNavBtn} ${view==='nyheter' ? styles.topNavActive : ''}`} onClick={() => setView('nyheter')}>Nyheter</button>
           <button className={`${styles.topNavBtn} ${view==='idag' ? styles.topNavActive : ''}`} onClick={() => setView('idag')}>Idag</button>
+          <button className={`${styles.topNavBtn} ${view==='nara' ? styles.topNavActive : ''}`} onClick={() => setView('nara')}>Matcher här</button>
         </nav>
         <div className={styles.headerRight}>
           <select className={styles.yearSelect} value={year} onChange={e => setYear(Number(e.target.value))}>
@@ -735,6 +737,17 @@ export default function Home() {
           <div className={styles.centeredContent}>
             <h2 className={styles.dashboardTitle}>Matcher idag</h2>
             <TodayMatches allLeagues={allLeagues} nationalLeagues={nationalLeagues} favLeagueIds={favLeagueIds} favTeamIds={favTeamIds} onOpenMatch={openMatch} />
+          </div>
+        </div>
+      )}
+
+      {view === 'nara' && (
+        <div className={styles.pageContent}>
+          <div className={styles.centeredContent}>
+            <h2 className={styles.dashboardTitle}>Matcher här</h2>
+            <Suspense fallback={<LoadingSpinner message="Laddar..." />}>
+              <NearbyMatches allLeagues={allLeagues} onOpenMatch={openMatch} />
+            </Suspense>
           </div>
         </div>
       )}

@@ -1307,6 +1307,85 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* ── Nearby matches ── */
+.nearbyControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.nearbyLabel {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.nearbyRadiusBtns {
+  display: flex;
+  gap: 4px;
+}
+.nearbyRadiusBtn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--pitch3);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.nearbyRadiusBtn:hover { color: var(--text); border-color: var(--steel-dark); }
+.nearbyRadiusActive {
+  background: var(--grass);
+  color: #fff;
+  border-color: var(--grass);
+}
+.nearbyMatchCard {
+  background: var(--pitch2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.nearbyMatchCard:hover {
+  border-color: var(--steel-dark);
+  background: var(--pitch3);
+}
+.nearbyMatchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.nearbyLeagueName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.nearbyDistance {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grass);
+  letter-spacing: 0.04em;
+}
+.nearbyVenue {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
 @media (max-width: 768px) {
 
   /* ── Hamburger visible ── */
