@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react'
+import { useEffect, useState, useCallback, useRef, useMemo, lazy, Suspense } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { API } from '../lib/api'
+import { API, TTL } from '../lib/api'
 import { fmt, fmtTime } from '../lib/format'
 import { groupLeagues, isSwedish, getRegion, REGION_ORDER } from '../lib/regions'
 import { parseStandings } from '../lib/standings'
@@ -10,10 +10,12 @@ import type { League, Event, ParsedStanding, MatchModalData } from '../lib/types
 import MatchModal from '../components/MatchModal'
 import { fetchMatchDetails } from '../lib/apifootball'
 import Dashboard from '../components/Dashboard'
-import SwedenMap from '../components/SwedenMap'
-import TeamSearch from '../components/TeamSearch'
-import RaceChart from '../components/RaceChart'
 import TodayMatches from '../components/TodayMatches'
+import LoadingSpinner from '../components/LoadingSpinner'
+
+const SwedenMap = lazy(() => import('../components/SwedenMap'))
+const TeamSearch = lazy(() => import('../components/TeamSearch'))
+const RaceChart = lazy(() => import('../components/RaceChart'))
 
 const CURRENT_YEAR = 2026
 const YEARS = Array.from({ length: CURRENT_YEAR - 1999 }, (_, i) => CURRENT_YEAR - i)
@@ -90,7 +92,7 @@ export default function Home() {
     setStandings([])
 
     try {
-      const data = await API('leagues', { sport: 10, limit: 500, season: selectedYear })
+      const data = await API('leagues', { sport: 10, limit: 500, season: selectedYear }, TTL.MEDIUM)
       let football: League[] = data.leagues || []
       const dam = football.filter(l =>
         l.teamClassId === 2 ||
@@ -235,7 +237,7 @@ export default function Home() {
   const groupedLeagues = groupLeagues(currentLeagues || [], favLeagueIds)
 
   // Filter sidebar leagues by search and region
-  const filteredGroupedLeagues = groupedLeagues.map(g => {
+  const filteredGroupedLeagues = useMemo(() => groupedLeagues.map(g => {
     let filtered = g.leagues
     if (sidebarSearch) {
       const q = sidebarSearch.toLowerCase()
@@ -248,11 +250,11 @@ export default function Home() {
       })
     }
     return { ...g, leagues: filtered }
-  }).filter(g => g.leagues.length > 0)
+  }).filter(g => g.leagues.length > 0), [groupedLeagues, sidebarSearch, regionFilter, favLeagueIds])
 
   // Compute form (last 5 match results) per team for standings
   type FormEntry = { result: 'W'|'D'|'L'; event: Event }
-  const teamForm = (() => {
+  const teamForm = useMemo(() => {
     const form: Record<number, FormEntry[]> = {}
     if (!rounds.length || currentRound < 0) return form
     const allEvents: Event[] = []
@@ -280,7 +282,7 @@ export default function Home() {
       form[Number(id)] = results.slice(-5)
     }
     return form
-  })()
+  }, [rounds, currentRound, roundMap])
 
   // Auto-filter map on Superettan on first visit
   const nationalLeagues = useMemo(() =>
@@ -340,7 +342,7 @@ export default function Home() {
           <nav className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
             <button className={styles.sidebarClose} onClick={() => setSidebarOpen(false)}>{"\u2715"}</button>
             {loading ? (
-              <div className={styles.loading}>Laddar...</div>
+              <LoadingSpinner message="Laddar..." />
             ) : (
               <>
                 <div className={styles.sidebarSearch}>
@@ -395,7 +397,7 @@ export default function Home() {
 
           <main className={styles.main}>
             {loadingMain ? (
-              <div className={styles.loading}>Laddar...</div>
+              <LoadingSpinner message="Laddar..." />
             ) : !selectedLeague ? (
               <div className={styles.loading}>Välj en division</div>
             ) : rounds.length === 0 ? (
@@ -544,7 +546,7 @@ export default function Home() {
           <nav className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
             <button className={styles.sidebarClose} onClick={() => setSidebarOpen(false)}>{"\u2715"}</button>
             {loading ? (
-              <div className={styles.loading}>Laddar...</div>
+              <LoadingSpinner message="Laddar..." />
             ) : (
               <>
                 <div className={`${styles.sidebarGroupLabel} ${styles.sidebarGroupFirst}`}>
@@ -568,7 +570,9 @@ export default function Home() {
             )}
           </nav>
           <main className={styles.main}>
-            <SwedenMap allLeagues={nationalLeagues} selectedLeagueIds={mapLeagueIds} onGoToLeague={selectLeague} />
+            <Suspense fallback={<LoadingSpinner message="Laddar karta..." />}>
+              <SwedenMap allLeagues={nationalLeagues} selectedLeagueIds={mapLeagueIds} onGoToLeague={selectLeague} />
+            </Suspense>
           </main>
         </div>
       )}
@@ -576,7 +580,9 @@ export default function Home() {
       {/* ── Search view ── */}
       {view === 'sok' && (
         <div className={styles.pageContent}>
-          <TeamSearch allLeagues={allLeagues} onGoToLeague={selectLeague} />
+          <Suspense fallback={<LoadingSpinner message="Laddar sök..." />}>
+            <TeamSearch allLeagues={allLeagues} onGoToLeague={selectLeague} />
+          </Suspense>
         </div>
       )}
 
@@ -767,7 +773,9 @@ export default function Home() {
         </div>
       )}
       {showRace && selectedLeague && rounds.length > 1 && (
-        <RaceChart league={selectedLeague} rounds={rounds} onClose={() => setShowRace(false)} favTeamIds={favTeamIds} />
+        <Suspense fallback={<LoadingSpinner message="Laddar serierace..." />}>
+          <RaceChart league={selectedLeague} rounds={rounds} onClose={() => setShowRace(false)} favTeamIds={favTeamIds} />
+        </Suspense>
       )}
     </>
   )

@@ -3,6 +3,7 @@ import { API } from '../lib/api'
 import { parseStandings } from '../lib/standings'
 import type { League, ParsedStanding } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 type Props = {
   league: League
@@ -27,18 +28,30 @@ export default function RaceChart({ league, rounds, onClose, favTeamIds = [] }: 
   const [loading, setLoading] = useState(true)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Load all rounds
+  const [loadProgress, setLoadProgress] = useState(0)
+
+  // Load all rounds in parallel batches
   useEffect(() => {
     let cancelled = false
     async function load() {
       setLoading(true)
+      setLoadProgress(0)
       const map = new Map<number, ParsedStanding[]>()
-      for (const r of rounds) {
+      const batchSize = 5
+      let loaded = 0
+      for (let i = 0; i < rounds.length; i += batchSize) {
         if (cancelled) return
-        try {
-          const data = await API(`leagues/${league.id}/standings`, { round: r })
-          map.set(r, parseStandings(data))
-        } catch { /* skip */ }
+        const batch = rounds.slice(i, i + batchSize)
+        const results = await Promise.allSettled(
+          batch.map(r => API(`leagues/${league.id}/standings`, { round: r }).then(data => ({ r, data })))
+        )
+        for (const result of results) {
+          if (result.status === 'fulfilled') {
+            map.set(result.value.r, parseStandings(result.value.data))
+          }
+        }
+        loaded += batch.length
+        if (!cancelled) setLoadProgress(Math.round((loaded / rounds.length) * 100))
       }
       if (!cancelled) {
         const firstRound = map.get(rounds[0])
@@ -113,7 +126,7 @@ export default function RaceChart({ league, rounds, onClose, favTeamIds = [] }: 
         </div>
         <div className={styles.raceChartBody}>
           {loading ? (
-            <div className={styles.modalEmpty}>Laddar alla omgångars ställningar…</div>
+            <LoadingSpinner message={`Laddar ställningar\u2026 ${loadProgress}%`} />
           ) : (
             <>
               <div className={styles.raceControls}>

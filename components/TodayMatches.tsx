@@ -3,6 +3,7 @@ import { API } from '../lib/api'
 import { fmt, fmtTime } from '../lib/format'
 import type { League, Event } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 type Props = {
   allLeagues: League[]
@@ -69,7 +70,7 @@ export default function TodayMatches({ allLeagues, nationalLeagues, favLeagueIds
     return () => { cancelled = true }
   }, [allLeagues, nationalLeagues, favLeagueIds, favTeamIds])
 
-  if (loading) return <div className={styles.loading}>Laddar matcher...</div>
+  if (loading) return <LoadingSpinner message="Laddar matcher..." />
   if (!groups.length) return <div className={styles.emptyState}>Inga matcher idag</div>
 
   return (

@@ -3,6 +3,7 @@ import { API } from '../lib/api'
 import { findTeamLocation } from '../lib/teamLocations'
 import type { Team, League, Event } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 type Props = {
   allLeagues: League[]
@@ -177,7 +178,7 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
     <div className={styles.mapContainer}>
       <div className={styles.mapSvgWrap}>
         {loading ? (
-          <div className={styles.modalEmpty}>Laddar lagpositioner…</div>
+          <LoadingSpinner message="Laddar lagpositioner…" />
         ) : (
           <>
             <svg viewBox="0 0 500 780" className={styles.mapSvg}>
@@ -251,7 +252,7 @@ export default function SwedenMap({ allLeagues, selectedLeagueIds, onGoToLeague 
         {selectedTeam ? (
           <div className={styles.teamInfoCard}>
             {loadingTeam ? (
-              <div className={styles.modalEmpty}>Laddar…</div>
+              <LoadingSpinner message="Laddar…" inline />
             ) : (
               <>
                 <h3 className={styles.teamInfoName}>{selectedTeam.name}</h3>

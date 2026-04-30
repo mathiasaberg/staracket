@@ -5,6 +5,7 @@ import { fmt, fmtTime } from '../lib/format'
 import { getFavLeagues, getFavTeams } from '../lib/favorites'
 import type { League, Event, ParsedStanding } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 type Props = {
   allLeagues: League[]
@@ -49,11 +50,18 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
       const teamMap = new Map<number, TeamDetail>()
       const favTeamSet = new Set(favTeamIds)
 
-      // Load favorite leagues + collect team data from them
+      // Load favorite leagues in parallel (batches of 5)
       const leaguesToLoad = allLeagues.filter(l => favLeagueIds.includes(l.id))
-      for (const league of leaguesToLoad) {
-        try {
-          const data = await API('events', { league: league.id, limit: 100 })
+      const batchSize = 5
+      for (let i = 0; i < leaguesToLoad.length; i += batchSize) {
+        if (cancelled) return
+        const batch = leaguesToLoad.slice(i, i + batchSize)
+        const results = await Promise.allSettled(
+          batch.map(league => API('events', { league: league.id, limit: 100 }).then(data => ({ league, data })))
+        )
+        for (const r of results) {
+          if (r.status !== 'fulfilled') continue
+          const { league, data } = r.value
           const events: Event[] = data.events || []
           const finished = events.filter(e => e.status === 'FINISHED').slice(-3)
           const upcoming = events.filter(e => e.status !== 'FINISHED').slice(0, 3)
@@ -95,19 +103,24 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
               }
             }
           }
-        } catch { /* skip */ }
+        }
       }
 
-      // Search for fav teams in other leagues if not found yet
+      // Search for fav teams in other leagues if not found yet (batches of 5)
       if (favTeamSet.size > 0) {
         const missingIds = favTeamIds.filter(id => !teamMap.has(id))
         if (missingIds.length > 0) {
           const missingSet = new Set(missingIds)
-          for (const league of allLeagues.slice(0, 30)) {
-            if (missingSet.size === 0) break
-            if (favLeagueIds.includes(league.id)) continue
-            try {
-              const data = await API('events', { league: league.id, limit: 100 })
+          const otherLeagues = allLeagues.filter(l => !favLeagueIds.includes(l.id)).slice(0, 30)
+          for (let i = 0; i < otherLeagues.length && missingSet.size > 0; i += batchSize) {
+            if (cancelled) return
+            const batch = otherLeagues.slice(i, i + batchSize)
+            const results = await Promise.allSettled(
+              batch.map(league => API('events', { league: league.id, limit: 100 }).then(data => ({ league, data })))
+            )
+            for (const r of results) {
+              if (r.status !== 'fulfilled') continue
+              const { league, data } = r.value
               const events: Event[] = data.events || []
               for (const tid of Array.from(missingSet)) {
                 const teamEvents = events.filter(
@@ -142,18 +155,21 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
                   missingSet.delete(tid)
                 }
               }
-            } catch { /* skip */ }
+            }
           }
         }
       }
 
       if (cancelled) return
 
-      // Fetch standings for each team's league
+      // Fetch standings for each team's league in parallel
       const leagueIdsToFetch = Array.from(new Set(Array.from(teamMap.values()).map(t => t.league.id)))
-      for (const lid of leagueIdsToFetch) {
-        try {
-          const stData = await API(`leagues/${lid}/standings`)
+      const standingsResults = await Promise.allSettled(
+        leagueIdsToFetch.map(lid => API(`leagues/${lid}/standings`).then(data => ({ lid, data })))
+      )
+      for (const r of standingsResults) {
+        if (r.status === 'fulfilled') {
+          const { lid, data: stData } = r.value
           const standings = parseStandings(stData)
           Array.from(teamMap.values()).forEach(td => {
             if (td.league.id !== lid) return
@@ -163,7 +179,9 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
             }
             td.loading = false
           })
-        } catch {
+        } else {
+          // Mark as done even on failure
+          const lid = leagueIdsToFetch[standingsResults.indexOf(r)]
           Array.from(teamMap.values()).forEach(td => {
             if (td.league.id === lid) td.loading = false
           })
@@ -194,7 +212,7 @@ export default function Dashboard({ allLeagues, onGoToLeague, onOpenMatch }: Pro
     <div className={styles.dashboard}>
       <h2 className={styles.dashboardTitle}>Min dashboard</h2>
       {loading ? (
-        <div className={styles.modalEmpty}>Laddar favoriter…</div>
+        <LoadingSpinner message="Laddar favoriter…" />
       ) : (
         <div className={styles.dashboardGrid}>
           {/* Left column: Favorite teams with details */}

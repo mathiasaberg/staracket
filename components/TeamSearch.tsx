@@ -4,6 +4,7 @@ import { fmt, fmtTime } from '../lib/format'
 import { findTeamLocation } from '../lib/teamLocations'
 import type { Team, Event, League } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 type Props = {
   allLeagues: League[]
@@ -90,6 +91,7 @@ export default function TeamSearch({ allLeagues, onGoToLeague }: Props) {
 
   return (
     <div className={styles.searchContainer}>
+      {indexLoading && <LoadingSpinner message="Bygger lagregister…" />}
       <div className={styles.searchInputWrap}>
         <input
           className={styles.searchInput}
@@ -118,7 +120,7 @@ export default function TeamSearch({ allLeagues, onGoToLeague }: Props) {
       {selectedTeam && (
         <div className={styles.teamInfoCard}>
           {loading ? (
-            <div className={styles.modalEmpty}>Laddar laginfo…</div>
+            <LoadingSpinner message="Laddar laginfo…" inline />
           ) : (
             <>
               <h3 className={styles.teamInfoName}>{selectedTeam.name}</h3>

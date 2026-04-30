@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { fmt, fmtTime } from '../lib/format'
 import type { MatchModalData, ApiFootballEvent, ApiFootballLineup } from '../lib/types'
 import styles from '../styles/Home.module.css'
+import LoadingSpinner from './LoadingSpinner'
 
 function statusText(status?: string): string {
   switch (status) {
@@ -181,7 +182,7 @@ export default function MatchModal({ modal, onClose }: Props) {
         )}
 
         <div className={styles.modalBody}>
-          {modal.loading && <div className={styles.modalEmpty}>Laddar matchdata…</div>}
+          {modal.loading && <LoadingSpinner message="Laddar matchdata…" inline />}
 
           {!modal.loading && tab === 'info' && (
             <>
@@ -227,7 +228,7 @@ export default function MatchModal({ modal, onClose }: Props) {
 
           {!modal.loading && tab === 'events' && (
             <>
-              {modal.apiLoading && <div className={styles.modalEmpty}>Laddar händelser…</div>}
+              {modal.apiLoading && <LoadingSpinner message="Laddar händelser…" inline />}
               {!modal.apiLoading && modal.apiEvents && modal.apiEvents.length > 0 && (
                 <EventsTab events={modal.apiEvents} />
               )}
@@ -239,7 +240,7 @@ export default function MatchModal({ modal, onClose }: Props) {
 
           {!modal.loading && tab === 'lineups' && (
             <>
-              {modal.apiLoading && <div className={styles.modalEmpty}>Laddar uppställningar…</div>}
+              {modal.apiLoading && <LoadingSpinner message="Laddar uppställningar…" inline />}
               {!modal.apiLoading && modal.apiLineups && modal.apiLineups.length > 0 && (
                 <LineupsTab lineups={modal.apiLineups} events={modal.apiEvents} />
               )}

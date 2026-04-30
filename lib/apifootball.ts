@@ -1,8 +1,21 @@
 import type { ApiFootballEvent, ApiFootballLineup } from './types'
 import { getApiFootballLeagueId, getApiFootballTeamId } from './apifootballMapping'
 
-const cache = new Map<string, { data: any; ts: number }>()
+const CACHE_MAX = 100
 const CACHE_TTL = 60 * 60 * 1000 // 60 min for finished matches
+
+const cache = new Map<string, { data: any; ts: number }>()
+const inflight = new Map<string, Promise<any>>()
+
+function evictOldest() {
+  if (cache.size <= CACHE_MAX) return
+  let oldestKey: string | null = null
+  let oldestTs = Infinity
+  cache.forEach((entry, key) => {
+    if (entry.ts < oldestTs) { oldestTs = entry.ts; oldestKey = key }
+  })
+  if (oldestKey) cache.delete(oldestKey)
+}
 
 async function apiFB(endpoint: string, params: Record<string, string | number> = {}) {
   const qs = new URLSearchParams(
@@ -13,15 +26,29 @@ async function apiFB(endpoint: string, params: Record<string, string | number> =
   const cached = cache.get(url)
   if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.data
 
-  const res = await fetch(url)
-  if (!res.ok) return null
-  const data = await res.json()
-  cache.set(url, { data, ts: Date.now() })
-  return data
+  const pending = inflight.get(url)
+  if (pending) return pending
+
+  const request = fetch(url).then(async res => {
+    if (!res.ok) { inflight.delete(url); return null }
+    const data = await res.json()
+    cache.set(url, { data, ts: Date.now() })
+    evictOldest()
+    inflight.delete(url)
+    return data
+  }).catch(err => {
+    inflight.delete(url)
+    throw err
+  })
+
+  inflight.set(url, request)
+  return request
 }
 
 // Cache for fixture ID lookups: "leagueId-season-date" → fixture list
-const fixtureCache = new Map<string, any[]>()
+const FIXTURE_CACHE_MAX = 200
+const FIXTURE_CACHE_TTL = 60 * 60 * 1000
+const fixtureCache = new Map<string, { data: any[]; ts: number }>()
 
 export async function findFixtureId(
   leagueName: string,
@@ -41,9 +68,12 @@ export async function findFixtureId(
   if (year < 2022 || year > 2024) return null
 
   const cacheKey = `${leagueId}-${year}-${date}`
-  let fixtures = fixtureCache.get(cacheKey)
+  const cachedFixture = fixtureCache.get(cacheKey)
+  let fixtures: any[]
 
-  if (!fixtures) {
+  if (cachedFixture && Date.now() - cachedFixture.ts < FIXTURE_CACHE_TTL) {
+    fixtures = cachedFixture.data
+  } else {
     const data = await apiFB('fixtures', {
       league: leagueId,
       season: year,
@@ -51,7 +81,11 @@ export async function findFixtureId(
       to: date,
     })
     const list: any[] = data?.response || []
-    fixtureCache.set(cacheKey, list)
+    fixtureCache.set(cacheKey, { data: list, ts: Date.now() })
+    if (fixtureCache.size > FIXTURE_CACHE_MAX) {
+      const oldest = fixtureCache.keys().next().value
+      if (oldest) fixtureCache.delete(oldest)
+    }
     fixtures = list
   }
 
