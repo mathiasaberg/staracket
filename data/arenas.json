@@ -1,0 +1,1234 @@
+{
+  "aik": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "city": "Stockholm",
+    "arena": "Friends Arena"
+  },
+  "djurgården": {
+    "lat": 59.345,
+    "lng": 18.078,
+    "city": "Stockholm",
+    "arena": "Stockholms Stadion"
+  },
+  "hammarby": {
+    "lat": 59.286,
+    "lng": 18.076,
+    "city": "Stockholm",
+    "arena": "Tele2 Arena"
+  },
+  "ifk göteborg": {
+    "lat": 57.706,
+    "lng": 11.979,
+    "city": "Göteborg",
+    "arena": "Gamla Ullevi"
+  },
+  "göteborg": {
+    "lat": 57.706,
+    "lng": 11.979,
+    "city": "Göteborg",
+    "arena": "Gamla Ullevi"
+  },
+  "malmö": {
+    "lat": 55.583,
+    "lng": 13.011,
+    "city": "Malmö",
+    "arena": "Eleda Stadion"
+  },
+  "malmö ff": {
+    "lat": 55.583,
+    "lng": 13.011,
+    "city": "Malmö",
+    "arena": "Eleda Stadion"
+  },
+  "helsingborg": {
+    "lat": 56.048,
+    "lng": 12.706,
+    "city": "Helsingborg",
+    "arena": "Olympia"
+  },
+  "ifk norrköping": {
+    "lat": 58.595,
+    "lng": 16.194,
+    "city": "Norrköping",
+    "arena": "Östgötaporten"
+  },
+  "norrköping": {
+    "lat": 58.595,
+    "lng": 16.194,
+    "city": "Norrköping",
+    "arena": "Östgötaporten"
+  },
+  "elfsborg": {
+    "lat": 57.722,
+    "lng": 12.942,
+    "city": "Borås",
+    "arena": "Borås Arena"
+  },
+  "borås": {
+    "lat": 57.722,
+    "lng": 12.942,
+    "city": "Borås",
+    "arena": "Borås Arena"
+  },
+  "kalmar": {
+    "lat": 56.663,
+    "lng": 16.357,
+    "city": "Kalmar",
+    "arena": "Guldfågeln Arena"
+  },
+  "halmstad": {
+    "lat": 56.674,
+    "lng": 12.86,
+    "city": "Halmstad",
+    "arena": "Örjans Vall"
+  },
+  "sundsvall": {
+    "lat": 62.394,
+    "lng": 17.302,
+    "city": "Sundsvall",
+    "arena": "NP3 Arena"
+  },
+  "gif sundsvall": {
+    "lat": 62.394,
+    "lng": 17.302,
+    "city": "Sundsvall",
+    "arena": "NP3 Arena"
+  },
+  "östersund": {
+    "lat": 63.177,
+    "lng": 14.636,
+    "city": "Östersund",
+    "arena": "Jämtkraft Arena"
+  },
+  "sirius": {
+    "lat": 59.861,
+    "lng": 17.643,
+    "city": "Uppsala",
+    "arena": "Studenternas IP"
+  },
+  "uppsala": {
+    "lat": 59.861,
+    "lng": 17.643,
+    "city": "Uppsala",
+    "arena": "Studenternas IP"
+  },
+  "värnamo": {
+    "lat": 57.186,
+    "lng": 14.038,
+    "city": "Värnamo",
+    "arena": "Finnvedsvallen"
+  },
+  "varberg": {
+    "lat": 57.111,
+    "lng": 12.262,
+    "city": "Varberg",
+    "arena": "Varberg Energi Arena"
+  },
+  "landskrona": {
+    "lat": 55.868,
+    "lng": 12.82,
+    "city": "Landskrona",
+    "arena": "Landskrona IP"
+  },
+  "mjällby": {
+    "lat": 56.297,
+    "lng": 14.742,
+    "city": "Hällevik",
+    "arena": "Strandvallen"
+  },
+  "häcken": {
+    "lat": 57.722,
+    "lng": 11.926,
+    "city": "Göteborg",
+    "arena": "Bravida Arena"
+  },
+  "degerfors": {
+    "lat": 59.234,
+    "lng": 14.432,
+    "city": "Degerfors",
+    "arena": "Stora Valla"
+  },
+  "örebro": {
+    "lat": 59.275,
+    "lng": 15.215,
+    "city": "Örebro",
+    "arena": "Behrn Arena"
+  },
+  "brommapojkarna": {
+    "lat": 59.345,
+    "lng": 17.945,
+    "city": "Stockholm",
+    "arena": "Grimsta IP"
+  },
+  "falkenberg": {
+    "lat": 56.906,
+    "lng": 12.492,
+    "city": "Falkenberg",
+    "arena": "Falcon Alkoholfri Arena"
+  },
+  "jönköping": {
+    "lat": 57.783,
+    "lng": 14.168,
+    "city": "Jönköping",
+    "arena": "Stadsparksvallen"
+  },
+  "gais": {
+    "lat": 57.697,
+    "lng": 11.979,
+    "city": "Göteborg",
+    "arena": "Gamla Ullevi"
+  },
+  "umeå": {
+    "lat": 63.826,
+    "lng": 20.263,
+    "city": "Umeå",
+    "arena": "Umeå Energi Arena"
+  },
+  "luleå": {
+    "lat": 65.584,
+    "lng": 22.15,
+    "city": "Luleå",
+    "arena": "LF Arena"
+  },
+  "boden": {
+    "lat": 66.06,
+    "lng": 21.698,
+    "city": "Boden",
+    "arena": "Bodens IP"
+  },
+  "karlstad": {
+    "lat": 59.379,
+    "lng": 13.504,
+    "city": "Karlstad",
+    "arena": "Tingvalla IP"
+  },
+  "trelleborg": {
+    "lat": 55.379,
+    "lng": 13.156,
+    "city": "Trelleborg",
+    "arena": "Vångavallen"
+  },
+  "norrby": {
+    "lat": 57.722,
+    "lng": 12.942,
+    "city": "Borås",
+    "arena": "Borås Arena"
+  },
+  "öster": {
+    "lat": 56.879,
+    "lng": 14.806,
+    "city": "Växjö",
+    "arena": "Värendsvallen"
+  },
+  "växjö": {
+    "lat": 56.879,
+    "lng": 14.806,
+    "city": "Växjö",
+    "arena": "Värendsvallen"
+  },
+  "ljungskile": {
+    "lat": 58.228,
+    "lng": 11.928,
+    "city": "Ljungskile",
+    "arena": "Sparbanken Lidköping Arena"
+  },
+  "brage": {
+    "lat": 60.484,
+    "lng": 15.435,
+    "city": "Borlänge",
+    "arena": "Domnarsvallen"
+  },
+  "borlänge": {
+    "lat": 60.484,
+    "lng": 15.435,
+    "city": "Borlänge",
+    "arena": "Domnarsvallen"
+  },
+  "sandviken": {
+    "lat": 60.618,
+    "lng": 16.776,
+    "city": "Sandviken",
+    "arena": "Jernvallen"
+  },
+  "gefle": {
+    "lat": 60.675,
+    "lng": 17.141,
+    "city": "Gävle",
+    "arena": "Gavlevallen"
+  },
+  "gävle": {
+    "lat": 60.675,
+    "lng": 17.141,
+    "city": "Gävle",
+    "arena": "Gavlevallen"
+  },
+  "nordic united": {
+    "lat": 59.196,
+    "lng": 17.625,
+    "city": "Södertälje",
+    "arena": "Södertälje Fotbollsarena"
+  },
+  "linköping": {
+    "lat": 58.411,
+    "lng": 15.625,
+    "city": "Linköping",
+    "arena": "Linköping Arena"
+  },
+  "västerås": {
+    "lat": 59.61,
+    "lng": 16.545,
+    "city": "Västerås",
+    "arena": "Hitachi Energy Arena"
+  },
+  "eskilstuna": {
+    "lat": 59.371,
+    "lng": 16.51,
+    "city": "Eskilstuna",
+    "arena": "Tunavallen"
+  },
+  "kristianstad": {
+    "lat": 56.031,
+    "lng": 14.152,
+    "city": "Kristianstad",
+    "arena": "Kristianstad Fotbollsarena"
+  },
+  "ängelholm": {
+    "lat": 56.242,
+    "lng": 12.862,
+    "city": "Ängelholm",
+    "arena": "Lindab Arena"
+  },
+  "husqvarna": {
+    "lat": 57.783,
+    "lng": 14.282,
+    "city": "Huskvarna"
+  },
+  "motala": {
+    "lat": 58.537,
+    "lng": 15.037,
+    "city": "Motala",
+    "arena": "Motala IP"
+  },
+  "sylvia": {
+    "lat": 58.411,
+    "lng": 15.625,
+    "city": "Norrköping"
+  },
+  "karlskrona": {
+    "lat": 56.161,
+    "lng": 15.586,
+    "city": "Karlskrona",
+    "arena": "Karlskrona IP"
+  },
+  "nyköping": {
+    "lat": 58.753,
+    "lng": 17.007,
+    "city": "Nyköping",
+    "arena": "Rosvalla"
+  },
+  "sollentuna": {
+    "lat": 59.428,
+    "lng": 17.951,
+    "city": "Sollentuna",
+    "arena": "Sollentunavallen"
+  },
+  "täby": {
+    "lat": 59.444,
+    "lng": 18.069,
+    "city": "Täby",
+    "arena": "Täby IP"
+  },
+  "sundbyberg": {
+    "lat": 59.361,
+    "lng": 17.971,
+    "city": "Sundbyberg"
+  },
+  "vasalund": {
+    "lat": 59.358,
+    "lng": 17.971,
+    "city": "Solna",
+    "arena": "Solnavallen"
+  },
+  "assyriska": {
+    "lat": 59.196,
+    "lng": 17.625,
+    "city": "Södertälje",
+    "arena": "Södertälje Fotbollsarena"
+  },
+  "södertälje": {
+    "lat": 59.196,
+    "lng": 17.625,
+    "city": "Södertälje",
+    "arena": "Södertälje Fotbollsarena"
+  },
+  "kiruna": {
+    "lat": 67.86,
+    "lng": 20.225,
+    "city": "Kiruna",
+    "arena": "Lombololeden"
+  },
+  "piteå": {
+    "lat": 65.317,
+    "lng": 21.48,
+    "city": "Piteå",
+    "arena": "LF Arena Piteå"
+  },
+  "skellefteå": {
+    "lat": 64.751,
+    "lng": 20.951,
+    "city": "Skellefteå",
+    "arena": "Skellefteå IP Noliavallen"
+  },
+  "örnsköldsvik": {
+    "lat": 63.291,
+    "lng": 18.716,
+    "city": "Örnsköldsvik",
+    "arena": "Ö-viks IP"
+  },
+  "härnösand": {
+    "lat": 62.632,
+    "lng": 17.938,
+    "city": "Härnösand"
+  },
+  "ånge": {
+    "lat": 62.524,
+    "lng": 15.659,
+    "city": "Ånge"
+  },
+  "falun": {
+    "lat": 60.606,
+    "lng": 15.632,
+    "city": "Falun",
+    "arena": "Lugnet"
+  },
+  "mora": {
+    "lat": 61.006,
+    "lng": 14.541,
+    "city": "Mora",
+    "arena": "Mora IP"
+  },
+  "hudiksvall": {
+    "lat": 61.728,
+    "lng": 17.105,
+    "city": "Hudiksvall",
+    "arena": "Glysis IP"
+  },
+  "bollnäs": {
+    "lat": 61.348,
+    "lng": 16.396,
+    "city": "Bollnäs",
+    "arena": "Sävstaås IP"
+  },
+  "söderhamn": {
+    "lat": 61.303,
+    "lng": 17.058,
+    "city": "Söderhamn"
+  },
+  "oddevold": {
+    "lat": 58.354,
+    "lng": 11.937,
+    "city": "Uddevalla",
+    "arena": "Rimnersvallen"
+  },
+  "uddevalla": {
+    "lat": 58.354,
+    "lng": 11.937,
+    "city": "Uddevalla",
+    "arena": "Rimnersvallen"
+  },
+  "tvååker": {
+    "lat": 57.054,
+    "lng": 12.376,
+    "city": "Tvååker"
+  },
+  "ik frej": {
+    "lat": 59.444,
+    "lng": 18.069,
+    "city": "Täby",
+    "arena": "Täby IP"
+  },
+  "akropolis": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "city": "Stockholm",
+    "arena": "Grimsta IP"
+  },
+  "dalkurd": {
+    "lat": 60.484,
+    "lng": 15.435,
+    "city": "Borlänge",
+    "arena": "Domnarsvallen"
+  },
+  "fc trollhättan": {
+    "lat": 58.283,
+    "lng": 12.289,
+    "city": "Trollhättan",
+    "arena": "Edsborgs IP"
+  },
+  "trollhättan": {
+    "lat": 58.283,
+    "lng": 12.289,
+    "city": "Trollhättan",
+    "arena": "Edsborgs IP"
+  },
+  "örgryte": {
+    "lat": 57.697,
+    "lng": 11.979,
+    "city": "Göteborg",
+    "arena": "Gamla Ullevi"
+  },
+  "utsikten": {
+    "lat": 58.354,
+    "lng": 11.937,
+    "city": "Uddevalla",
+    "arena": "Rimnersvallen"
+  },
+  "lund": {
+    "lat": 55.702,
+    "lng": 13.195,
+    "city": "Lund",
+    "arena": "Lunds IP"
+  },
+  "fc rosengård": {
+    "lat": 55.583,
+    "lng": 13.011,
+    "city": "Malmö",
+    "arena": "Malmö IP"
+  },
+  "rosengård": {
+    "lat": 55.583,
+    "lng": 13.011,
+    "city": "Malmö",
+    "arena": "Malmö IP"
+  },
+  "vittsjö": {
+    "lat": 56.339,
+    "lng": 13.664,
+    "city": "Vittsjö"
+  },
+  "kopparberg": {
+    "lat": 59.872,
+    "lng": 15,
+    "city": "Kopparberg"
+  },
+  "linköpings fc": {
+    "lat": 58.411,
+    "lng": 15.625,
+    "city": "Linköping",
+    "arena": "Linköping Arena"
+  },
+  "östers if": {
+    "lat": 56.879,
+    "lng": 14.806,
+    "city": "Växjö",
+    "arena": "Värendsvallen"
+  },
+  "norrby if": {
+    "lat": 57.722,
+    "lng": 12.942,
+    "city": "Borås",
+    "arena": "Borås Arena"
+  },
+  "oskarshamn": {
+    "lat": 57.264,
+    "lng": 16.448,
+    "city": "Oskarshamn",
+    "arena": "Oskarshamns IP"
+  },
+  "mjölby": {
+    "lat": 58.326,
+    "lng": 15.132,
+    "city": "Mjölby"
+  },
+  "skövde": {
+    "lat": 58.393,
+    "lng": 13.846,
+    "city": "Skövde",
+    "arena": "Billingehov"
+  },
+  "lidköping": {
+    "lat": 58.505,
+    "lng": 13.158,
+    "city": "Lidköping",
+    "arena": "Lidköpings IP"
+  },
+  "norrköpings if": {
+    "lat": 58.595,
+    "lng": 16.194,
+    "city": "Norrköping",
+    "arena": "Östgötaporten"
+  },
+  "åtvidaberg": {
+    "lat": 58.2,
+    "lng": 16,
+    "city": "Åtvidaberg",
+    "arena": "Kopparvallen"
+  },
+  "tranås": {
+    "lat": 58.037,
+    "lng": 14.975,
+    "city": "Tranås"
+  },
+  "torns if": {
+    "lat": 55.702,
+    "lng": 13.195,
+    "city": "Lund"
+  },
+  "qbk": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "city": "Stockholm"
+  },
+  "gif nike": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "city": "Stockholm"
+  },
+  "tyresö": {
+    "lat": 59.241,
+    "lng": 18.227,
+    "city": "Tyresö",
+    "arena": "Tyresövallen"
+  },
+  "nacka": {
+    "lat": 59.311,
+    "lng": 18.164,
+    "city": "Nacka"
+  },
+  "strängnäs": {
+    "lat": 59.378,
+    "lng": 17.032,
+    "city": "Strängnäs"
+  },
+  "enköping": {
+    "lat": 59.636,
+    "lng": 17.076,
+    "city": "Enköping"
+  },
+  "arameisk": {
+    "lat": 59.196,
+    "lng": 17.625,
+    "city": "Södertälje",
+    "arena": "Södertälje Fotbollsarena"
+  },
+  "syrianska": {
+    "lat": 59.196,
+    "lng": 17.625,
+    "city": "Södertälje",
+    "arena": "Södertälje Fotbollsarena"
+  },
+  "drottningholm": {
+    "lat": 59.321,
+    "lng": 17.886,
+    "city": "Stockholm"
+  },
+  "örebro syrianska": {
+    "lat": 59.275,
+    "lng": 15.215,
+    "city": "Örebro"
+  },
+  "värmbols": {
+    "lat": 59.371,
+    "lng": 16.51,
+    "city": "Eskilstuna"
+  },
+  "karlskoga": {
+    "lat": 59.327,
+    "lng": 14.524,
+    "city": "Karlskoga",
+    "arena": "Nobelstadion"
+  },
+  "kristinehamn": {
+    "lat": 59.31,
+    "lng": 14.108,
+    "city": "Kristinehamn",
+    "arena": "Kristinehamns IP"
+  },
+  "säffle": {
+    "lat": 59.133,
+    "lng": 12.933,
+    "city": "Säffle"
+  },
+  "kramfors": {
+    "lat": 62.933,
+    "lng": 17.8,
+    "city": "Kramfors"
+  },
+  "timrå": {
+    "lat": 62.487,
+    "lng": 17.325,
+    "city": "Timrå",
+    "arena": "Söråkers IP"
+  },
+  "strömsund": {
+    "lat": 63.85,
+    "lng": 15.558,
+    "city": "Strömsund"
+  },
+  "frösö": {
+    "lat": 63.177,
+    "lng": 14.636,
+    "city": "Östersund"
+  },
+  "ytterhogdal": {
+    "lat": 62.176,
+    "lng": 15.002,
+    "city": "Ytterhogdal"
+  },
+  "sveg": {
+    "lat": 62.036,
+    "lng": 14.355,
+    "city": "Sveg"
+  },
+  "mariestad": {
+    "lat": 58.71,
+    "lng": 13.824,
+    "city": "Mariestad",
+    "arena": "Mariestads IP"
+  },
+  "stenungsund": {
+    "lat": 58.073,
+    "lng": 11.767,
+    "city": "Stenungsund"
+  },
+  "partille": {
+    "lat": 57.737,
+    "lng": 12.107,
+    "city": "Partille",
+    "arena": "Vallhamra IP"
+  },
+  "alingsås": {
+    "lat": 57.93,
+    "lng": 12.533,
+    "city": "Alingsås",
+    "arena": "Stadsskogen"
+  },
+  "lerum": {
+    "lat": 57.77,
+    "lng": 12.269,
+    "city": "Lerum"
+  },
+  "kungsbacka": {
+    "lat": 57.486,
+    "lng": 12.076,
+    "city": "Kungsbacka",
+    "arena": "Kungsbacka IP"
+  },
+  "mölndal": {
+    "lat": 57.656,
+    "lng": 12.015,
+    "city": "Mölndal",
+    "arena": "Kvarnbyvallen"
+  },
+  "gällivare": {
+    "lat": 67.133,
+    "lng": 20.652,
+    "city": "Gällivare"
+  },
+  "kalix": {
+    "lat": 65.854,
+    "lng": 23.161,
+    "city": "Kalix"
+  },
+  "lycksele": {
+    "lat": 64.596,
+    "lng": 18.677,
+    "city": "Lycksele"
+  },
+  "robertsfors": {
+    "lat": 64.194,
+    "lng": 20.851,
+    "city": "Robertsfors"
+  },
+  "storuman": {
+    "lat": 65.097,
+    "lng": 17.115,
+    "city": "Storuman"
+  },
+  "karlberg": {
+    "lat": 59.345,
+    "lng": 18.03,
+    "city": "Stockholm"
+  },
+  "råsunda": {
+    "lat": 59.361,
+    "lng": 17.971,
+    "city": "Solna"
+  },
+  "spårvägen": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "city": "Stockholm"
+  },
+  "enskede": {
+    "lat": 59.286,
+    "lng": 18.076,
+    "city": "Stockholm"
+  },
+  "hägersten": {
+    "lat": 59.3,
+    "lng": 17.975,
+    "city": "Stockholm"
+  },
+  "vendelsö": {
+    "lat": 59.215,
+    "lng": 18.206,
+    "city": "Vendelsö"
+  },
+  "älta": {
+    "lat": 59.26,
+    "lng": 18.178,
+    "city": "Älta"
+  },
+  "boo": {
+    "lat": 59.311,
+    "lng": 18.264,
+    "city": "Boo"
+  },
+  "viksjö": {
+    "lat": 59.395,
+    "lng": 17.844,
+    "city": "Viksjö"
+  },
+  "vallentuna": {
+    "lat": 59.534,
+    "lng": 18.078,
+    "city": "Vallentuna"
+  },
+  "vaxholm": {
+    "lat": 59.402,
+    "lng": 18.349,
+    "city": "Vaxholm"
+  },
+  "gustafs": {
+    "lat": 59.394,
+    "lng": 18.01,
+    "city": "Stockholm"
+  },
+  "lidingö": {
+    "lat": 59.367,
+    "lng": 18.146,
+    "city": "Lidingö",
+    "arena": "Lidingövallen"
+  },
+  "haninge": {
+    "lat": 59.174,
+    "lng": 18.132,
+    "city": "Haninge",
+    "arena": "Haninge IP"
+  },
+  "huddinge": {
+    "lat": 59.237,
+    "lng": 17.981,
+    "city": "Huddinge",
+    "arena": "Kvarnberga IP"
+  },
+  "järfälla": {
+    "lat": 59.427,
+    "lng": 17.829,
+    "city": "Järfälla"
+  },
+  "norrtälje": {
+    "lat": 59.758,
+    "lng": 18.7,
+    "city": "Norrtälje",
+    "arena": "Norrtälje IP"
+  },
+  "sigtuna": {
+    "lat": 59.617,
+    "lng": 17.722,
+    "city": "Sigtuna"
+  },
+  "märsta": {
+    "lat": 59.625,
+    "lng": 17.855,
+    "city": "Märsta"
+  },
+  "tumba": {
+    "lat": 59.2,
+    "lng": 17.832,
+    "city": "Tumba"
+  },
+  "katrineholm": {
+    "lat": 58.996,
+    "lng": 16.208,
+    "city": "Katrineholm",
+    "arena": "Backavallen"
+  },
+  "norrby if gävle": {
+    "lat": 60.675,
+    "lng": 17.141,
+    "city": "Gävle"
+  },
+  "valbo": {
+    "lat": 60.645,
+    "lng": 17.046,
+    "city": "Valbo"
+  },
+  "strömsbro": {
+    "lat": 60.7,
+    "lng": 17.17,
+    "city": "Gävle"
+  },
+  "hille": {
+    "lat": 60.73,
+    "lng": 17.2,
+    "city": "Gävle"
+  },
+  "ljusdal": {
+    "lat": 61.828,
+    "lng": 16.084,
+    "city": "Ljusdal"
+  },
+  "alfta": {
+    "lat": 61.351,
+    "lng": 16.095,
+    "city": "Alfta"
+  },
+  "sollefteå": {
+    "lat": 63.167,
+    "lng": 17.267,
+    "city": "Sollefteå",
+    "arena": "Nipvallen"
+  },
+  "brunflo": {
+    "lat": 63.06,
+    "lng": 14.819,
+    "city": "Brunflo"
+  },
+  "ope": {
+    "lat": 63.2,
+    "lng": 14.77,
+    "city": "Östersund"
+  },
+  "sörberge": {
+    "lat": 62.44,
+    "lng": 17.3,
+    "city": "Timrå"
+  },
+  "matfors": {
+    "lat": 62.34,
+    "lng": 17.01,
+    "city": "Matfors"
+  },
+  "stöde": {
+    "lat": 62.319,
+    "lng": 16.585,
+    "city": "Stöde"
+  },
+  "kubikenborg": {
+    "lat": 62.4,
+    "lng": 17.3,
+    "city": "Sundsvall"
+  },
+  "alnö": {
+    "lat": 62.406,
+    "lng": 17.43,
+    "city": "Alnö"
+  },
+  "torpshammar": {
+    "lat": 62.484,
+    "lng": 16.355,
+    "city": "Torpshammar"
+  },
+  "njurunda": {
+    "lat": 62.285,
+    "lng": 17.33,
+    "city": "Njurunda"
+  },
+  "vivalla": {
+    "lat": 59.275,
+    "lng": 15.215,
+    "city": "Örebro",
+    "arena": "Behrn Arena"
+  },
+  "hovsta": {
+    "lat": 59.31,
+    "lng": 15.17,
+    "city": "Örebro"
+  },
+  "bk forward": {
+    "lat": 59.275,
+    "lng": 15.215,
+    "city": "Örebro",
+    "arena": "Behrn Arena"
+  },
+  "kumla": {
+    "lat": 59.127,
+    "lng": 15.141,
+    "city": "Kumla",
+    "arena": "Kumla IP"
+  },
+  "hallsberg": {
+    "lat": 59.067,
+    "lng": 15.098,
+    "city": "Hallsberg"
+  },
+  "askersund": {
+    "lat": 58.88,
+    "lng": 14.905,
+    "city": "Askersund"
+  },
+  "lindesberg": {
+    "lat": 59.591,
+    "lng": 15.252,
+    "city": "Lindesberg"
+  },
+  "nora": {
+    "lat": 59.518,
+    "lng": 15.035,
+    "city": "Nora"
+  },
+  "arboga": {
+    "lat": 59.394,
+    "lng": 15.837,
+    "city": "Arboga"
+  },
+  "köping": {
+    "lat": 59.514,
+    "lng": 15.993,
+    "city": "Köping"
+  },
+  "sala": {
+    "lat": 59.92,
+    "lng": 16.606,
+    "city": "Sala",
+    "arena": "Sparbanken Arena"
+  },
+  "avesta": {
+    "lat": 60.145,
+    "lng": 16.171,
+    "city": "Avesta",
+    "arena": "Avesta IP"
+  },
+  "leksand": {
+    "lat": 60.73,
+    "lng": 14.999,
+    "city": "Leksand",
+    "arena": "Leksands IP"
+  },
+  "rättvik": {
+    "lat": 60.887,
+    "lng": 15.117,
+    "city": "Rättvik"
+  },
+  "ludvika": {
+    "lat": 60.149,
+    "lng": 15.187,
+    "city": "Ludvika",
+    "arena": "Ludvika IP"
+  },
+  "hedemora": {
+    "lat": 60.279,
+    "lng": 15.993,
+    "city": "Hedemora"
+  },
+  "gagnef": {
+    "lat": 60.596,
+    "lng": 15.067,
+    "city": "Gagnef"
+  },
+  "eslöv": {
+    "lat": 55.838,
+    "lng": 13.361,
+    "city": "Eslöv",
+    "arena": "Eslövs IP"
+  },
+  "hässleholm": {
+    "lat": 56.159,
+    "lng": 13.766,
+    "city": "Hässleholm",
+    "arena": "Österås IP"
+  },
+  "ystad": {
+    "lat": 55.43,
+    "lng": 13.82,
+    "city": "Ystad",
+    "arena": "Ystads IP"
+  },
+  "simrishamn": {
+    "lat": 55.554,
+    "lng": 14.35,
+    "city": "Simrishamn"
+  },
+  "staffanstorp": {
+    "lat": 55.644,
+    "lng": 13.206,
+    "city": "Staffanstorp"
+  },
+  "limhamn": {
+    "lat": 55.583,
+    "lng": 12.935,
+    "city": "Malmö"
+  },
+  "burlöv": {
+    "lat": 55.635,
+    "lng": 13.088,
+    "city": "Burlöv"
+  },
+  "dalby": {
+    "lat": 55.67,
+    "lng": 13.35,
+    "city": "Dalby"
+  },
+  "svedala": {
+    "lat": 55.506,
+    "lng": 13.232,
+    "city": "Svedala"
+  },
+  "åstorp": {
+    "lat": 56.134,
+    "lng": 12.945,
+    "city": "Åstorp"
+  },
+  "klippan": {
+    "lat": 56.135,
+    "lng": 13.128,
+    "city": "Klippan"
+  },
+  "höganäs": {
+    "lat": 56.2,
+    "lng": 12.564,
+    "city": "Höganäs",
+    "arena": "Höganäs IP"
+  },
+  "laholm": {
+    "lat": 56.512,
+    "lng": 13.044,
+    "city": "Laholm"
+  },
+  "kungälv": {
+    "lat": 57.871,
+    "lng": 11.975,
+    "city": "Kungälv",
+    "arena": "Ytterby IP"
+  },
+  "falköping": {
+    "lat": 58.173,
+    "lng": 13.551,
+    "city": "Falköping"
+  },
+  "tibro": {
+    "lat": 58.423,
+    "lng": 14.162,
+    "city": "Tibro"
+  },
+  "vara": {
+    "lat": 58.262,
+    "lng": 13.117,
+    "city": "Vara"
+  },
+  "töreboda": {
+    "lat": 58.712,
+    "lng": 14.13,
+    "city": "Töreboda"
+  },
+  "ulricehamn": {
+    "lat": 57.791,
+    "lng": 13.419,
+    "city": "Ulricehamn"
+  },
+  "vänersborg": {
+    "lat": 58.381,
+    "lng": 12.323,
+    "city": "Vänersborg",
+    "arena": "Arena Vänersborg"
+  },
+  "lilla edet": {
+    "lat": 58.133,
+    "lng": 12.129,
+    "city": "Lilla Edet"
+  },
+  "ale": {
+    "lat": 57.945,
+    "lng": 12.23,
+    "city": "Ale"
+  },
+  "härryda": {
+    "lat": 57.679,
+    "lng": 12.148,
+    "city": "Härryda"
+  },
+  "nässjö": {
+    "lat": 57.653,
+    "lng": 14.697,
+    "city": "Nässjö",
+    "arena": "Nässjö IP"
+  },
+  "vetlanda": {
+    "lat": 57.429,
+    "lng": 15.078,
+    "city": "Vetlanda"
+  },
+  "ljungby": {
+    "lat": 56.833,
+    "lng": 13.941,
+    "city": "Ljungby",
+    "arena": "Ljungby IP"
+  },
+  "alvesta": {
+    "lat": 56.899,
+    "lng": 14.556,
+    "city": "Alvesta"
+  },
+  "västervik": {
+    "lat": 57.758,
+    "lng": 16.638,
+    "city": "Västervik",
+    "arena": "Västerviks IP"
+  },
+  "vimmerby": {
+    "lat": 57.667,
+    "lng": 15.858,
+    "city": "Vimmerby"
+  },
+  "ronneby": {
+    "lat": 56.21,
+    "lng": 15.276,
+    "city": "Ronneby",
+    "arena": "Kockumsvallen"
+  },
+  "sölvesborg": {
+    "lat": 56.053,
+    "lng": 14.586,
+    "city": "Sölvesborg"
+  },
+  "visby": {
+    "lat": 57.64,
+    "lng": 18.296,
+    "city": "Visby",
+    "arena": "Gutavallen"
+  },
+  "hemse": {
+    "lat": 57.233,
+    "lng": 18.37,
+    "city": "Hemse"
+  },
+  "hammarby if": {
+    "lat": 59.286,
+    "lng": 18.076,
+    "city": "Stockholm",
+    "arena": "Tele2 Arena"
+  },
+  "ifk stocksund": {
+    "lat": 59.382,
+    "lng": 18.071,
+    "city": "Stocksund"
+  },
+  "stocksund": {
+    "lat": 59.382,
+    "lng": 18.071,
+    "city": "Stocksund"
+  },
+  "djursholm": {
+    "lat": 59.396,
+    "lng": 18.088,
+    "city": "Djursholm"
+  },
+  "danderyd": {
+    "lat": 59.396,
+    "lng": 18.02,
+    "city": "Danderyd"
+  }
+}

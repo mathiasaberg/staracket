@@ -1,6 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
-import { API } from '../lib/api'
-import { findTeamLocation } from '../lib/teamLocations'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { fmtTime } from '../lib/format'
 import type { League, Event } from '../lib/types'
 import styles from '../styles/Home.module.css'
@@ -13,31 +11,28 @@ type Props = {
 
 type NearbyMatch = {
   event: Event
-  league: League
+  leagueId: number
+  leagueName: string
   distance: number
   venueCity: string
+  venueName: string | null
 }
 
-function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371
-  const dLat = (lat2 - lat1) * Math.PI / 180
-  const dLon = (lon2 - lon1) * Math.PI / 180
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2)
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-}
+type ClosestVenue = { name: string | null; city: string; distance: number }
 
 const RADIUS_OPTIONS = [1, 2, 5, 10, 25, 50, 100]
+const MAX_RADIUS = 100 // Fetch all within 100 km, filter client-side
 
 export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null)
   const [geoError, setGeoError] = useState<string | null>(null)
   const [radius, setRadius] = useState(2)
-  const [matches, setMatches] = useState<NearbyMatch[]>([])
+  const [allNearby, setAllNearby] = useState<NearbyMatch[]>([]) // Full result set (100 km)
+  const [matches, setMatches] = useState<NearbyMatch[]>([])     // Filtered by current radius
+  const [closestVenue, setClosestVenue] = useState<ClosestVenue | null>(null)
   const [loading, setLoading] = useState(true)
   const [loadingMatches, setLoadingMatches] = useState(false)
+  const fetchedPos = useRef<string | null>(null) // Track which position we already fetched for
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -64,65 +59,58 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
     )
   }, [])
 
-  const fetchNearby = useCallback(async (pos: { lat: number; lng: number }, maxKm: number) => {
+  // Fetch all nearby matches (max radius) once per position
+  const fetchNearby = useCallback(async (pos: { lat: number; lng: number }) => {
+    const posKey = `${pos.lat.toFixed(4)},${pos.lng.toFixed(4)}`
+    if (fetchedPos.current === posKey) return // Already fetched for this position
+    fetchedPos.current = posKey
+
     setLoadingMatches(true)
     const today = new Date().toISOString().slice(0, 10)
-    const nearby: NearbyMatch[] = []
-    const batchSize = 10
+    const params = new URLSearchParams({
+      lat: String(pos.lat),
+      lng: String(pos.lng),
+      radius: String(MAX_RADIUS),
+      date: today,
+    })
 
-    console.log(`[NearbyMatches] Användarens position: lat=${pos.lat}, lng=${pos.lng}`)
-    console.log(`[NearbyMatches] Söker matcher inom ${maxKm} km, datum: ${today}`)
-    console.log(`[NearbyMatches] Antal ligor att söka igenom: ${allLeagues.length}`)
+    try {
+      const res = await fetch(`/api/nearby?${params}`)
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
 
-    let totalEvents = 0
-    let matchedTeams = 0
-    let unmatchedTeams: string[] = []
+      const nearby: NearbyMatch[] = (data.matches || []).map((m: any) => ({
+        event: m.event,
+        leagueId: m.leagueId,
+        leagueName: m.leagueName,
+        distance: m.distance,
+        venueCity: m.venueCity,
+        venueName: m.venueName || null,
+      }))
 
-    for (let i = 0; i < allLeagues.length; i += batchSize) {
-      const batch = allLeagues.slice(i, i + batchSize)
-      const results = await Promise.allSettled(
-        batch.map(league =>
-          API(`leagues/${league.id}/events`, { from: today, to: today })
-            .then(data => ({ league, data }))
-        )
-      )
-      for (const r of results) {
-        if (r.status !== 'fulfilled') continue
-        const { league, data } = r.value
-        const events: Event[] = (data?.events || [])
-          .filter((e: Event) => e.startDate && e.startDate.startsWith(today))
-        totalEvents += events.length
-        for (const event of events) {
-          const homeName = event.homeTeam?.name
-          if (!homeName) continue
-          const loc = findTeamLocation(homeName)
-          if (!loc) {
-            unmatchedTeams.push(homeName)
-            continue
-          }
-          matchedTeams++
-          const dist = haversineKm(pos.lat, pos.lng, loc.lat, loc.lng)
-          console.log(`[NearbyMatches] ${homeName} → ${loc.city} (lat=${loc.lat}, lng=${loc.lng}) avstånd: ${dist.toFixed(1)} km ${dist <= maxKm ? '✅ INOM RADIE' : ''}`)
-          if (dist <= maxKm) {
-            nearby.push({ event, league, distance: dist, venueCity: loc.city })
-          }
-        }
+      setAllNearby(nearby)
+      if (data.closestVenue) setClosestVenue(data.closestVenue)
+
+      if (data.meta?.unmatchedTeams?.length > 0) {
+        console.log(`[NearbyMatches] Hemmalag utan matchad position:`, data.meta.unmatchedTeams)
       }
+    } catch (err) {
+      console.error('[NearbyMatches] Fetch error:', err)
+      setAllNearby([])
+    } finally {
+      setLoadingMatches(false)
     }
+  }, [])
 
-    console.log(`[NearbyMatches] Sammanfattning: ${totalEvents} matcher idag, ${matchedTeams} hemmalag med position, ${unmatchedTeams.length} utan position, ${nearby.length} inom ${maxKm} km`)
-    if (unmatchedTeams.length > 0) {
-      console.log(`[NearbyMatches] Hemmalag utan matchad position:`, unmatchedTeams)
-    }
-
-    nearby.sort((a, b) => a.distance - b.distance)
-    setMatches(nearby)
-    setLoadingMatches(false)
-  }, [allLeagues])
-
+  // Fetch when position is available
   useEffect(() => {
-    if (userPos) fetchNearby(userPos, radius)
-  }, [userPos, radius, fetchNearby])
+    if (userPos) fetchNearby(userPos)
+  }, [userPos, fetchNearby])
+
+  // Client-side filter when radius changes (instant, no refetch)
+  useEffect(() => {
+    setMatches(allNearby.filter(m => m.distance <= radius))
+  }, [allNearby, radius])
 
   if (loading) return <LoadingSpinner message="Hämtar din position…" />
 
@@ -155,6 +143,9 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
       {userPos && (
         <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8, fontFamily: 'monospace' }}>
           📍 Din position: {userPos.lat.toFixed(5)}, {userPos.lng.toFixed(5)}
+          {closestVenue && (
+            <span> — Närmaste arena: {closestVenue.name ? `${closestVenue.name}, ${closestVenue.city}` : closestVenue.city} ({closestVenue.distance < 1 ? `${Math.round(closestVenue.distance * 1000)} m` : `${closestVenue.distance} km`})</span>
+          )}
         </div>
       )}
 
@@ -176,7 +167,7 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
             return (
               <div key={e.id} className={styles.nearbyMatchCard} onClick={() => onOpenMatch(e)}>
                 <div className={styles.nearbyMatchHeader}>
-                  <span className={styles.nearbyLeagueName}>{m.league.name}</span>
+                  <span className={styles.nearbyLeagueName}>{m.leagueName}</span>
                   <span className={styles.nearbyDistance}>{m.distance < 1 ? `${Math.round(m.distance * 1000)} m` : `${m.distance.toFixed(1)} km`}</span>
                 </div>
                 <div className={styles.matchInfoRow}>
@@ -189,7 +180,12 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
                   </span>
                   <span style={{ flex: 1, textAlign: 'right' }}>{e.visitingTeam?.name}</span>
                 </div>
-                <div className={styles.nearbyVenue}>📍 {m.venueCity}</div>
+                <div className={styles.nearbyVenue}>
+                  📍 {m.venueName ? `${m.venueName}, ${m.venueCity}` : m.venueCity}
+                  <span style={{ marginLeft: 8, opacity: 0.7 }}>
+                    ({m.distance < 1 ? `${Math.round(m.distance * 1000)} m` : `${m.distance.toFixed(1)} km`})
+                  </span>
+                </div>
               </div>
             )
           })}
