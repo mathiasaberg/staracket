@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "update-league-bounds": "npx tsx scripts/update-league-bounds.ts",
+    "build-team-index": "npx tsx scripts/build-team-index.ts"
   },
   "dependencies": {
     "next": "14.2.3",

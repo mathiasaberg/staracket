@@ -2,13 +2,21 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 // Server-side arena locations — loaded once per cold start
 import arenas from '../../data/arenas.json'
+import leagueBoundsData from '../../data/leagueBounds.json'
+import teamIndexData from '../../data/teamArenaIndex.json'
 
 type ArenaEntry = { lat: number; lng: number; city: string; arena?: string }
 const arenaMap: Record<string, ArenaEntry> = arenas as Record<string, ArenaEntry>
 
+type LeagueBound = { lat: number; lng: number; radiusKm: number; teamCount: number; name: string }
+const leagueBounds: Record<string, LeagueBound> = leagueBoundsData as Record<string, LeagueBound>
+
+// Pre-computed normalized team name → arena for O(1) lookups
+const teamIndex: Record<string, ArenaEntry> = teamIndexData as Record<string, ArenaEntry>
+
 // In-memory cache for aggregated today-events (shared across requests on same instance)
 let eventsCache: { date: string; ts: number; events: any[] } | null = null
-const EVENTS_CACHE_TTL = 2 * 60 * 1000 // 2 min
+const EVENTS_CACHE_TTL = 30 * 60 * 1000 // 30 min — match schedules rarely change intra-day
 
 function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371
@@ -27,6 +35,16 @@ function stripDiacritics(s: string): string {
 
 function findArenaLocation(teamName: string): ArenaEntry | null {
   const lower = teamName.toLowerCase()
+
+  // Fast path: O(1) lookup in pre-computed index
+  const hasIndex = Object.keys(teamIndex).length > 0
+  if (hasIndex) {
+    if (teamIndex[lower]) return teamIndex[lower]
+    const norm = stripDiacritics(teamName)
+    if (teamIndex[norm]) return teamIndex[norm]
+  }
+
+  // Fallback: original fuzzy search (for teams not yet in the index)
   if (arenaMap[lower]) return arenaMap[lower]
   for (const [key, val] of Object.entries(arenaMap)) {
     if (lower.includes(key) || key.includes(lower)) return val
@@ -39,7 +57,7 @@ function findArenaLocation(teamName: string): ArenaEntry | null {
   return null
 }
 
-async function fetchAllTodayEvents(date: string): Promise<any[]> {
+async function fetchAllTodayEvents(date: string, userLat?: number, userLng?: number): Promise<any[]> {
   // Return cached if fresh
   if (eventsCache && eventsCache.date === date && Date.now() - eventsCache.ts < EVENTS_CACHE_TTL) {
     return eventsCache.events
@@ -53,10 +71,25 @@ async function fetchAllTodayEvents(date: string): Promise<any[]> {
   )
   if (!leaguesRes.ok) throw new Error(`Leagues fetch failed: ${leaguesRes.status}`)
   const leaguesData = await leaguesRes.json()
-  const leagues: { id: number; name: string }[] = leaguesData.leagues || []
+  let leagues: { id: number; name: string }[] = leaguesData.leagues || []
+
+  // Geo-filter: skip leagues whose geographic area is too far from the user
+  // Only applies if we have league bounds data AND user coordinates
+  const hasLeagueBounds = Object.keys(leagueBounds).length > 0
+  if (hasLeagueBounds && userLat !== undefined && userLng !== undefined) {
+    const GEO_BUFFER_KM = 150 // Include leagues within 150km of their outer boundary
+    const before = leagues.length
+    leagues = leagues.filter(league => {
+      const bound = leagueBounds[String(league.id)]
+      if (!bound || bound.radiusKm >= 9999) return true // National/unknown → always include
+      const dist = haversineKm(userLat, userLng, bound.lat, bound.lng)
+      return dist <= bound.radiusKm + GEO_BUFFER_KM
+    })
+    console.log(`[nearby] Geo-filter: ${before} → ${leagues.length} leagues (user at ${userLat.toFixed(2)}, ${userLng.toFixed(2)})`)
+  }
 
   // Fetch events for all leagues in parallel (server-side, no browser overhead)
-  const BATCH = 20
+  const BATCH = 50
   const allEvents: any[] = []
 
   for (let i = 0; i < leagues.length; i += BATCH) {
@@ -88,17 +121,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'lat and lng are required' })
   }
 
-  const userLat = parseFloat(lat as string)
-  const userLng = parseFloat(lng as string)
+  const rawLat = parseFloat(lat as string)
+  const rawLng = parseFloat(lng as string)
   const maxKm = parseFloat((radius as string) || '100')
   const queryDate = (date as string) || new Date().toISOString().slice(0, 10)
 
-  if (isNaN(userLat) || isNaN(userLng) || userLat < -90 || userLat > 90 || userLng < -180 || userLng > 180) {
+  if (isNaN(rawLat) || isNaN(rawLng) || rawLat < -90 || rawLat > 90 || rawLng < -180 || rawLng > 180) {
     return res.status(400).json({ error: 'Invalid lat/lng values' })
   }
 
+  // Quantize coordinates to ~1km grid so nearby users share the same CDN cache entry
+  const userLat = Math.round(rawLat * 100) / 100
+  const userLng = Math.round(rawLng * 100) / 100
+
   try {
-    const events = await fetchAllTodayEvents(queryDate)
+    const events = await fetchAllTodayEvents(queryDate, userLat, userLng)
 
     const nearby: any[] = []
     const unmatchedTeams: string[] = []
@@ -139,9 +176,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    // Cache aggressively — same position/radius/date can be shared across users
-    // Events update every 2 min server-side, CDN can cache for 2 min + serve stale for 10 min
-    res.setHeader('Cache-Control', 's-maxage=120, stale-while-revalidate=600')
+    // Cache aggressively — quantized coordinates ensure nearby users share the same CDN entry
+    // 15 min fresh, 30 min stale-while-revalidate (match schedules rarely change intra-day)
+    res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=1800')
     res.json({
       matches: nearby,
       closestVenue,

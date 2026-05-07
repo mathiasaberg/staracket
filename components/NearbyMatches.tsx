@@ -23,6 +23,41 @@ type ClosestVenue = { name: string | null; city: string; distance: number }
 const RADIUS_OPTIONS = [1, 2, 5, 10, 25, 50, 100]
 const MAX_RADIUS = 100 // Fetch all within 100 km, filter client-side
 
+const STORAGE_KEY_POS = 'nearby_lastPos'
+const STORAGE_KEY_DATA = 'nearby_cache'
+
+function getStoredPosition(): { lat: number; lng: number } | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_POS)
+    if (!raw) return null
+    const pos = JSON.parse(raw)
+    if (typeof pos.lat === 'number' && typeof pos.lng === 'number') return pos
+  } catch {}
+  return null
+}
+
+function storePosition(pos: { lat: number; lng: number }) {
+  try { localStorage.setItem(STORAGE_KEY_POS, JSON.stringify(pos)) } catch {}
+}
+
+function getStoredData(): { date: string; matches: NearbyMatch[]; closestVenue: ClosestVenue | null } | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_DATA)
+    if (!raw) return null
+    const data = JSON.parse(raw)
+    const today = new Date().toISOString().slice(0, 10)
+    if (data.date === today && Array.isArray(data.matches)) return data
+  } catch {}
+  return null
+}
+
+function storeData(matches: NearbyMatch[], closestVenue: ClosestVenue | null) {
+  try {
+    const today = new Date().toISOString().slice(0, 10)
+    localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify({ date: today, matches, closestVenue }))
+  } catch {}
+}
+
 export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null)
   const [geoError, setGeoError] = useState<string | null>(null)
@@ -34,18 +69,42 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
   const [loadingMatches, setLoadingMatches] = useState(false)
   const fetchedPos = useRef<string | null>(null) // Track which position we already fetched for
 
+  // Hydrate from localStorage immediately (instant perceived load for returning users)
+  useEffect(() => {
+    const cached = getStoredData()
+    if (cached) {
+      setAllNearby(cached.matches)
+      if (cached.closestVenue) setClosestVenue(cached.closestVenue)
+    }
+    // Use last-known position to avoid waiting for geolocation
+    const storedPos = getStoredPosition()
+    if (storedPos) {
+      setUserPos(storedPos)
+      setLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     if (!navigator.geolocation) {
-      setGeoError('Din webbläsare stöder inte platstjänster.')
-      setLoading(false)
+      if (!getStoredPosition()) {
+        setGeoError('Din webbläsare stöder inte platstjänster.')
+        setLoading(false)
+      }
       return
     }
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setUserPos({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+        const newPos = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+        setUserPos(newPos)
+        storePosition(newPos)
         setLoading(false)
       },
       (err) => {
+        // If we have a stored position, don't show error — use the stored one
+        if (getStoredPosition()) {
+          setLoading(false)
+          return
+        }
         if (err.code === err.PERMISSION_DENIED) {
           setGeoError('Platstjänster nekades. Aktivera platsåtkomst i webbläsaren för att använda denna funktion.')
         } else if (err.code === err.POSITION_UNAVAILABLE) {
@@ -89,6 +148,7 @@ export default function NearbyMatches({ allLeagues, onOpenMatch }: Props) {
       }))
 
       setAllNearby(nearby)
+      storeData(nearby, data.closestVenue || null)
       if (data.closestVenue) setClosestVenue(data.closestVenue)
 
       if (data.meta?.unmatchedTeams?.length > 0) {

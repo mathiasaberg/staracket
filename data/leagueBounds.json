@@ -1,0 +1,3502 @@
+{
+  "141802": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "FA-cupen Fjärde omgången"
+  },
+  "141803": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "FA-cupen Andra omgången"
+  },
+  "141805": {
+    "lat": 60.235,
+    "lng": 13.945,
+    "radiusKm": 273,
+    "teamCount": 2,
+    "name": "FA-cupen Tredje omgången"
+  },
+  "141806": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "FA-cupen Kvartsfinal"
+  },
+  "141807": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "FA-cupen Semifinal"
+  },
+  "141808": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "FA-cupen Final"
+  },
+  "141809": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "FA-cupen Åttondelsfinal"
+  },
+  "141810": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Danska mästerskapsserien"
+  },
+  "141811": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Danska nedflyttningsserien"
+  },
+  "141812": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "1. Division uppflyttningsserie"
+  },
+  "141813": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Superligaen"
+  },
+  "141814": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "1. Division"
+  },
+  "141815": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "1. Division nedflyttningsserie"
+  },
+  "141817": {
+    "lat": 57.945,
+    "lng": 12.23,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Norska ligan"
+  },
+  "141839": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Belgiska kvalet till Conference League"
+  },
+  "141840": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Belgiska nedflyttningsserien"
+  },
+  "141841": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Belgiska ligan"
+  },
+  "141842": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Belgiska mästerskapsserien"
+  },
+  "141843": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Spanska cupen Åttondelsfinal"
+  },
+  "141846": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Spanska cupen Första omgången"
+  },
+  "141847": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Spanska cupen Kvartsfinal"
+  },
+  "141848": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Spanska cupen Final"
+  },
+  "141849": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Spanska cupen Semifinal"
+  },
+  "141850": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Spanska supercupen Semifinal"
+  },
+  "141851": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Spanska supercupen Final"
+  },
+  "141852": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska supercupen Final"
+  },
+  "141853": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska supercupen Semifinal"
+  },
+  "141854": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska cupen Kvartsfinal"
+  },
+  "141855": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska cupen Kvalomgång"
+  },
+  "141856": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Italienska cupen Andra omgången"
+  },
+  "141857": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska cupen Semifinal"
+  },
+  "141858": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska cupen Final"
+  },
+  "141859": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Italienska cupen Första omgången"
+  },
+  "141860": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Italienska cupen Åttondelsfinal"
+  },
+  "141863": {
+    "lat": 60.163,
+    "lng": 15.376,
+    "radiusKm": 528,
+    "teamCount": 4,
+    "name": "Champions League Andra kvalomgången"
+  },
+  "141864": {
+    "lat": 62.862,
+    "lng": 15.215,
+    "radiusKm": 44,
+    "teamCount": 2,
+    "name": "Champions League Playoff"
+  },
+  "141865": {
+    "lat": 60.436,
+    "lng": 14.48,
+    "radiusKm": 546,
+    "teamCount": 3,
+    "name": "Champions League Tredje kvalomgången"
+  },
+  "141866": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Champions League Playoff till åttondelsfinal"
+  },
+  "141867": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Champions League"
+  },
+  "141868": {
+    "lat": 59.054,
+    "lng": 14.335,
+    "radiusKm": 394,
+    "teamCount": 2,
+    "name": "Champions League Första kvalomgången"
+  },
+  "141869": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Champions League Final"
+  },
+  "141870": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Champions League Semifinal"
+  },
+  "141871": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Champions League Kvartsfinal"
+  },
+  "141872": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Champions League Åttondelsfinal"
+  },
+  "141873": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Conference League Åttondelsfinal"
+  },
+  "141874": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Conference League Playoff till åttondelsfinal"
+  },
+  "141875": {
+    "lat": 61.329,
+    "lng": 14.515,
+    "radiusKm": 350,
+    "teamCount": 3,
+    "name": "Conference League Första kvalomgången"
+  },
+  "141876": {
+    "lat": 60.123,
+    "lng": 13.793,
+    "radiusKm": 288,
+    "teamCount": 2,
+    "name": "Conference League Playoff"
+  },
+  "141877": {
+    "lat": 59.775,
+    "lng": 16.007,
+    "radiusKm": 306,
+    "teamCount": 4,
+    "name": "Conference League Tredje kvalomgången"
+  },
+  "141878": {
+    "lat": 60.185,
+    "lng": 15.273,
+    "radiusKm": 336,
+    "teamCount": 7,
+    "name": "Conference League Andra kvalomgången"
+  },
+  "141879": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Conference League Final"
+  },
+  "141880": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Conference League Semifinal"
+  },
+  "141881": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Conference League Kvartsfinal"
+  },
+  "141882": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Conference League"
+  },
+  "141885": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Finländska ligan"
+  },
+  "141886": {
+    "lat": 59.345,
+    "lng": 18.063,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Grekiska ligan"
+  },
+  "141887": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Grekiska mästerskapsserien"
+  },
+  "141888": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Grekiska nedflyttningsserien"
+  },
+  "141889": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Grekiska kvalet till Conference League"
+  },
+  "141890": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländerna Supercupen"
+  },
+  "141891": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländerna Eredivisie"
+  },
+  "141893": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Engelska ligacupen Final"
+  },
+  "141894": {
+    "lat": 59.471,
+    "lng": 13.373,
+    "radiusKm": 361,
+    "teamCount": 3,
+    "name": "Engelska ligacupen Första omgången"
+  },
+  "141895": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Engelska ligacupen Andra omgången"
+  },
+  "141896": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Engelska ligacupen Tredje omgången"
+  },
+  "141897": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Engelska ligacupen Semifinal"
+  },
+  "141898": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Engelska ligacupen Kvartsfinal"
+  },
+  "141899": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Engelska ligacupen Åttondelsfinal"
+  },
+  "141900": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Europa League Åttondelsfinal"
+  },
+  "141901": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Europa League Playoff till åttondelsfinal"
+  },
+  "141902": {
+    "lat": 59.151,
+    "lng": 15.578,
+    "radiusKm": 425,
+    "teamCount": 3,
+    "name": "Europa League"
+  },
+  "141903": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Europa League Final"
+  },
+  "141904": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Europa League Semifinal"
+  },
+  "141905": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Europa League Kvartsfinal"
+  },
+  "141906": {
+    "lat": 57.464,
+    "lng": 15.537,
+    "radiusKm": 260,
+    "teamCount": 2,
+    "name": "Europa League Playoff"
+  },
+  "141907": {
+    "lat": 58.534,
+    "lng": 14.994,
+    "radiusKm": 201,
+    "teamCount": 2,
+    "name": "Europa League Tredje kvalomgången"
+  },
+  "141908": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Europa League Andra kvalomgången"
+  },
+  "141909": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Europa League Första kvalomgången"
+  },
+  "141910": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Kvartsfinal"
+  },
+  "141911": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Åttondelsfinal"
+  },
+  "141912": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Final"
+  },
+  "141913": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Semifinal"
+  },
+  "141914": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Andra omgången"
+  },
+  "141915": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Nederländska cupen Första omgången"
+  },
+  "141916": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Bundesliga"
+  },
+  "141919": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Bundesliga 2"
+  },
+  "141921": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Europeiska supercupen"
+  },
+  "141922": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Franska cupen Kvartsfinal"
+  },
+  "141923": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Franska cupen Åttondelsfinal"
+  },
+  "141924": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Franska cupen 32-delsfinal"
+  },
+  "141925": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Franska cupen Semifinal"
+  },
+  "141926": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Franska cupen Final"
+  },
+  "141927": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Franska cupen Sextondelsfinal"
+  },
+  "141930": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Ligue 2"
+  },
+  "141931": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Ligue 1"
+  },
+  "141935": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "La Liga 2"
+  },
+  "141937": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "La Liga"
+  },
+  "141938": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Skotska mästerskapsserien"
+  },
+  "141939": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Skotska nedflyttningsserien"
+  },
+  "141941": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Skotska ligan"
+  },
+  "141942": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Premier League"
+  },
+  "141943": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Championship"
+  },
+  "141944": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "League One"
+  },
+  "141945": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "League Two"
+  },
+  "141946": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till Premier League, semifinal"
+  },
+  "141950": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till Championship, semifinal"
+  },
+  "141951": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till League One, semifinal"
+  },
+  "141952": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Community Shield"
+  },
+  "141953": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Serie B"
+  },
+  "141957": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Serie A"
+  },
+  "141958": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Kroatien HNL"
+  },
+  "141959": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Polen Ekstraklasa"
+  },
+  "141960": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Bosnien/Hercegovina Premijer Liga"
+  },
+  "141961": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Portugal Primeira Liga"
+  },
+  "141963": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Portugal Supertaca"
+  },
+  "141964": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Turkiet Süper Lig"
+  },
+  "141965": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Åttondelsfinal"
+  },
+  "141966": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Kvartsfinal"
+  },
+  "141967": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Final"
+  },
+  "141968": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Semifinal"
+  },
+  "141969": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Andra omgången"
+  },
+  "141970": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Tyska cupen Första omgången"
+  },
+  "141986": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp A"
+  },
+  "141987": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp B"
+  },
+  "141988": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp C"
+  },
+  "141989": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp D"
+  },
+  "141990": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp E"
+  },
+  "141991": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Grupp F"
+  },
+  "141992": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Åttondelsfinal"
+  },
+  "141993": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Kvartsfinal"
+  },
+  "141994": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Semifinal"
+  },
+  "141995": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Final"
+  },
+  "141996": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Afrikanska mästerskapen Bronsmatch"
+  },
+  "143104": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Brasilien Serie A"
+  },
+  "143322": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Irland Premier Division"
+  },
+  "143402": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Island Besta deild"
+  },
+  "143475": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Schweiz Nedflyttningsserie"
+  },
+  "143476": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Schweiz Mästerskapsserie"
+  },
+  "143477": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Schweiz Super League"
+  },
+  "143535": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Österrike Bundesliga"
+  },
+  "143547": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Brasilien Serie B"
+  },
+  "143628": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Rumänien Superliga"
+  },
+  "143840": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Argentina Apertura"
+  },
+  "143841": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Argentina Clausura"
+  },
+  "143842": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "National League"
+  },
+  "144477": {
+    "lat": 59.301,
+    "lng": 17.886,
+    "radiusKm": 19,
+    "teamCount": 3,
+    "name": "Division 6 Stockholm B"
+  },
+  "144479": {
+    "lat": 62.524,
+    "lng": 15.659,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 6 Hälsingland"
+  },
+  "144480": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Skåne nordvästra A"
+  },
+  "144481": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skåne nordöstra A"
+  },
+  "144482": {
+    "lat": 57.331,
+    "lng": 14.544,
+    "radiusKm": 53,
+    "teamCount": 2,
+    "name": "Division 6 Aneby"
+  },
+  "144483": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Skåne mellersta"
+  },
+  "144485": {
+    "lat": 55.583,
+    "lng": 13,
+    "radiusKm": 4,
+    "teamCount": 7,
+    "name": "Division 6 Skåne sydvästra B"
+  },
+  "144486": {
+    "lat": 57.154,
+    "lng": 14.942,
+    "radiusKm": 32,
+    "teamCount": 2,
+    "name": "Division 6 Vetlanda"
+  },
+  "144487": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Vimmerby"
+  },
+  "144488": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Mark"
+  },
+  "144489": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Göteborg B"
+  },
+  "144490": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Bohuslän/Dalsland norra"
+  },
+  "144491": {
+    "lat": 58.786,
+    "lng": 16.724,
+    "radiusKm": 240,
+    "teamCount": 3,
+    "name": "Division 6 Uppland södra"
+  },
+  "144492": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skåne södra"
+  },
+  "144493": {
+    "lat": 58.104,
+    "lng": 12.674,
+    "radiusKm": 32,
+    "teamCount": 2,
+    "name": "Division 6 Lidköping"
+  },
+  "144495": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Blekinge östra"
+  },
+  "144496": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Stockholm D"
+  },
+  "144497": {
+    "lat": 57.708,
+    "lng": 14.922,
+    "radiusKm": 92,
+    "teamCount": 2,
+    "name": "Division 6 Östergötland västra"
+  },
+  "144498": {
+    "lat": 60.009,
+    "lng": 16.211,
+    "radiusKm": 122,
+    "teamCount": 3,
+    "name": "Division 6 Dalarna södra"
+  },
+  "144499": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Emmaboda"
+  },
+  "144501": {
+    "lat": 59.113,
+    "lng": 14.427,
+    "radiusKm": 386,
+    "teamCount": 2,
+    "name": "Division 6 Högsby"
+  },
+  "144502": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Bohuslän/Dalsland södra"
+  },
+  "144503": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Halland norra"
+  },
+  "144504": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Stockholm C"
+  },
+  "144505": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Stockholm F"
+  },
+  "144506": {
+    "lat": 60.675,
+    "lng": 17.141,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 6 Gestrikland"
+  },
+  "144508": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Västerbotten"
+  },
+  "144509": {
+    "lat": 57.706,
+    "lng": 11.979,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 6 Göteborg A"
+  },
+  "144510": {
+    "lat": 59.253,
+    "lng": 15.029,
+    "radiusKm": 277,
+    "teamCount": 3,
+    "name": "Division 6 Skåne nordvästra B"
+  },
+  "144511": {
+    "lat": 57.826,
+    "lng": 12.105,
+    "radiusKm": 15,
+    "teamCount": 2,
+    "name": "Division 6 Göteborg C"
+  },
+  "144512": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Uppland norra"
+  },
+  "144513": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Värmland östra"
+  },
+  "144514": {
+    "lat": 59.416,
+    "lng": 13.674,
+    "radiusKm": 184,
+    "teamCount": 2,
+    "name": "Division 6 Dalarna norra"
+  },
+  "144515": {
+    "lat": 57.524,
+    "lng": 15.629,
+    "radiusKm": 251,
+    "teamCount": 2,
+    "name": "Division 6 Värmland norra"
+  },
+  "144516": {
+    "lat": 57.837,
+    "lng": 13.522,
+    "radiusKm": 77,
+    "teamCount": 3,
+    "name": "Division 6 Jönköping"
+  },
+  "144517": {
+    "lat": 58.585,
+    "lng": 16.358,
+    "radiusKm": 211,
+    "teamCount": 4,
+    "name": "Division 6 Södermanland sydöstra"
+  },
+  "144518": {
+    "lat": 56.887,
+    "lng": 13.466,
+    "radiusKm": 139,
+    "teamCount": 3,
+    "name": "Division 6 Halland södra"
+  },
+  "144519": {
+    "lat": 59.905,
+    "lng": 16.016,
+    "radiusKm": 292,
+    "teamCount": 3,
+    "name": "Division 6 Östergötland norra"
+  },
+  "144520": {
+    "lat": 58.089,
+    "lng": 16.002,
+    "radiusKm": 186,
+    "teamCount": 2,
+    "name": "Division 6 Kalmar/Öland"
+  },
+  "144521": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Skåne nordöstra B"
+  },
+  "144522": {
+    "lat": 58.512,
+    "lng": 14.47,
+    "radiusKm": 451,
+    "teamCount": 3,
+    "name": "Division 6 Växjö/Ljungby"
+  },
+  "144523": {
+    "lat": 59.593,
+    "lng": 16.887,
+    "radiusKm": 72,
+    "teamCount": 3,
+    "name": "Division 6 Västmanland"
+  },
+  "144524": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skåne sydvästra A"
+  },
+  "144526": {
+    "lat": 57.549,
+    "lng": 15.608,
+    "radiusKm": 253,
+    "teamCount": 2,
+    "name": "Division 6 Stockholm A"
+  },
+  "144527": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skåne norra"
+  },
+  "144528": {
+    "lat": 56.048,
+    "lng": 12.706,
+    "radiusKm": 0,
+    "teamCount": 3,
+    "name": "Division 6 Skåne västra"
+  },
+  "144529": {
+    "lat": 60.866,
+    "lng": 16.974,
+    "radiusKm": 197,
+    "teamCount": 3,
+    "name": "Division 6 Värnamo"
+  },
+  "144530": {
+    "lat": 60.935,
+    "lng": 16.861,
+    "radiusKm": 189,
+    "teamCount": 2,
+    "name": "Division 6 Ulricehamn"
+  },
+  "144531": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Värmland västra"
+  },
+  "144532": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Herrljunga"
+  },
+  "144533": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Örebro"
+  },
+  "144534": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Trollhättan"
+  },
+  "144535": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skövde"
+  },
+  "144536": {
+    "lat": 58.144,
+    "lng": 14.673,
+    "radiusKm": 170,
+    "teamCount": 4,
+    "name": "Division 6 Östergötland östra"
+  },
+  "144537": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Bohuslän/Dalsland mellersta"
+  },
+  "144538": {
+    "lat": 59.237,
+    "lng": 16.927,
+    "radiusKm": 66,
+    "teamCount": 3,
+    "name": "Division 6 Södermanland nordvästra"
+  },
+  "144539": {
+    "lat": 59.375,
+    "lng": 14.968,
+    "radiusKm": 224,
+    "teamCount": 3,
+    "name": "Division 6 Stockholm E"
+  },
+  "144540": {
+    "lat": 58.711,
+    "lng": 15.567,
+    "radiusKm": 364,
+    "teamCount": 7,
+    "name": "P19 Div 1 Region 4"
+  },
+  "144542": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P19 Superettan norra"
+  },
+  "144543": {
+    "lat": 59.606,
+    "lng": 17.622,
+    "radiusKm": 122,
+    "teamCount": 9,
+    "name": "P19 Div 1 Region 5"
+  },
+  "144545": {
+    "lat": 63.418,
+    "lng": 19.388,
+    "radiusKm": 458,
+    "teamCount": 6,
+    "name": "P19 Div 1 Region 6"
+  },
+  "144546": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P19 Allsvenskan"
+  },
+  "144547": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P19 Superettan södra"
+  },
+  "144550": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Göteborg A"
+  },
+  "144551": {
+    "lat": 59.502,
+    "lng": 16.191,
+    "radiusKm": 23,
+    "teamCount": 4,
+    "name": "Division 7 Västmanland"
+  },
+  "144552": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Stockholm C"
+  },
+  "144553": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Östergötland mellersta"
+  },
+  "144554": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Uppland västra"
+  },
+  "144555": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Stockholm E"
+  },
+  "144556": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Östergötland västra"
+  },
+  "144557": {
+    "lat": 59.756,
+    "lng": 17.457,
+    "radiusKm": 51,
+    "teamCount": 4,
+    "name": "Division 7 Uppland södra"
+  },
+  "144558": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Stockholm H"
+  },
+  "144559": {
+    "lat": 58.477,
+    "lng": 16.896,
+    "radiusKm": 381,
+    "teamCount": 4,
+    "name": "Division 7 Stockholm B"
+  },
+  "144560": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Stockholm G"
+  },
+  "144561": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Värmland västra"
+  },
+  "144562": {
+    "lat": 58.319,
+    "lng": 13.199,
+    "radiusKm": 264,
+    "teamCount": 4,
+    "name": "Division 7 Göteborg B"
+  },
+  "144563": {
+    "lat": 59.357,
+    "lng": 16.33,
+    "radiusKm": 76,
+    "teamCount": 2,
+    "name": "Division 7 Örebro norra"
+  },
+  "144564": {
+    "lat": 58.4,
+    "lng": 15.706,
+    "radiusKm": 177,
+    "teamCount": 2,
+    "name": "Division 7 Uppland norra"
+  },
+  "144566": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Södermanland västra"
+  },
+  "144567": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Värmland norra"
+  },
+  "144568": {
+    "lat": 59.097,
+    "lng": 15.12,
+    "radiusKm": 4,
+    "teamCount": 2,
+    "name": "Division 7 Örebro södra"
+  },
+  "144569": {
+    "lat": 59.236,
+    "lng": 18.166,
+    "radiusKm": 8,
+    "teamCount": 4,
+    "name": "Division 7 Stockholm F"
+  },
+  "144570": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Bohuslän/Dalsland västra"
+  },
+  "144571": {
+    "lat": 58.768,
+    "lng": 17.231,
+    "radiusKm": 254,
+    "teamCount": 4,
+    "name": "Division 7 Stockholm A"
+  },
+  "144572": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Dalarna västra"
+  },
+  "144573": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Stockholm D"
+  },
+  "144574": {
+    "lat": 60.892,
+    "lng": 16.919,
+    "radiusKm": 194,
+    "teamCount": 2,
+    "name": "Division 7 Göteborg C"
+  },
+  "144575": {
+    "lat": 59.34,
+    "lng": 15.097,
+    "radiusKm": 227,
+    "teamCount": 3,
+    "name": "Division 7 Dalarna norra"
+  },
+  "144577": {
+    "lat": 60.176,
+    "lng": 16.302,
+    "radiusKm": 135,
+    "teamCount": 2,
+    "name": "Division 7 Dalarna östra"
+  },
+  "144578": {
+    "lat": 59.336,
+    "lng": 16.293,
+    "radiusKm": 100,
+    "teamCount": 2,
+    "name": "Division 7 Värmland östra"
+  },
+  "144579": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Uppland östra"
+  },
+  "144580": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Östergötland östra"
+  },
+  "144581": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 7 Bohuslän/Dalsland södra"
+  },
+  "144582": {
+    "lat": 60.364,
+    "lng": 16.598,
+    "radiusKm": 245,
+    "teamCount": 3,
+    "name": "Division 7 Södermanland nordöstra"
+  },
+  "144583": {
+    "lat": 58.293,
+    "lng": 15.883,
+    "radiusKm": 172,
+    "teamCount": 4,
+    "name": "Division 4 Östergötland västra"
+  },
+  "144584": {
+    "lat": 58.73,
+    "lng": 14.112,
+    "radiusKm": 140,
+    "teamCount": 2,
+    "name": "Division 4 Västergötland östra"
+  },
+  "144585": {
+    "lat": 59.24,
+    "lng": 18.064,
+    "radiusKm": 14,
+    "teamCount": 4,
+    "name": "Division 4 Stockholm södra"
+  },
+  "144586": {
+    "lat": 60.688,
+    "lng": 17.123,
+    "radiusKm": 6,
+    "teamCount": 2,
+    "name": "Division 4 Gestrikland"
+  },
+  "144587": {
+    "lat": 57.811,
+    "lng": 15.41,
+    "radiusKm": 74,
+    "teamCount": 4,
+    "name": "Division 4 Småland norra"
+  },
+  "144588": {
+    "lat": 57.577,
+    "lng": 15.366,
+    "radiusKm": 251,
+    "teamCount": 4,
+    "name": "Division 4 Småland sydvästra"
+  },
+  "144589": {
+    "lat": 62.421,
+    "lng": 17.047,
+    "radiusKm": 72,
+    "teamCount": 7,
+    "name": "Division 4 Medelpad"
+  },
+  "144590": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 4 Småland nordvästra"
+  },
+  "144591": {
+    "lat": 57.826,
+    "lng": 12.105,
+    "radiusKm": 15,
+    "teamCount": 2,
+    "name": "Division 4 Göteborg B"
+  },
+  "144592": {
+    "lat": 63.138,
+    "lng": 14.697,
+    "radiusKm": 11,
+    "teamCount": 3,
+    "name": "Division 4 Jämtland/Härjedalen"
+  },
+  "144593": {
+    "lat": 58.208,
+    "lng": 18.218,
+    "radiusKm": 127,
+    "teamCount": 3,
+    "name": "Division 4 Gotland"
+  },
+  "144594": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Norrbotten södra vår"
+  },
+  "144595": {
+    "lat": 58.284,
+    "lng": 14.146,
+    "radiusKm": 254,
+    "teamCount": 3,
+    "name": "Division 4 Göteborg A"
+  },
+  "144596": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 4 Skåne östra"
+  },
+  "144597": {
+    "lat": 55.951,
+    "lng": 12.88,
+    "radiusKm": 34,
+    "teamCount": 2,
+    "name": "Division 4 Skåne västra"
+  },
+  "144598": {
+    "lat": 58.396,
+    "lng": 15.797,
+    "radiusKm": 179,
+    "teamCount": 4,
+    "name": "Division 4 Östergötland östra"
+  },
+  "144599": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Ångermanland"
+  },
+  "144600": {
+    "lat": 57.486,
+    "lng": 12.076,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 4 Halland"
+  },
+  "144601": {
+    "lat": 61.988,
+    "lng": 17.781,
+    "radiusKm": 545,
+    "teamCount": 3,
+    "name": "Division 4 Västerbotten"
+  },
+  "144602": {
+    "lat": 60.439,
+    "lng": 15.093,
+    "radiusKm": 33,
+    "teamCount": 2,
+    "name": "Division 4 Dalarna"
+  },
+  "144603": {
+    "lat": 59.302,
+    "lng": 18.121,
+    "radiusKm": 6,
+    "teamCount": 2,
+    "name": "Division 4 Stockholm mellersta"
+  },
+  "144604": {
+    "lat": 58.564,
+    "lng": 16.888,
+    "radiusKm": 231,
+    "teamCount": 3,
+    "name": "Division 4 Stockholm norra"
+  },
+  "144605": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Småland sydöstra"
+  },
+  "144606": {
+    "lat": 59.356,
+    "lng": 15.155,
+    "radiusKm": 19,
+    "teamCount": 3,
+    "name": "Division 4 Örebro"
+  },
+  "144607": {
+    "lat": 65.822,
+    "lng": 21.924,
+    "radiusKm": 28,
+    "teamCount": 2,
+    "name": "Division 4 Norrbotten norra vår"
+  },
+  "144608": {
+    "lat": 59.207,
+    "lng": 16.63,
+    "radiusKm": 55,
+    "teamCount": 6,
+    "name": "Division 4 Södermanland"
+  },
+  "144609": {
+    "lat": 59.484,
+    "lng": 16.619,
+    "radiusKm": 65,
+    "teamCount": 5,
+    "name": "Division 4 Västmanland"
+  },
+  "144610": {
+    "lat": 59.336,
+    "lng": 14.165,
+    "radiusKm": 38,
+    "teamCount": 4,
+    "name": "Division 4 Värmland"
+  },
+  "144611": {
+    "lat": 55.943,
+    "lng": 13.059,
+    "radiusKm": 228,
+    "teamCount": 5,
+    "name": "Division 4 Skåne södra"
+  },
+  "144612": {
+    "lat": 59.707,
+    "lng": 17.525,
+    "radiusKm": 26,
+    "teamCount": 3,
+    "name": "Division 4 Uppland"
+  },
+  "144613": {
+    "lat": 56.993,
+    "lng": 12.742,
+    "radiusKm": 146,
+    "teamCount": 4,
+    "name": "Division 4 Västergötland västra"
+  },
+  "144614": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Bohuslän/Dalsland"
+  },
+  "144615": {
+    "lat": 61.057,
+    "lng": 16.927,
+    "radiusKm": 200,
+    "teamCount": 3,
+    "name": "Division 4 Hälsingland"
+  },
+  "144616": {
+    "lat": 57.778,
+    "lng": 16.67,
+    "radiusKm": 194,
+    "teamCount": 2,
+    "name": "Division 4 Blekinge"
+  },
+  "144617": {
+    "lat": 63.594,
+    "lng": 21.125,
+    "radiusKm": 500,
+    "teamCount": 3,
+    "name": "Division 5 Norrbotten B"
+  },
+  "144618": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Västergötland sydöstra"
+  },
+  "144619": {
+    "lat": 57.76,
+    "lng": 12.131,
+    "radiusKm": 21,
+    "teamCount": 3,
+    "name": "Division 5 Göteborg B"
+  },
+  "144620": {
+    "lat": 59.839,
+    "lng": 17.653,
+    "radiusKm": 59,
+    "teamCount": 2,
+    "name": "Division 5 Uppland östra"
+  },
+  "144621": {
+    "lat": 59.778,
+    "lng": 15.982,
+    "radiusKm": 306,
+    "teamCount": 4,
+    "name": "Division 5 Stockholm södra"
+  },
+  "144622": {
+    "lat": 59.324,
+    "lng": 17.847,
+    "radiusKm": 19,
+    "teamCount": 3,
+    "name": "Division 5 Stockholm norra"
+  },
+  "144623": {
+    "lat": 59.331,
+    "lng": 18.114,
+    "radiusKm": 9,
+    "teamCount": 4,
+    "name": "Division 5 Stockholm mellersta"
+  },
+  "144624": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Småland nordvästra"
+  },
+  "144625": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Skåne sydöstra"
+  },
+  "144626": {
+    "lat": 57.541,
+    "lng": 14.888,
+    "radiusKm": 17,
+    "teamCount": 2,
+    "name": "Division 5 Småland mellersta"
+  },
+  "144627": {
+    "lat": 60.016,
+    "lng": 17.593,
+    "radiusKm": 82,
+    "teamCount": 4,
+    "name": "Division 5 Gestrikland"
+  },
+  "144628": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Bohuslän/Dalsland västra"
+  },
+  "144629": {
+    "lat": 59.113,
+    "lng": 14.427,
+    "radiusKm": 386,
+    "teamCount": 2,
+    "name": "Division 5 Göteborg A"
+  },
+  "144630": {
+    "lat": 59.316,
+    "lng": 15.199,
+    "radiusKm": 31,
+    "teamCount": 5,
+    "name": "Division 5 Örebro"
+  },
+  "144631": {
+    "lat": 58.76,
+    "lng": 14.454,
+    "radiusKm": 470,
+    "teamCount": 3,
+    "name": "Division 5 Ångermanland"
+  },
+  "144632": {
+    "lat": 60.56,
+    "lng": 15.927,
+    "radiusKm": 219,
+    "teamCount": 2,
+    "name": "Division 5 Östergötland östra"
+  },
+  "144633": {
+    "lat": 56.605,
+    "lng": 14.451,
+    "radiusKm": 372,
+    "teamCount": 4,
+    "name": "Division 5 Skåne sydvästra"
+  },
+  "144634": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Småland sydvästra"
+  },
+  "144635": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Bohuslän/Dalsland östra"
+  },
+  "144636": {
+    "lat": 57.699,
+    "lng": 16.325,
+    "radiusKm": 211,
+    "teamCount": 2,
+    "name": "Division 5 Blekinge"
+  },
+  "144637": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Västerbotten grupp 2"
+  },
+  "144638": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Halland norra"
+  },
+  "144639": {
+    "lat": 59.319,
+    "lng": 14.316,
+    "radiusKm": 12,
+    "teamCount": 2,
+    "name": "Division 5 Värmland östra"
+  },
+  "144640": {
+    "lat": 66.494,
+    "lng": 21.907,
+    "radiusKm": 91,
+    "teamCount": 2,
+    "name": "Division 5 Norrbotten A"
+  },
+  "144641": {
+    "lat": 62.42,
+    "lng": 16.443,
+    "radiusKm": 44,
+    "teamCount": 5,
+    "name": "Division 5 Medelpad"
+  },
+  "144642": {
+    "lat": 59.239,
+    "lng": 15.498,
+    "radiusKm": 147,
+    "teamCount": 2,
+    "name": "Division 5 Värmland västra"
+  },
+  "144643": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Skåne södra"
+  },
+  "144644": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Skåne nordöstra"
+  },
+  "144645": {
+    "lat": 61.59,
+    "lng": 13.998,
+    "radiusKm": 417,
+    "teamCount": 4,
+    "name": "Division 5 Jämtland/Härjedalen södra"
+  },
+  "144647": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Västergötland sydvästra"
+  },
+  "144648": {
+    "lat": 58.666,
+    "lng": 14.744,
+    "radiusKm": 149,
+    "teamCount": 2,
+    "name": "Division 5 Västmanland"
+  },
+  "144649": {
+    "lat": 58.814,
+    "lng": 15.176,
+    "radiusKm": 178,
+    "teamCount": 2,
+    "name": "Division 5 Västergötland nordvästra"
+  },
+  "144650": {
+    "lat": 56.913,
+    "lng": 13.113,
+    "radiusKm": 108,
+    "teamCount": 3,
+    "name": "Division 5 Skåne nordvästra"
+  },
+  "144651": {
+    "lat": 59.254,
+    "lng": 17.253,
+    "radiusKm": 44,
+    "teamCount": 3,
+    "name": "Division 5 Södermanland"
+  },
+  "144652": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Småland nordöstra"
+  },
+  "144653": {
+    "lat": 58.09,
+    "lng": 15.846,
+    "radiusKm": 189,
+    "teamCount": 3,
+    "name": "Division 5 Småland sydöstra"
+  },
+  "144654": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Småland norra"
+  },
+  "144655": {
+    "lat": 57.64,
+    "lng": 18.296,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 5 Gotland"
+  },
+  "144656": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Halland södra"
+  },
+  "144657": {
+    "lat": 59.782,
+    "lng": 15.636,
+    "radiusKm": 305,
+    "teamCount": 3,
+    "name": "Division 5 Östergötland mellersta"
+  },
+  "144660": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Östergötland västra"
+  },
+  "144661": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Hälsingland"
+  },
+  "144662": {
+    "lat": 57.879,
+    "lng": 13.749,
+    "radiusKm": 244,
+    "teamCount": 4,
+    "name": "Division 5 Västergötland nordöstra"
+  },
+  "144663": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Västerbotten grupp 1"
+  },
+  "144664": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Jämtland/Härjedalen norra"
+  },
+  "144665": {
+    "lat": 59.858,
+    "lng": 16.841,
+    "radiusKm": 128,
+    "teamCount": 4,
+    "name": "Division 5 Dalarna"
+  },
+  "144666": {
+    "lat": 59.82,
+    "lng": 17.242,
+    "radiusKm": 37,
+    "teamCount": 4,
+    "name": "Division 5 Uppland västra"
+  },
+  "144668": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P17 Allsvenskan södra"
+  },
+  "144670": {
+    "lat": 59.854,
+    "lng": 17.354,
+    "radiusKm": 127,
+    "teamCount": 9,
+    "name": "P17 Div 1 Region 5"
+  },
+  "144671": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P17 Allsvenskan norra"
+  },
+  "144673": {
+    "lat": 58.914,
+    "lng": 15.629,
+    "radiusKm": 386,
+    "teamCount": 10,
+    "name": "P17 Div 1 Region 4"
+  },
+  "144684": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P16 Allsvenskan norra"
+  },
+  "144685": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P16 Allsvenskan mellersta"
+  },
+  "144686": {
+    "lat": 59.908,
+    "lng": 17.324,
+    "radiusKm": 122,
+    "teamCount": 7,
+    "name": "P16 Div 1 Region 5"
+  },
+  "144690": {
+    "lat": 63.274,
+    "lng": 20.274,
+    "radiusKm": 453,
+    "teamCount": 7,
+    "name": "P16 Div 1 Region 6 gr 1"
+  },
+  "144691": {
+    "lat": 62.766,
+    "lng": 16.229,
+    "radiusKm": 93,
+    "teamCount": 9,
+    "name": "P16 Div 1 Region 6 gr 2"
+  },
+  "144695": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "P16 Allsvenskan södra"
+  },
+  "144697": {
+    "lat": 59.052,
+    "lng": 15.862,
+    "radiusKm": 405,
+    "teamCount": 11,
+    "name": "P16 Div 1 Region 4"
+  },
+  "144701": {
+    "lat": 58.745,
+    "lng": 16.221,
+    "radiusKm": 384,
+    "teamCount": 8,
+    "name": "Division 2 södra Svealand"
+  },
+  "144702": {
+    "lat": 60.155,
+    "lng": 17.488,
+    "radiusKm": 281,
+    "teamCount": 4,
+    "name": "Division 2 norra Svealand"
+  },
+  "144703": {
+    "lat": 56.505,
+    "lng": 14.676,
+    "radiusKm": 374,
+    "teamCount": 8,
+    "name": "Division 2 södra Götaland"
+  },
+  "144705": {
+    "lat": 57.754,
+    "lng": 15.231,
+    "radiusKm": 260,
+    "teamCount": 4,
+    "name": "Division 2 västra Götaland"
+  },
+  "144707": {
+    "lat": 58.507,
+    "lng": 13.487,
+    "radiusKm": 118,
+    "teamCount": 9,
+    "name": "Division 2 norra Götaland"
+  },
+  "144709": {
+    "lat": 63.134,
+    "lng": 17.4,
+    "radiusKm": 162,
+    "teamCount": 3,
+    "name": "Division 2 Norrland vår södra"
+  },
+  "144710": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Ettan södra"
+  },
+  "144711": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Ettan norra"
+  },
+  "144712": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 8 Uppland östra"
+  },
+  "144714": {
+    "lat": 58.609,
+    "lng": 15.57,
+    "radiusKm": 353,
+    "teamCount": 4,
+    "name": "Division 8 Västmanland"
+  },
+  "144715": {
+    "lat": 59.881,
+    "lng": 17.297,
+    "radiusKm": 39,
+    "teamCount": 3,
+    "name": "Division 8 Uppland västra"
+  },
+  "144716": {
+    "lat": 55.676,
+    "lng": 13.465,
+    "radiusKm": 57,
+    "teamCount": 7,
+    "name": "Division 3 södra Götaland"
+  },
+  "144717": {
+    "lat": 59.335,
+    "lng": 17.31,
+    "radiusKm": 310,
+    "teamCount": 8,
+    "name": "Division 3 norra Svealand"
+  },
+  "144718": {
+    "lat": 59.292,
+    "lng": 15.318,
+    "radiusKm": 137,
+    "teamCount": 3,
+    "name": "Division 3 mellersta Svealand"
+  },
+  "144719": {
+    "lat": 58.793,
+    "lng": 14.57,
+    "radiusKm": 181,
+    "teamCount": 5,
+    "name": "Division 3 nordvästra Götaland"
+  },
+  "144720": {
+    "lat": 64.835,
+    "lng": 21.006,
+    "radiusKm": 629,
+    "teamCount": 7,
+    "name": "Division 3 norra Norrland"
+  },
+  "144721": {
+    "lat": 62.72,
+    "lng": 16.552,
+    "radiusKm": 105,
+    "teamCount": 7,
+    "name": "Division 3 mellersta Norrland"
+  },
+  "144722": {
+    "lat": 57.845,
+    "lng": 13.292,
+    "radiusKm": 293,
+    "teamCount": 6,
+    "name": "Division 3 mellersta Götaland"
+  },
+  "144723": {
+    "lat": 58.899,
+    "lng": 15.023,
+    "radiusKm": 478,
+    "teamCount": 3,
+    "name": "Division 3 sydöstra Götaland"
+  },
+  "144724": {
+    "lat": 56.995,
+    "lng": 13.534,
+    "radiusKm": 78,
+    "teamCount": 2,
+    "name": "Division 3 sydvästra Götaland"
+  },
+  "144725": {
+    "lat": 60.767,
+    "lng": 16.709,
+    "radiusKm": 175,
+    "teamCount": 6,
+    "name": "Division 3 södra Norrland"
+  },
+  "144726": {
+    "lat": 59.233,
+    "lng": 17.988,
+    "radiusKm": 21,
+    "teamCount": 6,
+    "name": "Division 3 södra Svealand"
+  },
+  "144727": {
+    "lat": 57.952,
+    "lng": 15.548,
+    "radiusKm": 81,
+    "teamCount": 5,
+    "name": "Division 3 nordöstra Götaland"
+  },
+  "144728": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Superettan"
+  },
+  "144729": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Allsvenskan"
+  },
+  "144730": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Växjö"
+  },
+  "144731": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Jönköping"
+  },
+  "144732": {
+    "lat": 60.935,
+    "lng": 16.861,
+    "radiusKm": 189,
+    "teamCount": 2,
+    "name": "Division 5 Göteborg A"
+  },
+  "144733": {
+    "lat": 58.819,
+    "lng": 16.109,
+    "radiusKm": 246,
+    "teamCount": 3,
+    "name": "Division 5 Stockholm B"
+  },
+  "144734": {
+    "lat": 58.276,
+    "lng": 12.565,
+    "radiusKm": 32,
+    "teamCount": 3,
+    "name": "Division 5 Västergötland västra"
+  },
+  "144735": {
+    "lat": 58.46,
+    "lng": 16.808,
+    "radiusKm": 376,
+    "teamCount": 4,
+    "name": "Division 5 Stockholm A"
+  },
+  "144736": {
+    "lat": 56.663,
+    "lng": 16.357,
+    "radiusKm": 0,
+    "teamCount": 2,
+    "name": "Division 5 Kalmar/Öland"
+  },
+  "144737": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Västergötland östra"
+  },
+  "144738": {
+    "lat": 59.239,
+    "lng": 16.677,
+    "radiusKm": 285,
+    "teamCount": 5,
+    "name": "Division 5 Uppland"
+  },
+  "144742": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 5 Vimmerby"
+  },
+  "144743": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Värnamo"
+  },
+  "144744": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Blekinge"
+  },
+  "144745": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Västergötland södra"
+  },
+  "144746": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Höglandet"
+  },
+  "144747": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 4 Halland södra"
+  },
+  "144749": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Småland nordvästra"
+  },
+  "144750": {
+    "lat": 57.807,
+    "lng": 12.159,
+    "radiusKm": 16,
+    "teamCount": 3,
+    "name": "Division 4 Göteborg B"
+  },
+  "144751": {
+    "lat": 56.874,
+    "lng": 14.583,
+    "radiusKm": 39,
+    "teamCount": 5,
+    "name": "Division 4 Småland sydvästra"
+  },
+  "144752": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Skåne mellersta"
+  },
+  "144753": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Östergötland östra"
+  },
+  "144757": {
+    "lat": 59.437,
+    "lng": 14.487,
+    "radiusKm": 199,
+    "teamCount": 2,
+    "name": "Division 4 Bohuslän/Dalsland"
+  },
+  "144758": {
+    "lat": 58.385,
+    "lng": 15.965,
+    "radiusKm": 190,
+    "teamCount": 4,
+    "name": "Division 4 Uppland"
+  },
+  "144759": {
+    "lat": 59.231,
+    "lng": 13.963,
+    "radiusKm": 60,
+    "teamCount": 3,
+    "name": "Division 4 Värmland södra"
+  },
+  "144760": {
+    "lat": 57.618,
+    "lng": 15.858,
+    "radiusKm": 51,
+    "teamCount": 3,
+    "name": "Division 4 Småland nordöstra"
+  },
+  "144762": {
+    "lat": 58.119,
+    "lng": 16.389,
+    "radiusKm": 167,
+    "teamCount": 2,
+    "name": "Division 4 Stockholm A"
+  },
+  "144764": {
+    "lat": 56.687,
+    "lng": 12.612,
+    "radiusKm": 122,
+    "teamCount": 3,
+    "name": "Division 4 Skåne nordvästra"
+  },
+  "144765": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 4 Värmland norra"
+  },
+  "144767": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Småland sydöstra"
+  },
+  "144768": {
+    "lat": 58.815,
+    "lng": 16.171,
+    "radiusKm": 249,
+    "teamCount": 3,
+    "name": "Division 4 Stockholm B"
+  },
+  "144769": {
+    "lat": 58.594,
+    "lng": 14.804,
+    "radiusKm": 336,
+    "teamCount": 5,
+    "name": "Division 4 Örebro"
+  },
+  "144770": {
+    "lat": 58.493,
+    "lng": 18.179,
+    "radiusKm": 95,
+    "teamCount": 2,
+    "name": "Division 4 Gotland"
+  },
+  "144771": {
+    "lat": 57.681,
+    "lng": 11.997,
+    "radiusKm": 3,
+    "teamCount": 2,
+    "name": "Division 4 Göteborg A"
+  },
+  "144773": {
+    "lat": 59.896,
+    "lng": 16.456,
+    "radiusKm": 104,
+    "teamCount": 3,
+    "name": "Division 4 Dalarna södra"
+  },
+  "144774": {
+    "lat": 55.442,
+    "lng": 13.194,
+    "radiusKm": 7,
+    "teamCount": 2,
+    "name": "Division 4 Skåne södra"
+  },
+  "144775": {
+    "lat": 59.992,
+    "lng": 14.979,
+    "radiusKm": 277,
+    "teamCount": 5,
+    "name": "Division 4 Dalarna norra"
+  },
+  "144776": {
+    "lat": 58.878,
+    "lng": 16.844,
+    "radiusKm": 88,
+    "teamCount": 2,
+    "name": "Division 4 Östergötland västra"
+  },
+  "144777": {
+    "lat": 55.702,
+    "lng": 13.195,
+    "radiusKm": 0,
+    "teamCount": 3,
+    "name": "Division 4 Skåne sydvästra A"
+  },
+  "144778": {
+    "lat": 58.332,
+    "lng": 12.306,
+    "radiusKm": 6,
+    "teamCount": 2,
+    "name": "Division 4 Västergötland västra"
+  },
+  "144779": {
+    "lat": 57.696,
+    "lng": 14.227,
+    "radiusKm": 288,
+    "teamCount": 4,
+    "name": "Division 4 Västergötland södra"
+  },
+  "144780": {
+    "lat": 58.909,
+    "lng": 15.108,
+    "radiusKm": 183,
+    "teamCount": 3,
+    "name": "Division 4 Västmanland"
+  },
+  "144781": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 4 Skåne nordöstra"
+  },
+  "144782": {
+    "lat": 59.212,
+    "lng": 17.153,
+    "radiusKm": 54,
+    "teamCount": 4,
+    "name": "Division 4 Södermanland"
+  },
+  "144783": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 4 Halland"
+  },
+  "144786": {
+    "lat": 58.711,
+    "lng": 13.977,
+    "radiusKm": 9,
+    "teamCount": 2,
+    "name": "Division 4 Västergötland östra"
+  },
+  "144788": {
+    "lat": 63.028,
+    "lng": 20.162,
+    "radiusKm": 425,
+    "teamCount": 6,
+    "name": "F17 Region 6 norr"
+  },
+  "144790": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "F17 Allsvenskan norra"
+  },
+  "144791": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "F17 Allsvenskan södra"
+  },
+  "144795": {
+    "lat": 61.856,
+    "lng": 16.079,
+    "radiusKm": 704,
+    "teamCount": 8,
+    "name": "F17 Region 6 söder"
+  },
+  "144796": {
+    "lat": 59.54,
+    "lng": 17.012,
+    "radiusKm": 323,
+    "teamCount": 9,
+    "name": "F17 Region 4-5 norra"
+  },
+  "144797": {
+    "lat": 57.733,
+    "lng": 15.026,
+    "radiusKm": 34,
+    "teamCount": 2,
+    "name": "Division 3 Småland nordvästra"
+  },
+  "144798": {
+    "lat": 58.458,
+    "lng": 12.812,
+    "radiusKm": 65,
+    "teamCount": 3,
+    "name": "Division 3 Västergötland norra"
+  },
+  "144799": {
+    "lat": 64.593,
+    "lng": 20.647,
+    "radiusKm": 599,
+    "teamCount": 4,
+    "name": "Division 3 Norrbotten"
+  },
+  "144800": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 3 Ångermanland"
+  },
+  "144801": {
+    "lat": 59.339,
+    "lng": 15.479,
+    "radiusKm": 67,
+    "teamCount": 4,
+    "name": "Division 3 VFF/ÖLFF"
+  },
+  "144802": {
+    "lat": 56.775,
+    "lng": 12.676,
+    "radiusKm": 37,
+    "teamCount": 3,
+    "name": "Division 3 Halland"
+  },
+  "144803": {
+    "lat": 59.319,
+    "lng": 14.316,
+    "radiusKm": 12,
+    "teamCount": 2,
+    "name": "Division 3 Värmland"
+  },
+  "144804": {
+    "lat": 56.532,
+    "lng": 14.402,
+    "radiusKm": 380,
+    "teamCount": 4,
+    "name": "Division 3 Skåne södra"
+  },
+  "144805": {
+    "lat": 62.372,
+    "lng": 17.164,
+    "radiusKm": 30,
+    "teamCount": 6,
+    "name": "Division 3 Medelpad"
+  },
+  "144806": {
+    "lat": 60.204,
+    "lng": 17.388,
+    "radiusKm": 274,
+    "teamCount": 4,
+    "name": "Division 3 Stockholm A"
+  },
+  "144807": {
+    "lat": 59.285,
+    "lng": 18.086,
+    "radiusKm": 13,
+    "teamCount": 4,
+    "name": "Division 3 Stockholm B"
+  },
+  "144808": {
+    "lat": 60.688,
+    "lng": 17.139,
+    "radiusKm": 7,
+    "teamCount": 4,
+    "name": "Division 3 Gestrikland"
+  },
+  "144809": {
+    "lat": 59.309,
+    "lng": 13.206,
+    "radiusKm": 381,
+    "teamCount": 3,
+    "name": "Division 3 Göteborg"
+  },
+  "144810": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 3 Skåne östra"
+  },
+  "144811": {
+    "lat": 63.826,
+    "lng": 20.263,
+    "radiusKm": 0,
+    "teamCount": 3,
+    "name": "Division 3 Västerbotten grupp 2"
+  },
+  "144812": {
+    "lat": 56.517,
+    "lng": 13.253,
+    "radiusKm": 55,
+    "teamCount": 2,
+    "name": "Division 3 Skåne västra"
+  },
+  "144813": {
+    "lat": 59.866,
+    "lng": 17.304,
+    "radiusKm": 79,
+    "teamCount": 3,
+    "name": "Division 3 Uppland"
+  },
+  "144814": {
+    "lat": 60.037,
+    "lng": 16.531,
+    "radiusKm": 115,
+    "teamCount": 2,
+    "name": "Division 3 Dalarna"
+  },
+  "144815": {
+    "lat": 56.856,
+    "lng": 14.374,
+    "radiusKm": 26,
+    "teamCount": 2,
+    "name": "Division 3 Småland sydvästra"
+  },
+  "144816": {
+    "lat": 61.56,
+    "lng": 14.044,
+    "radiusKm": 415,
+    "teamCount": 4,
+    "name": "Division 3 Jämtland/Härjedalen"
+  },
+  "144819": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 3 Bohuslän/Dalsland"
+  },
+  "144820": {
+    "lat": 58.722,
+    "lng": 14.263,
+    "radiusKm": 134,
+    "teamCount": 2,
+    "name": "Division 3 Västergötland södra"
+  },
+  "144821": {
+    "lat": 57.54,
+    "lng": 15.403,
+    "radiusKm": 82,
+    "teamCount": 2,
+    "name": "Division 3 Östergötland"
+  },
+  "144822": {
+    "lat": 58.726,
+    "lng": 16.437,
+    "radiusKm": 506,
+    "teamCount": 5,
+    "name": "Division 3 Småland sydöstra"
+  },
+  "144823": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 3 Västerbotten grupp 1"
+  },
+  "144824": {
+    "lat": 59.062,
+    "lng": 16.759,
+    "radiusKm": 37,
+    "teamCount": 2,
+    "name": "Division 3 Södermanland"
+  },
+  "144825": {
+    "lat": 60.587,
+    "lng": 15.665,
+    "radiusKm": 432,
+    "teamCount": 4,
+    "name": "Division 2 n Norrland S"
+  },
+  "144826": {
+    "lat": 59.272,
+    "lng": 18.087,
+    "radiusKm": 9,
+    "teamCount": 4,
+    "name": "Division 2 östra Svealand"
+  },
+  "144827": {
+    "lat": 57.269,
+    "lng": 13.604,
+    "radiusKm": 342,
+    "teamCount": 4,
+    "name": "Division 2 sydvästra Götaland"
+  },
+  "144828": {
+    "lat": 63.308,
+    "lng": 20.384,
+    "radiusKm": 458,
+    "teamCount": 6,
+    "name": "Division 2 n Norrland N"
+  },
+  "144829": {
+    "lat": 58.031,
+    "lng": 14.929,
+    "radiusKm": 176,
+    "teamCount": 7,
+    "name": "Division 2 nordöstra Götaland"
+  },
+  "144830": {
+    "lat": 59.335,
+    "lng": 15.389,
+    "radiusKm": 72,
+    "teamCount": 3,
+    "name": "Division 2 västra Svealand"
+  },
+  "144831": {
+    "lat": 56.621,
+    "lng": 15.28,
+    "radiusKm": 344,
+    "teamCount": 6,
+    "name": "Division 2 sydöstra Götaland"
+  },
+  "144832": {
+    "lat": 61.05,
+    "lng": 16.837,
+    "radiusKm": 175,
+    "teamCount": 5,
+    "name": "Division 2 södra Norrland"
+  },
+  "144833": {
+    "lat": 59.04,
+    "lng": 17.133,
+    "radiusKm": 277,
+    "teamCount": 5,
+    "name": "Division 2 mellersta Svealand"
+  },
+  "144834": {
+    "lat": 62.649,
+    "lng": 15.98,
+    "radiusKm": 91,
+    "teamCount": 8,
+    "name": "Division 2 mellersta Norrland"
+  },
+  "144835": {
+    "lat": 58.266,
+    "lng": 12.611,
+    "radiusKm": 42,
+    "teamCount": 4,
+    "name": "Division 2 nordvästra Götaland"
+  },
+  "144836": {
+    "lat": 59.529,
+    "lng": 16.905,
+    "radiusKm": 100,
+    "teamCount": 5,
+    "name": "F19 Division 1 norra"
+  },
+  "144837": {
+    "lat": 58.67,
+    "lng": 15.9,
+    "radiusKm": 254,
+    "teamCount": 6,
+    "name": "F19 Division 1 södra"
+  },
+  "144838": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "F19 Allsvenskan"
+  },
+  "144839": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Damallsvenskan"
+  },
+  "144840": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Elitettan"
+  },
+  "144841": {
+    "lat": 56.89,
+    "lng": 12.77,
+    "radiusKm": 146,
+    "teamCount": 7,
+    "name": "Division 1 södra"
+  },
+  "144842": {
+    "lat": 59.075,
+    "lng": 15.731,
+    "radiusKm": 218,
+    "teamCount": 9,
+    "name": "Division 1 mellersta"
+  },
+  "144843": {
+    "lat": 60.257,
+    "lng": 16.555,
+    "radiusKm": 356,
+    "teamCount": 9,
+    "name": "Division 1 norra"
+  },
+  "144868": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Skotska championship"
+  },
+  "144869": {
+    "lat": 60.235,
+    "lng": 13.945,
+    "radiusKm": 273,
+    "teamCount": 2,
+    "name": "Skotska League 1"
+  },
+  "144870": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Portugal Liga 2"
+  },
+  "144940": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 5 Göteborg B"
+  },
+  "145039": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 3 Hälsingland"
+  },
+  "145112": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Play off till VM Grupp A, semifinal"
+  },
+  "145113": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp B, semifinal"
+  },
+  "145114": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp C, semifinal"
+  },
+  "145115": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp D, semifinal"
+  },
+  "145116": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Play off till VM Grupp 1, semifinal"
+  },
+  "145117": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp 2, semifinal"
+  },
+  "145118": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp 1, final"
+  },
+  "145119": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp 2, final"
+  },
+  "145120": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp A, final"
+  },
+  "145121": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp B, final"
+  },
+  "145122": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp C, final"
+  },
+  "145123": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Play off till VM Grupp D, final"
+  },
+  "145193": {
+    "lat": 55.583,
+    "lng": 12.973,
+    "radiusKm": 2,
+    "teamCount": 2,
+    "name": "Division 4 Skåne sydvästra B"
+  },
+  "145194": {
+    "lat": 57.052,
+    "lng": 12.998,
+    "radiusKm": 110,
+    "teamCount": 2,
+    "name": "Division 4 Västergötland södra"
+  },
+  "145231": {
+    "lat": 55.875,
+    "lng": 12.951,
+    "radiusKm": 25,
+    "teamCount": 2,
+    "name": "Division 5 Skåne västra"
+  },
+  "145232": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Skåne sydöstra"
+  },
+  "145295": {
+    "lat": 58.111,
+    "lng": 14.754,
+    "radiusKm": 300,
+    "teamCount": 24,
+    "name": "Träningsmatch"
+  },
+  "145428": {
+    "lat": 58.589,
+    "lng": 15.868,
+    "radiusKm": 803,
+    "teamCount": 22,
+    "name": "Träningsmatch"
+  },
+  "145429": {
+    "lat": 63.899,
+    "lng": 20.565,
+    "radiusKm": 523,
+    "teamCount": 6,
+    "name": "Division 2 Norrland vår norra"
+  },
+  "145442": {
+    "lat": 57.88,
+    "lng": 12.956,
+    "radiusKm": 79,
+    "teamCount": 6,
+    "name": "F17 Götaland norra"
+  },
+  "145443": {
+    "lat": 55.632,
+    "lng": 13.253,
+    "radiusKm": 72,
+    "teamCount": 5,
+    "name": "F17 Götaland södra"
+  },
+  "145444": {
+    "lat": 58.041,
+    "lng": 13.784,
+    "radiusKm": 264,
+    "teamCount": 4,
+    "name": "F17 Götaland västra"
+  },
+  "145459": {
+    "lat": 55.495,
+    "lng": 13.252,
+    "radiusKm": 36,
+    "teamCount": 5,
+    "name": "P16 Div 1 södra Götaland"
+  },
+  "145483": {
+    "lat": 57.221,
+    "lng": 12.434,
+    "radiusKm": 129,
+    "teamCount": 4,
+    "name": "P16 Div 1 västra Götaland"
+  },
+  "145484": {
+    "lat": 57.987,
+    "lng": 12.099,
+    "radiusKm": 122,
+    "teamCount": 6,
+    "name": "P17 Div 1 nordvästra Götaland"
+  },
+  "145518": {
+    "lat": 55.843,
+    "lng": 14.088,
+    "radiusKm": 167,
+    "teamCount": 7,
+    "name": "P17 Div 1 sydöstra Götaland"
+  },
+  "145521": {
+    "lat": 57.78,
+    "lng": 12.116,
+    "radiusKm": 75,
+    "teamCount": 8,
+    "name": "Ligacupen Elit västra"
+  },
+  "145522": {
+    "lat": 59.287,
+    "lng": 17.465,
+    "radiusKm": 106,
+    "teamCount": 4,
+    "name": "Ligacupen Elit norra"
+  },
+  "145523": {
+    "lat": 56.449,
+    "lng": 13.248,
+    "radiusKm": 107,
+    "teamCount": 7,
+    "name": "Ligacupen Elit södra"
+  },
+  "145524": {
+    "lat": 58.23,
+    "lng": 13.588,
+    "radiusKm": 141,
+    "teamCount": 5,
+    "name": "P19 Div 1 norra Götaland"
+  },
+  "145527": {
+    "lat": 58.082,
+    "lng": 14.486,
+    "radiusKm": 250,
+    "teamCount": 7,
+    "name": "P17 Div 1 nordöstra Götaland"
+  },
+  "145528": {
+    "lat": 58.444,
+    "lng": 13.393,
+    "radiusKm": 286,
+    "teamCount": 6,
+    "name": "P16 Div 1 norra Götaland"
+  },
+  "145530": {
+    "lat": 58.271,
+    "lng": 13.039,
+    "radiusKm": 274,
+    "teamCount": 5,
+    "name": "P19 Div 1 västra Götaland"
+  },
+  "145532": {
+    "lat": 57.379,
+    "lng": 15.256,
+    "radiusKm": 273,
+    "teamCount": 6,
+    "name": "P17 Div 1 sydvästra Götaland"
+  },
+  "145533": {
+    "lat": 57.673,
+    "lng": 15.96,
+    "radiusKm": 222,
+    "teamCount": 5,
+    "name": "P16 Div 1 östra Götaland"
+  },
+  "145617": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Division 6 Blekinge västra"
+  },
+  "145618": {
+    "lat": 58.672,
+    "lng": 16.187,
+    "radiusKm": 376,
+    "teamCount": 5,
+    "name": "F17 Region 4-5 mellersta"
+  },
+  "145709": {
+    "lat": 56.28,
+    "lng": 14.123,
+    "radiusKm": 413,
+    "teamCount": 9,
+    "name": "P19 Div 1 södra Götaland"
+  },
+  "145742": {
+    "lat": 57.709,
+    "lng": 14.964,
+    "radiusKm": 256,
+    "teamCount": 7,
+    "name": "P15 Regional Norra Götaland"
+  },
+  "145749": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 7 Södermanland södra"
+  },
+  "145813": {
+    "lat": 62.902,
+    "lng": 15.8,
+    "radiusKm": 101,
+    "teamCount": 6,
+    "name": "P17 Region 6 Söder"
+  },
+  "145818": {
+    "lat": 58.708,
+    "lng": 15.873,
+    "radiusKm": 90,
+    "teamCount": 3,
+    "name": "Division 5 Östergötland"
+  },
+  "145869": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Västerbotten grupp 1"
+  },
+  "145870": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 1,
+    "name": "Division 6 Västerbotten grupp 2"
+  },
+  "146170": {
+    "lat": 62,
+    "lng": 15,
+    "radiusKm": 9999,
+    "teamCount": 0,
+    "name": "Kval till skotska ligan, kvartsfinal"
+  }
+}
